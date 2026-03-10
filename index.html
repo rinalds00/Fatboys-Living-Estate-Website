@@ -26,8 +26,8 @@
       --stone-dark: #6A6660;         /* darker stone */
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100vw; }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -1042,9 +1042,17 @@
       .nav-hamburger { display: flex; }
       .nav-logo { font-size: 1rem; }
 
-      /* Hero */
-      #seh-wrapper { min-height: 100dvh; }
-      #seh-titles { padding: 0 1.25rem; }
+      /* Hero — force full width, no empty side gap */
+      #seh-wrapper { width: 100%; overflow-x: hidden; }
+      #seh-section { width: 100vw; overflow: hidden; }
+      #seh-bg { width: 100vw; }
+      #seh-media {
+        width: calc(100vw - 2rem) !important;
+        max-width: 100vw !important;
+        height: 70vh !important;
+        border-radius: 12px !important;
+      }
+      #seh-titles { padding: 0 1.25rem; width: 100%; }
       .seh-title { font-size: clamp(2.2rem, 10vw, 3.5rem) !important; }
       #seh-scroll-hint { font-size: 0.65rem; }
 
@@ -1058,6 +1066,8 @@
       .listings-section,
       .testimonials-section,
       .cta-section { padding: 3.5rem 1.25rem; }
+      .featured-section { padding-top: 4rem; }
+      section, .marquee-strip { max-width: 100vw; overflow-x: hidden; }
 
       /* Section header */
       .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 2.5rem; }
