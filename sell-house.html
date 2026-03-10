@@ -93,30 +93,42 @@
   .mobile-nav-drawer .mobile-lang button.active{background:var(--forest-green);border-color:var(--forest-green);color:var(--warm-sand)}
   .mobile-section-label{font-size:.6rem;letter-spacing:.18em;color:var(--stone-grey);text-transform:uppercase;padding:1rem 0 .25rem;border-bottom:none!important}
   @media(max-width:768px){
+    html{overflow-x:hidden}
+    body{overflow-x:hidden;cursor:auto}
+    .cursor,.cursor-ring{display:none}
     nav{padding:.85rem 1.25rem}
     .nav-links{display:none}
     .nav-hamburger{display:flex}
     .nav-logo{font-size:1rem}
-    .page-hero{padding:7rem 1.25rem 3rem}
-    .page-title{font-size:clamp(2rem,9vw,3rem)}
-    .page-tagline{font-size:.85rem}
-    .page-intro{padding:3rem 1.25rem}
-    .intro-text{font-size:1rem}
-    .how-section{padding:3rem 1.25rem}
-    .benefits-grid{grid-template-columns:1fr;gap:1rem}
-    .stats-row{grid-template-columns:1fr 1fr;gap:1.5rem;padding:2.5rem 1.25rem}
+    .page-hero{padding:6rem 1.25rem 3rem;min-height:50vh}
+    .page-hero-content{padding:0}
+    .page-title{font-size:clamp(1.9rem,8vw,3rem)}
+    .page-tagline{font-size:.88rem}
+    .intro-section{padding:3rem 1.25rem}
+    .intro-layout{grid-template-columns:1fr;gap:2rem}
+    .intro-heading{font-size:clamp(1.6rem,7vw,2.4rem)}
+    .intro-text{font-size:.92rem;line-height:1.8}
+    .intro-stats{flex-wrap:wrap;gap:1.5rem}
+    .benefits-section{padding:3rem 1.25rem}
+    .benefits-h2{font-size:clamp(1.6rem,7vw,2.4rem)}
+    .benefits-grid{grid-template-columns:1fr;gap:0}
+    .benefit-card{border-right:none;padding:1.75rem 0}
+    .services-strip{padding:1.5rem 1.25rem}
+    .services-strip-links{gap:.4rem}
     .other-services{padding:3rem 1.25rem}
     .other-services-grid{grid-template-columns:1fr 1fr;gap:1rem}
-    .cta-strip{padding:1.5rem 1.25rem;flex-direction:column;gap:1.5rem;text-align:center}
+    .cta-strip{padding:2.5rem 1.25rem;flex-direction:column;gap:1.5rem;text-align:center}
+    .cta-strip-title{font-size:clamp(1.4rem,6vw,2rem)}
     footer{padding:3rem 1.25rem 1.5rem}
     .footer-grid{grid-template-columns:1fr;gap:2rem;margin-bottom:2rem}
     .footer-bottom{flex-direction:column;gap:.75rem;text-align:center}
-    .cursor,.cursor-ring{display:none}
-    .btn-forest{min-height:48px;display:inline-flex;align-items:center;justify-content:center}
+    .footer-bottom > div{flex-wrap:wrap;justify-content:center;gap:.75rem}
+    .btn-forest{min-height:48px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .btn-nav{cursor:pointer}
   }
   @media(max-width:480px){
     .other-services-grid{grid-template-columns:1fr}
-    .stats-row{grid-template-columns:1fr}
+    .intro-stats{gap:1.25rem}
     .nav-logo{font-size:.88rem}
   }
 
@@ -263,7 +275,7 @@
       </div>
       <div>
         <p class="intro-text" data-i18n="pg.intro">Selling a house in Thailand involves more than finding a buyer — it requires proper valuation, professional presentation, and careful handling of all legal documents and transfer procedures. Our team manages the entire process from listing to handover, so you sell smoothly, securely, and at the best possible price.</p>
-        <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(30,38,24,.1);display:flex;gap:3rem">
+        <div class="intro-stats" style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(30,38,24,.1);display:flex;gap:3rem">
           <div><div class="stat-num">12<span style="color:#C06A4A;font-size:1.2rem">+</span></div><div class="stat-label" data-i18n="pg.stat1_label">Years Experience</div></div>
           <div><div class="stat-num">1,200<span style="color:#C06A4A;font-size:1.2rem">+</span></div><div class="stat-label" data-i18n="pg.stat2_label">Happy Clients</div></div>
           <div><div class="stat-num">12</div><div class="stat-label" data-i18n="pg.stat3_label">Cities Covered</div></div>
