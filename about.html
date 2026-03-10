@@ -30,7 +30,6 @@
   /* ── NAV ── */
   nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(18,26,12,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,184,138,.1)}
   .nav-logo{display:flex;align-items:center;text-decoration:none}
-  .nav-logo img{height:52px;width:auto;display:block;mix-blend-mode:multiply}
   .nav-links{display:flex;gap:2.5rem;align-items:center}
   .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,232,220,.7);text-decoration:none;font-weight:400;transition:color .2s;position:relative}
   .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--burnt-sienna);transform:scaleX(0);transition:transform .25s;transform-origin:left}
@@ -119,8 +118,7 @@
   /* ── FOOTER ── */
   footer{background:var(--dark-walnut-deep);padding:4rem 7rem 2.5rem;border-top:1px solid rgba(200,184,138,.1)}
   .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3.5rem}
-  .footer-logo img{height:52px;width:auto;display:block;mix-blend-mode:multiply}
-  .footer-brand-desc{font-size:.85rem;line-height:1.75;color:rgba(144,140,132,.8);font-weight:300;margin-top:1.25rem;max-width:280px}
+.footer-brand-desc{font-size:.85rem;line-height:1.75;color:rgba(144,140,132,.8);font-weight:300;margin-top:1.25rem;max-width:280px}
   .footer-heading{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--warm-sand);font-weight:600;margin-bottom:1.25rem}
   .footer-links{display:flex;flex-direction:column;gap:.65rem}
   .footer-links a{font-size:.83rem;color:rgba(144,140,132,.75);text-decoration:none;font-weight:300;transition:color .2s}
@@ -140,6 +138,59 @@
   .lang-btn.active{background:var(--forest-green);color:var(--linen-white)}
   .lang-btn:hover:not(.active){background:rgba(200,184,138,.08);color:var(--warm-sand)}
   .lang-sep{width:1px;height:16px;background:rgba(200,184,138,.25);flex-shrink:0}
+
+  /* ── NAV TEXT LOGO ── */
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--linen-white);text-decoration:none;letter-spacing:.02em;white-space:nowrap}
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:4px;z-index:201}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--linen-white);transition:all .3s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* ── MOBILE DRAWER ── */
+  .mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:190;backdrop-filter:blur(4px)}
+  .mobile-nav-overlay.open{display:block}
+  .mobile-nav-drawer{display:none;position:fixed;top:0;right:-100%;width:min(320px,85vw);height:100dvh;background:#0d1209;z-index:200;flex-direction:column;padding:5rem 2rem 2rem;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+  .mobile-nav-drawer.open{right:0}
+  .mobile-nav-drawer a,.mobile-nav-drawer button{display:block;color:var(--linen-white);text-decoration:none;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;padding:.85rem 0;border-bottom:1px solid rgba(200,184,138,.1);background:none;border-left:none;border-right:none;border-top:none;font-family:'DM Sans',sans-serif;font-weight:400;text-align:left;cursor:pointer;width:100%}
+  .mobile-nav-drawer .mobile-book-btn{margin-top:1.5rem;background:var(--forest-green);color:var(--warm-sand);text-align:center;border:none;padding:.9rem 1rem;font-size:.78rem;letter-spacing:.14em;display:block;text-decoration:none}
+  .mobile-nav-drawer .mobile-lang{display:flex;gap:.75rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(200,184,138,.1)}
+  .mobile-nav-drawer .mobile-lang button{border-bottom:none;padding:.4rem .75rem;font-size:.75rem;border:1px solid rgba(200,184,138,.3);width:auto;text-transform:uppercase;letter-spacing:.1em}
+  .mobile-nav-drawer .mobile-lang button.active{background:var(--forest-green);border-color:var(--forest-green);color:var(--warm-sand)}
+  .mobile-section-label{font-size:.6rem;letter-spacing:.18em;color:var(--stone-grey);text-transform:uppercase;padding:1rem 0 .25rem;border-bottom:none !important}
+
+  @media(max-width:768px){
+    html{overflow-x:hidden}
+    body{overflow-x:hidden;cursor:auto}
+    .cursor,.cursor-ring{display:none}
+    nav{padding:.85rem 1.25rem}
+    .nav-links{display:none}
+    .nav-hamburger{display:flex}
+    .nav-logo{font-size:1rem}
+    .page-hero{padding:7rem 1.25rem 3.5rem;min-height:50vh}
+    .page-hero-content{padding:0 1.25rem}
+    .page-title{font-size:clamp(2rem,9vw,3rem)}
+    .page-tagline{font-size:.92rem}
+    .story-section{padding:3rem 1.25rem}
+    .story-layout{grid-template-columns:1fr;gap:2rem}
+    .pillars-section{padding:3rem 1.25rem}
+    .pillars-grid{grid-template-columns:1fr}
+    .pillar{border-right:none;border-bottom:1px solid rgba(200,184,138,.1);padding:1.75rem 0}
+    .pillar:last-child{border-bottom:none}
+    .siblings-banner{grid-template-columns:1fr;gap:2.5rem;padding:3rem 1.25rem}
+    .siblings-banner > div:last-child{padding-left:0;border-left:none;border-top:1px solid rgba(200,184,138,.1);padding-top:2rem;display:flex;flex-direction:row;gap:2rem;flex-wrap:wrap}
+    .cta-strip{padding:2.5rem 1.25rem;flex-direction:column;gap:1.5rem;text-align:center}
+    footer{padding:3rem 1.25rem 1.5rem}
+    .footer-grid{grid-template-columns:1fr;gap:2rem;margin-bottom:2rem}
+    .footer-bottom{flex-direction:column;gap:.75rem;text-align:center}
+    .btn-forest,.btn-sienna,.btn-nav{min-height:48px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+  }
+  @media(max-width:480px){
+    .nav-logo{font-size:.88rem}
+    .siblings-banner > div:last-child{flex-direction:column;gap:1.5rem}
+  }
   </style>
 </head>
 <body>
@@ -147,11 +198,37 @@
   <div class="cursor-ring" id="cursorRing"></div>
   <div class="grain"></div>
 
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-section-label">Buying</div>
+    <a href="buy-house.html">Houses</a>
+    <a href="buy-condo.html">Condo</a>
+    <a href="buy-land.html">Land</a>
+    <div class="mobile-section-label">Selling</div>
+    <a href="sell-house.html">Houses</a>
+    <a href="sell-condo.html">Condo</a>
+    <a href="sell-land.html">Land</a>
+    <div class="mobile-section-label">Services</div>
+    <a href="renting.html">Renting</a>
+    <a href="relocating.html">Relocating</a>
+    <a href="pet-friendly.html">Pet Friendly</a>
+    <a href="investing.html">Investing</a>
+    <a href="construction.html">Construction &amp; Renovation</a>
+    <a href="consulting.html">Consulting</a>
+    <div class="mobile-section-label">Info</div>
+    <a href="why-thailand.html">Why Thailand</a>
+    <a href="about.html">About</a>
+    <a href="https://lin.ee/H5iMNKQ" target="_blank" class="mobile-book-btn">Book Consultation</a>
+    <div class="mobile-lang">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="th">TH</button>
+    </div>
+  </div>
+
   <!-- NAV -->
   <nav id="mainNav">
-    <a href="index.html" class="nav-logo">
-      <img src="Brand_assets/Fatboys Real Estate Logo.jpeg" alt="Fatboy Living Estates" />
-    </a>
+    <a href="index.html" class="nav-logo">Fatboys Living Estate</a>
     <div class="nav-links">
       <div class="nav-dropdown">
         <button class="nav-dropdown-toggle">Buying/Selling <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -174,7 +251,7 @@
           </div>
         </div>
       </div>
-      <a href="index.html#locations">Locations</a>
+      <a href="why-thailand.html">Why Thailand</a>
       <a href="about.html" style="color:var(--warm-sand)">About</a>
       <div class="nav-dropdown">
         <button class="nav-dropdown-toggle">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -197,8 +274,11 @@
         <div class="lang-sep"></div>
         <button class="lang-btn" data-lang="th">TH</button>
       </div>
-      <button class="btn-nav" data-i18n="nav_cta" onclick="window.location='index.html#contact'">Book Consultation</button>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-nav" data-i18n="nav_cta">Book Consultation</a>
     </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -207,7 +287,7 @@
       <div class="page-eyebrow" data-i18n="hero_eyebrow">Our Story</div>
       <h1 class="page-title" data-i18n="hero_title">About<br><em>Fatboy's Estates</em></h1>
       <p class="page-tagline" data-i18n="hero_tagline">"We are a family helping you find yours."</p>
-      <a href="index.html#contact" class="btn-forest" data-i18n="hero_cta">Book a Consultation</a>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-forest" data-i18n="hero_cta">Book a Consultation</a>
     </div>
   </section>
 
@@ -290,19 +370,22 @@
   <!-- CTA STRIP -->
   <div class="cta-strip">
     <div class="cta-strip-title" data-i18n="cta_title">Ready to find your place in Thailand? <strong>Let's talk.</strong></div>
-    <a href="index.html#contact" class="btn-sienna" style="white-space:nowrap;flex-shrink:0" data-i18n="cta_btn">Book Free Consultation →</a>
+    <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-sienna" style="white-space:nowrap;flex-shrink:0" data-i18n="cta_btn">Book Free Consultation →</a>
   </div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div>
-        <a href="index.html" class="nav-logo footer-logo" style="text-decoration:none">
-          <img src="Brand_assets/Fatboys Real Estate Logo.jpeg" alt="Fatboy Living Estates" />
-        </a>
+        <a href="index.html" class="nav-logo" style="display:block;margin-bottom:1rem">Fatboys Living Estate</a>
         <p class="footer-brand-desc" data-i18n="footer_desc">Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.</p>
         <div style="display:flex;gap:.75rem;margin-top:1.5rem">
-          <a href="#" class="footer-social">f</a><a href="#" class="footer-social">in</a><a href="#" class="footer-social">ig</a><a href="#" class="footer-social">yt</a>
+          <a href="https://www.facebook.com/share/1M5e6w6kzU/" target="_blank" class="footer-social" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/66829473350" target="_blank" class="footer-social" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
         </div>
       </div>
       <div>
@@ -432,6 +515,16 @@
     });
     setLanguage(currentLang);
   })();
+
+  // Hamburger menu
+  var hBtn = document.getElementById('hamburgerBtn');
+  var mDrawer = document.getElementById('mobileDrawer');
+  var mOverlay = document.getElementById('mobileOverlay');
+  function openMenu(){hBtn.classList.add('open');mDrawer.style.display='flex';mOverlay.classList.add('open');setTimeout(function(){mDrawer.classList.add('open');},10);document.body.style.overflow='hidden';}
+  function closeMenu(){hBtn.classList.remove('open');mDrawer.classList.remove('open');mOverlay.classList.remove('open');document.body.style.overflow='';setTimeout(function(){if(!mDrawer.classList.contains('open'))mDrawer.style.display='';},350);}
+  hBtn.addEventListener('click',function(){mDrawer.classList.contains('open')?closeMenu():openMenu();});
+  mOverlay.addEventListener('click',closeMenu);
+  mDrawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
 
   const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
   let mx = 0, my = 0, rx = 0, ry = 0;
