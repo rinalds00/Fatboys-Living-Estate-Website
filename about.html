@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>About Fatboy's Estates — FatBoys Real Estate Thailand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+  :root{
+    --warm-sand:#C8B88A;
+    --forest-green:#233d00;
+    --burnt-sienna:#C06A4A;
+    --dark-walnut:#1E2618;
+    --linen-white:#ECE8DC;
+    --stone-grey:#908C84;
+    --dark-walnut-deep:#14180E;
+    --forest-light:#2f5200;
+    --sand-light:#DDD0B0;
+    --rocky-stone:#B8B4AE;
+    --stone-dark:#6A6660;
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--dark-walnut);color:var(--linen-white);overflow-x:hidden;cursor:none;margin:0}
+  .cursor{width:8px;height:8px;background:var(--burnt-sienna);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+  .cursor-ring{width:32px;height:32px;border:1px solid rgba(200,184,138,.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s cubic-bezier(.25,.46,.45,.94)}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(18,26,12,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,184,138,.1)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none}
+  .nav-logo img{height:52px;width:auto;display:block;mix-blend-mode:multiply}
+  .nav-links{display:flex;gap:2.5rem;align-items:center}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,232,220,.7);text-decoration:none;font-weight:400;transition:color .2s;position:relative}
+  .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--burnt-sienna);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+  .nav-links a:hover{color:var(--warm-sand)}.nav-links a:hover::after{transform:scaleX(1)}
+  .nav-dropdown{position:relative}
+  .nav-dropdown-toggle{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,232,220,.7);background:none;border:none;font-family:'DM Sans',sans-serif;font-weight:400;cursor:none;display:flex;align-items:center;gap:.4rem;padding:0;transition:color .2s;position:relative}
+  .nav-dropdown-toggle::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--burnt-sienna);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+  .nav-dropdown-toggle svg{transition:transform .25s}
+  .nav-dropdown:hover .nav-dropdown-toggle{color:var(--warm-sand)}
+  .nav-dropdown:hover .nav-dropdown-toggle::after{transform:scaleX(1)}
+  .nav-dropdown:hover .nav-dropdown-toggle svg{transform:rotate(180deg)}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%) translateY(6px);min-width:480px;background:rgba(10,14,8,.97);backdrop-filter:blur(20px);border:1px solid rgba(200,184,138,.12);padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.2s,transform 0.2s;z-index:200;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .nav-dropdown-menu::before{content:'';position:absolute;top:-0.8rem;left:0;right:0;height:0.8rem}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav-dd-single{min-width:260px;grid-template-columns:1fr}
+  .nav-dd-col{padding:.5rem 1rem}.nav-dd-col:first-child{border-right:1px solid rgba(200,184,138,.1)}
+  .nav-dd-heading{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--burnt-sienna);font-weight:600;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+  .nav-dd-heading::before{content:'';width:16px;height:1px;background:var(--burnt-sienna)}
+  .nav-dd-items{display:flex;flex-direction:column;gap:.1rem}
+  .nav-dd-item{display:flex;align-items:center;justify-content:space-between;padding:.6rem .75rem;color:rgba(200,184,138,.65);text-decoration:none;font-size:.82rem;font-weight:300;letter-spacing:.04em;transition:color .18s,background .18s,padding-left .18s;border-radius:2px;cursor:none;border-left:2px solid transparent}
+  .nav-dd-item-left{display:flex;align-items:center;gap:.75rem}
+  .nav-dd-item-arrow{font-size:.75rem;opacity:0;transform:translateX(-4px);transition:opacity .18s,transform .18s;color:var(--burnt-sienna)}
+  .nav-dd-item:hover{color:var(--warm-sand);background:rgba(200,184,138,.06);border-left-color:var(--burnt-sienna);padding-left:1rem}
+  .nav-dd-item:hover .nav-dd-item-arrow{opacity:1;transform:translateX(0)}
+  .nav-dd-item svg{color:var(--forest-green);flex-shrink:0}
+  .btn-nav{padding:.55rem 1.4rem;background:transparent;border:1px solid rgba(200,184,138,.4);color:var(--warm-sand);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;cursor:none;font-family:'DM Sans',sans-serif;transition:background .25s,border-color .25s,color .25s}
+  .btn-nav:hover{background:var(--warm-sand);color:var(--dark-walnut-deep);border-color:var(--warm-sand)}
+  .btn-forest{padding:.9rem 2.2rem;background:var(--forest-green);color:var(--linen-white);font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:none;cursor:none;transition:background .25s;display:inline-block;text-decoration:none}
+  .btn-forest:hover{background:var(--forest-light)}
+  .btn-sienna{padding:.9rem 2.2rem;background:var(--burnt-sienna);color:var(--linen-white);font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:none;cursor:none;transition:background .25s;display:inline-block;text-decoration:none}
+  .btn-sienna:hover{background:#a8573b}
+
+  /* ── HERO ── */
+  .page-hero{min-height:62vh;padding-top:7rem;padding-bottom:5rem;display:flex;align-items:center;background:linear-gradient(155deg,#0d1a08 0%,#162210 40%,#0f1a0a 100%);position:relative;overflow:hidden}
+  .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(35,61,0,.35) 0%,transparent 65%)}
+  .page-hero::after{content:'';position:absolute;top:0;right:0;width:55%;height:100%;background:radial-gradient(ellipse at 80% 40%,rgba(200,184,138,.05) 0%,transparent 60%)}
+  .page-hero-content{position:relative;z-index:2;padding:0 7rem;max-width:820px}
+  .page-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--burnt-sienna);font-weight:500}
+  .page-eyebrow::before{content:'';width:28px;height:1px;background:var(--burnt-sienna)}
+  .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:.95;color:var(--linen-white);letter-spacing:-.02em;margin:0 0 1rem}
+  .page-title em{font-style:italic;color:var(--warm-sand)}
+  .page-tagline{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;font-weight:300;color:rgba(200,184,138,.7);margin:0 0 2.5rem}
+
+  /* ── STORY SECTION (light) ── */
+  .story-section{background:var(--linen-white);padding:7rem;color:var(--dark-walnut)}
+  .story-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:7rem;align-items:start}
+  .story-label{font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--forest-green);font-weight:600;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+  .story-label::before{content:'';width:20px;height:1px;background:var(--forest-green)}
+  .story-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:600;line-height:1.1;color:var(--dark-walnut);letter-spacing:-.02em;margin:0 0 1rem}
+  .story-heading em{font-style:italic;color:var(--forest-green)}
+  .story-sub{font-size:.85rem;line-height:1.8;color:var(--stone-dark);font-weight:300;max-width:340px}
+  .story-body p{font-size:.93rem;line-height:1.9;color:#4a4640;font-weight:300;margin:0 0 1.5rem}
+  .story-body p:last-child{margin:0}
+  .story-closing{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;font-weight:600;color:var(--forest-green);border-left:3px solid var(--forest-green);padding-left:1.5rem;margin-top:2.5rem;line-height:1.4}
+
+  /* ── VALUES PILLARS (dark) ── */
+  .pillars-section{background:var(--dark-walnut);padding:6rem 7rem}
+  .pillars-eyebrow{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--burnt-sienna);font-weight:600;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+  .pillars-eyebrow::before{content:'';width:20px;height:1px;background:var(--burnt-sienna)}
+  .pillars-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:600;color:var(--warm-sand);line-height:1.05;letter-spacing:-.02em;margin:0 0 3.5rem}
+  .pillars-h2 em{font-style:italic;color:var(--forest-green)}
+  .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(200,184,138,.1)}
+  .pillar{padding:2.5rem 2rem;border-right:1px solid rgba(200,184,138,.1);transition:background .3s}
+  .pillar:last-child{border-right:none}
+  .pillar:hover{background:rgba(200,184,138,.03)}
+  .pillar-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(200,184,138,.08);line-height:1;display:block;margin-bottom:-.8rem}
+  .pillar-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--warm-sand);margin-bottom:.7rem}
+  .pillar-desc{font-size:.84rem;line-height:1.75;color:var(--stone-grey);font-weight:300}
+  .pillar-bar{width:28px;height:2px;background:var(--forest-green);margin-top:1.5rem;transition:width .4s}
+  .pillar:hover .pillar-bar{width:50px}
+
+  /* ── SIBLINGS BANNER ── */
+  .siblings-banner{background:var(--dark-walnut-deep);padding:5rem 7rem;border-top:1px solid rgba(200,184,138,.08);border-bottom:1px solid rgba(200,184,138,.08);display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:center}
+  .siblings-eyebrow{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--burnt-sienna);font-weight:600;margin-bottom:1rem}
+  .siblings-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:300;color:var(--linen-white);line-height:1.15;margin:0 0 1.25rem}
+  .siblings-heading strong{font-weight:600;color:var(--warm-sand)}
+  .siblings-text{font-size:.87rem;line-height:1.85;color:var(--stone-grey);font-weight:300}
+  .siblings-tags{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+  .tag{padding:.4rem 1rem;border:1px solid rgba(200,184,138,.18);color:rgba(200,184,138,.6);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+
+  /* ── CTA STRIP ── */
+  .cta-strip{background:linear-gradient(155deg,#0d1a08 0%,#162210 40%,#0f1a0a 100%);padding:5rem 7rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;border-top:1px solid rgba(200,184,138,.1)}
+  .cta-strip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;color:var(--linen-white);max-width:500px;line-height:1.2}
+  .cta-strip-title strong{font-weight:600;color:var(--warm-sand)}
+
+  /* ── FOOTER ── */
+  footer{background:var(--dark-walnut-deep);padding:4rem 7rem 2.5rem;border-top:1px solid rgba(200,184,138,.1)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3.5rem}
+  .footer-logo img{height:52px;width:auto;display:block;mix-blend-mode:multiply}
+  .footer-brand-desc{font-size:.85rem;line-height:1.75;color:rgba(144,140,132,.8);font-weight:300;margin-top:1.25rem;max-width:280px}
+  .footer-heading{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--warm-sand);font-weight:600;margin-bottom:1.25rem}
+  .footer-links{display:flex;flex-direction:column;gap:.65rem}
+  .footer-links a{font-size:.83rem;color:rgba(144,140,132,.75);text-decoration:none;font-weight:300;transition:color .2s}
+  .footer-links a:hover{color:var(--warm-sand)}
+  .footer-social{width:34px;height:34px;border:1px solid rgba(200,184,138,.15);display:flex;align-items:center;justify-content:center;color:var(--stone-grey);font-size:.78rem;text-decoration:none;transition:border-color .2s,color .2s;cursor:none}
+  .footer-social:hover{border-color:var(--warm-sand);color:var(--warm-sand)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(200,184,138,.08);font-size:.7rem;color:rgba(144,140,132,.5)}
+
+  /* ── REVEAL ── */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}.reveal-delay-3{transition-delay:.3s}
+
+  /* ── LANG TOGGLE ── */
+  .lang-toggle{display:flex;align-items:center;gap:0;border:1px solid rgba(200,184,138,.3);overflow:hidden}
+  .lang-btn{padding:.38rem .75rem;background:transparent;border:none;color:rgba(200,184,138,.5);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;cursor:none;font-family:'DM Sans',sans-serif;font-weight:500;transition:background .2s,color .2s;line-height:1}
+  .lang-btn.active{background:var(--forest-green);color:var(--linen-white)}
+  .lang-btn:hover:not(.active){background:rgba(200,184,138,.08);color:var(--warm-sand)}
+  .lang-sep{width:1px;height:16px;background:rgba(200,184,138,.25);flex-shrink:0}
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="grain"></div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="Brand_assets/Fatboys Real Estate Logo.jpeg" alt="Fatboy Living Estates" />
+    </a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">Buying/Selling <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading">Buying</div>
+            <div class="nav-dd-items">
+              <a href="buy-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Houses</a>
+              <a href="buy-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>Condo</a>
+              <a href="buy-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg>Land</a>
+            </div>
+          </div>
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading">Selling</div>
+            <div class="nav-dd-items">
+              <a href="sell-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Houses</a>
+              <a href="sell-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>Condo</a>
+              <a href="sell-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg>Land</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#locations">Locations</a>
+      <a href="about.html" style="color:var(--warm-sand)">About</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">Services <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dropdown-menu nav-dd-single">
+          <div class="nav-dd-col" style="border-right:none">
+            <div class="nav-dd-heading">What We Offer</div>
+            <div class="nav-dd-items">
+              <a href="renting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Renting</span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="relocating.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Relocating</span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="pet-friendly.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Pet Friendly</span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="investing.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Investing</span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="construction.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20"/><path d="M17 20V8l-5-5-5 5v12"/><path d="M9 20v-5h6v5"/></svg>Construction &amp; Renovation</span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="consulting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Consulting</span><span class="nav-dd-item-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <div class="lang-sep"></div>
+        <button class="lang-btn" data-lang="th">TH</button>
+      </div>
+      <button class="btn-nav" data-i18n="nav_cta" onclick="window.location='index.html#contact'">Book Consultation</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-eyebrow" data-i18n="hero_eyebrow">Our Story</div>
+      <h1 class="page-title" data-i18n="hero_title">About<br><em>Fatboy's Estates</em></h1>
+      <p class="page-tagline" data-i18n="hero_tagline">"We are a family helping you find yours."</p>
+      <a href="index.html#contact" class="btn-forest" data-i18n="hero_cta">Book a Consultation</a>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story-section">
+    <div class="story-layout reveal">
+      <div>
+        <div class="story-label" data-i18n="story_label">Who We Are</div>
+        <h2 class="story-heading" data-i18n="story_heading">More Than<br><em>Real Estate</em></h2>
+        <p class="story-sub" data-i18n="story_sub">A local community dedicated to helping you discover your dream home and live peacefully in Thailand.</p>
+      </div>
+      <div class="story-body">
+        <p data-i18n="story_p1">At Fatboy's Estates, we believe finding a home should feel personal, safe, and effortless. We are a local community dedicated to helping you discover your dream home and live peacefully in Thailand.</p>
+        <p data-i18n="story_p2">Our company was founded by siblings who combine their expertise in construction, local regulations, and customer service. By working together, we ensure every property we present meets high standards of quality, legality, and comfort.</p>
+        <p data-i18n="story_p3">Because we are a family-built business, we treat our clients like family as well. Our goal is to create a trustworthy experience where you feel supported at every step — from choosing the right property to settling into your new home.</p>
+        <div class="story-closing" data-i18n="story_closing">
+          At Fatboy's Estates, we are more than just a real estate service.<br>We are a family helping you find yours.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars-section">
+    <div class="reveal">
+      <div class="pillars-eyebrow" data-i18n="pillars_eyebrow">Our Foundation</div>
+      <h2 class="pillars-h2" data-i18n="pillars_heading">Built on<br><em>Family Values</em></h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar reveal">
+        <span class="pillar-num">01</span>
+        <div class="pillar-title" data-i18n="p1_title">Personal</div>
+        <div class="pillar-desc" data-i18n="p1_desc">Finding a home should feel personal, not transactional. Every client receives our full attention, tailored to their unique needs and lifestyle.</div>
+        <div class="pillar-bar"></div>
+      </div>
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-num">02</span>
+        <div class="pillar-title" data-i18n="p2_title">Safe</div>
+        <div class="pillar-desc" data-i18n="p2_desc">We vet every property for legal compliance, structural integrity, and fair pricing — so you can move forward with complete confidence.</div>
+        <div class="pillar-bar"></div>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-num">03</span>
+        <div class="pillar-title" data-i18n="p3_title">Effortless</div>
+        <div class="pillar-desc" data-i18n="p3_desc">From first viewing to final handover, we handle the complexity so the experience feels smooth, clear, and stress-free for you.</div>
+        <div class="pillar-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIBLINGS / FOUNDERS BANNER -->
+  <div class="siblings-banner">
+    <div class="reveal">
+      <div class="siblings-eyebrow" data-i18n="sib_eyebrow">Founded By Siblings</div>
+      <h2 class="siblings-heading" data-i18n="sib_heading">Three Disciplines,<br><strong>One Vision</strong></h2>
+      <p class="siblings-text" data-i18n="sib_text">Our founding siblings bring together three areas of deep expertise — construction, local regulations, and customer service — ensuring every property we present is built right, legally sound, and delivered with care.</p>
+      <div class="siblings-tags">
+        <span class="tag" data-i18n="tag1">Construction</span>
+        <span class="tag" data-i18n="tag2">Local Regulations</span>
+        <span class="tag" data-i18n="tag3">Customer Service</span>
+        <span class="tag" data-i18n="tag4">Thailand Specialists</span>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2" style="display:flex;flex-direction:column;gap:2rem;padding-left:2rem;border-left:1px solid rgba(200,184,138,.1)">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--warm-sand);line-height:1">8<span style="color:var(--burnt-sienna);font-size:1.4rem">+</span></div>
+        <div style="font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-grey);margin-top:.3rem" data-i18n="stat1_label">Years in Thailand</div>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--warm-sand);line-height:1">1,200<span style="color:var(--burnt-sienna);font-size:1.4rem">+</span></div>
+        <div style="font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-grey);margin-top:.3rem" data-i18n="stat2_label">Happy Clients</div>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:600;color:var(--warm-sand);line-height:1">12</div>
+        <div style="font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-grey);margin-top:.3rem" data-i18n="stat3_label">Cities Covered</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA STRIP -->
+  <div class="cta-strip">
+    <div class="cta-strip-title" data-i18n="cta_title">Ready to find your place in Thailand? <strong>Let's talk.</strong></div>
+    <a href="index.html#contact" class="btn-sienna" style="white-space:nowrap;flex-shrink:0" data-i18n="cta_btn">Book Free Consultation →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="nav-logo footer-logo" style="text-decoration:none">
+          <img src="Brand_assets/Fatboys Real Estate Logo.jpeg" alt="Fatboy Living Estates" />
+        </a>
+        <p class="footer-brand-desc" data-i18n="footer_desc">Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.</p>
+        <div style="display:flex;gap:.75rem;margin-top:1.5rem">
+          <a href="#" class="footer-social">f</a><a href="#" class="footer-social">in</a><a href="#" class="footer-social">ig</a><a href="#" class="footer-social">yt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <div class="footer-links">
+          <a href="renting.html">Renting</a>
+          <a href="relocating.html">Relocating</a>
+          <a href="pet-friendly.html">Pet Friendly</a>
+          <a href="investing.html">Investing</a>
+          <a href="construction.html">Construction</a>
+          <a href="consulting.html">Consulting</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Locations</div>
+        <div class="footer-links">
+          <a href="#">Phuket</a>
+          <a href="#">Bangkok</a>
+          <a href="#">Koh Samui</a>
+          <a href="#">Chiang Mai</a>
+          <a href="#">Pattaya</a>
+          <a href="#">Hua Hin</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="#">Careers</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer_copy">© 2026 FatBoys Real Estate Thailand. All rights reserved.</span>
+      <div style="display:flex;gap:2rem">
+        <a href="#" style="color:inherit;text-decoration:none">Privacy Policy</a>
+        <a href="#" style="color:inherit;text-decoration:none">Terms of Service</a>
+        <a href="#" style="color:inherit;text-decoration:none">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  /* ── BILINGUAL ── */
+  (function(){
+    var T = {
+      en: {
+        nav_cta: 'Book Consultation',
+        hero_eyebrow: 'Our Story',
+        hero_title: 'About<br><em>Fatboy\'s Estates</em>',
+        hero_tagline: '"We are a family helping you find yours."',
+        hero_cta: 'Book a Consultation',
+        story_label: 'Who We Are',
+        story_heading: 'More Than<br><em>Real Estate</em>',
+        story_sub: 'A local community dedicated to helping you discover your dream home and live peacefully in Thailand.',
+        story_p1: 'At Fatboy\'s Estates, we believe finding a home should feel personal, safe, and effortless. We are a local community dedicated to helping you discover your dream home and live peacefully in Thailand.',
+        story_p2: 'Our company was founded by siblings who combine their expertise in construction, local regulations, and customer service. By working together, we ensure every property we present meets high standards of quality, legality, and comfort.',
+        story_p3: 'Because we are a family-built business, we treat our clients like family as well. Our goal is to create a trustworthy experience where you feel supported at every step — from choosing the right property to settling into your new home.',
+        story_closing: 'At Fatboy\'s Estates, we are more than just a real estate service.<br>We are a family helping you find yours.',
+        pillars_eyebrow: 'Our Foundation',
+        pillars_heading: 'Built on<br><em>Family Values</em>',
+        p1_title: 'Personal',
+        p1_desc: 'Finding a home should feel personal, not transactional. Every client receives our full attention, tailored to their unique needs and lifestyle.',
+        p2_title: 'Safe',
+        p2_desc: 'We vet every property for legal compliance, structural integrity, and fair pricing — so you can move forward with complete confidence.',
+        p3_title: 'Effortless',
+        p3_desc: 'From first viewing to final handover, we handle the complexity so the experience feels smooth, clear, and stress-free for you.',
+        sib_eyebrow: 'Founded By Siblings',
+        sib_heading: 'Three Disciplines,<br><strong>One Vision</strong>',
+        sib_text: 'Our founding siblings bring together three areas of deep expertise — construction, local regulations, and customer service — ensuring every property we present is built right, legally sound, and delivered with care.',
+        tag1: 'Construction', tag2: 'Local Regulations', tag3: 'Customer Service', tag4: 'Thailand Specialists',
+        stat1_label: 'Years in Thailand', stat2_label: 'Happy Clients', stat3_label: 'Cities Covered',
+        cta_title: 'Ready to find your place in Thailand? <strong>Let\'s talk.</strong>',
+        cta_btn: 'Book Free Consultation →',
+        footer_desc: 'Thailand\'s most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.',
+        footer_copy: '© 2026 FatBoys Real Estate Thailand. All rights reserved.'
+      },
+      th: {
+        nav_cta: 'จองคำปรึกษา',
+        hero_eyebrow: 'เรื่องราวของเรา',
+        hero_title: 'เกี่ยวกับ<br><em>Fatboy\'s Estates</em>',
+        hero_tagline: '"เราคือครอบครัวที่จะช่วยคุณหาครอบครัวของตัวเอง"',
+        hero_cta: 'จองคำปรึกษา',
+        story_label: 'เราคือใคร',
+        story_heading: 'มากกว่า<br><em>อสังหาริมทรัพย์</em>',
+        story_sub: 'ชุมชนท้องถิ่นที่ทุ่มเทเพื่อช่วยคุณค้นพบบ้านในฝันและใช้ชีวิตอย่างสงบสุขในประเทศไทย',
+        story_p1: 'ที่ Fatboy\'s Estates เราเชื่อว่าการหาบ้านควรรู้สึกเป็นส่วนตัว ปลอดภัย และง่ายดาย เราคือชุมชนท้องถิ่นที่ทุ่มเทเพื่อช่วยคุณค้นพบบ้านในฝันและใช้ชีวิตอย่างสงบสุขในประเทศไทย',
+        story_p2: 'บริษัทของเราก่อตั้งโดยพี่น้องที่รวมความเชี่ยวชาญด้านการก่อสร้าง กฎหมายท้องถิ่น และการบริการลูกค้า ด้วยการทำงานร่วมกัน เราจึงมั่นใจว่าทุกอสังหาริมทรัพย์ที่เรานำเสนอตรงตามมาตรฐานคุณภาพ ความถูกกฎหมาย และความสะดวกสบายสูงสุด',
+        story_p3: 'เพราะเราเป็นธุรกิจที่สร้างขึ้นจากครอบครัว เราจึงปฏิบัติต่อลูกค้าเหมือนครอบครัวด้วย เป้าหมายของเราคือสร้างประสบการณ์ที่น่าเชื่อถือ ที่คุณจะรู้สึกได้รับการสนับสนุนทุกขั้นตอน ตั้งแต่การเลือกอสังหาริมทรัพย์ที่เหมาะสมจนถึงการเข้าอยู่ในบ้านใหม่',
+        story_closing: 'ที่ Fatboy\'s Estates เราไม่ได้เป็นแค่บริการอสังหาริมทรัพย์<br>เราคือครอบครัวที่ช่วยคุณหาครอบครัวของคุณ',
+        pillars_eyebrow: 'รากฐานของเรา',
+        pillars_heading: 'สร้างบน<br><em>คุณค่าของครอบครัว</em>',
+        p1_title: 'เป็นส่วนตัว',
+        p1_desc: 'การหาบ้านควรรู้สึกเป็นส่วนตัว ไม่ใช่แค่การทำธุรกรรม ลูกค้าทุกรายจะได้รับความใส่ใจอย่างเต็มที่ ปรับให้เหมาะกับความต้องการและวิถีชีวิตที่เป็นเอกลักษณ์ของแต่ละคน',
+        p2_title: 'ปลอดภัย',
+        p2_desc: 'เราตรวจสอบทุกอสังหาริมทรัพย์ในด้านการปฏิบัติตามกฎหมาย ความสมบูรณ์ของโครงสร้าง และราคาที่เป็นธรรม เพื่อให้คุณก้าวไปข้างหน้าด้วยความมั่นใจอย่างเต็มที่',
+        p3_title: 'ง่ายดาย',
+        p3_desc: 'ตั้งแต่การดูครั้งแรกจนถึงการส่งมอบขั้นสุดท้าย เราจัดการความซับซ้อนทั้งหมด เพื่อให้ประสบการณ์ของคุณราบรื่น ชัดเจน และปราศจากความเครียด',
+        sib_eyebrow: 'ก่อตั้งโดยพี่น้อง',
+        sib_heading: 'สามสาขาความเชี่ยวชาญ<br><strong>วิสัยทัศน์เดียว</strong>',
+        sib_text: 'พี่น้องผู้ก่อตั้งของเรานำความเชี่ยวชาญเชิงลึกสามด้านมารวมกัน ได้แก่ การก่อสร้าง กฎหมายท้องถิ่น และการบริการลูกค้า เพื่อให้ทุกอสังหาริมทรัพย์ที่เรานำเสนอสร้างอย่างถูกต้อง ถูกกฎหมาย และส่งมอบด้วยความใส่ใจ',
+        tag1: 'การก่อสร้าง', tag2: 'กฎหมายท้องถิ่น', tag3: 'การบริการลูกค้า', tag4: 'ผู้เชี่ยวชาญประเทศไทย',
+        stat1_label: 'ปีในประเทศไทย', stat2_label: 'ลูกค้าที่พึงพอใจ', stat3_label: 'เมืองที่ครอบคลุม',
+        cta_title: 'พร้อมหาที่อยู่ในประเทศไทยแล้วหรือยัง? <strong>มาคุยกัน</strong>',
+        cta_btn: 'จองคำปรึกษาฟรี →',
+        footer_desc: 'ชุมชนอสังหาริมทรัพย์ที่เชื่อถือได้มากที่สุดในประเทศไทย เชื่อมต่อผู้คนกับอสังหาริมทรัพย์ชั้นเยี่ยมและสร้างชีวิตทั่วราชอาณาจักรตั้งแต่ปี 2016',
+        footer_copy: '© 2026 FatBoys Real Estate Thailand. สงวนลิขสิทธิ์ทุกประการ'
+      }
+    };
+    var currentLang = localStorage.getItem('fb_lang') || 'en';
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('fb_lang', lang);
+      var t = T[lang];
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        var key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+      document.documentElement.lang = lang === 'th' ? 'th' : 'en';
+    }
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { setLanguage(btn.getAttribute('data-lang')); });
+    });
+    setLanguage(currentLang);
+  })();
+
+  const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  (function loop() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width = '12px'; cursor.style.height = '12px'; ring.style.width = '52px'; ring.style.height = '52px'; ring.style.borderColor = 'rgba(192,106,74,0.6)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px'; ring.style.borderColor = 'rgba(200,184,138,0.5)'; });
+  });
+  const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }); }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

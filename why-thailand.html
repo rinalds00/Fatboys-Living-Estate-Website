@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Thailand — FatBoys Living Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --warm-sand: #C8B88A;
+      --forest-green: #233d00;
+      --forest-light: #2f5200;
+      --dark-walnut: #1E2618;
+      --dark-walnut-deep: #14180E;
+      --linen-white: #ECE8DC;
+      --burnt-sienna: #C06A4A;
+      --stone-grey: #908C84;
+      --sand-light: #DDD0B0;
+      --rocky-stone: #B8B4AE;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #2a3520;
+      color: var(--sand-light);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      cursor: none;
+    }
+
+    /* ── Custom Cursor ── */
+    .cursor { width: 8px; height: 8px; background: var(--warm-sand); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform .1s; }
+    .cursor-ring { width: 32px; height: 32px; border: 1px solid rgba(200,184,138,.5); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: all .12s cubic-bezier(.25,.46,.45,.94); }
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 9990; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(0,0,0,.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(200,184,138,.1);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; letter-spacing: 0.04em; color: var(--linen-white); white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      color: var(--rocky-stone); text-decoration: none;
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--warm-sand); }
+
+    /* Nav dropdown */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      background: none; border: none; cursor: none;
+      color: var(--rocky-stone); font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      display: flex; align-items: center; gap: .4rem;
+      transition: color .2s;
+    }
+    .nav-dropdown-toggle:hover { color: var(--warm-sand); }
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%);
+      background: rgba(14,18,10,.98); border: 1px solid rgba(200,184,138,.12);
+      display: none; min-width: 200px; padding: .75rem 0;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: flex; }
+    .nav-dd-col { padding: .5rem 1.25rem; border-right: 1px solid rgba(200,184,138,.08); min-width: 160px; }
+    .nav-dd-col:last-child { border-right: none; }
+    .nav-dd-heading { font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--burnt-sienna); margin-bottom: .6rem; }
+    .nav-dd-items { display: flex; flex-direction: column; gap: .1rem; }
+    .nav-dd-item {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .45rem .5rem; color: var(--stone-grey);
+      text-decoration: none; font-size: .72rem; letter-spacing: .06em;
+      border-left: 2px solid transparent;
+      transition: color .2s, background .2s, border-left-color .2s, padding-left .2s;
+    }
+    .nav-dd-item:hover { color: var(--warm-sand); background: rgba(200,184,138,.06); border-left-color: var(--burnt-sienna); padding-left: .75rem; }
+    .nav-dd-item-left { display: flex; align-items: center; gap: .6rem; }
+    .nav-dd-item-arrow { opacity: 0; transform: translateX(-4px); transition: opacity .2s, transform .2s; margin-left: auto; font-size: .8rem; }
+    .nav-dd-item:hover .nav-dd-item-arrow { opacity: 1; transform: translateX(0); }
+    .nav-dd-item svg { color: var(--forest-green); flex-shrink: 0; }
+    .nav-dd-single { min-width: 260px; }
+    .btn-nav {
+      padding: .55rem 1.4rem;
+      background: var(--forest-green);
+      border: 1px solid var(--forest-green);
+      color: var(--warm-sand);
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      cursor: none; font-family: 'DM Sans', sans-serif;
+      transition: background .25s, border-color .25s, color .25s;
+    }
+    .btn-nav:hover { background: var(--warm-sand); color: var(--dark-walnut); border-color: var(--warm-sand); }
+    .lang-toggle { display: flex; align-items: center; gap: .4rem; }
+    .lang-btn { background: none; border: none; cursor: none; color: var(--stone-grey); font-family: 'DM Sans', sans-serif; font-size: .72rem; letter-spacing: .1em; transition: color .2s; }
+    .lang-btn.active, .lang-btn:hover { color: var(--warm-sand); }
+    .lang-sep { color: rgba(200,184,138,.3); font-size: .7rem; }
+
+    /* ── Hero Banner ── */
+    .page-hero {
+      min-height: 60vh;
+      display: flex; align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+      padding: 0 7rem 6rem;
+      background: linear-gradient(135deg, #0a1205 0%, #1a2a10 40%, #0d1a08 100%);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('Brand_assets/nature3.jpg') center/cover no-repeat;
+      opacity: .25;
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,18,10,.95) 0%, rgba(14,18,10,.3) 60%, transparent 100%);
+    }
+    .page-hero-content { position: relative; z-index: 2; max-width: 780px; }
+    .page-hero-eyebrow {
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--burnt-sienna); margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--linen-white);
+      margin-bottom: 1.5rem;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--warm-sand); }
+    .page-hero p {
+      font-size: 1.05rem; color: var(--stone-grey);
+      max-width: 560px; line-height: 1.75;
+    }
+
+    /* ── Main Content ── */
+    main { padding-top: 0; }
+
+    /* ── Section Base ── */
+    .wt-section {
+      padding: 7rem 7rem;
+      border-bottom: 1px solid rgba(200,184,138,.06);
+      position: relative;
+    }
+    .wt-section:nth-child(even) {
+      background: rgba(255,255,255,.04);
+    }
+
+    .wt-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section header */
+    .wt-header {
+      display: flex; align-items: flex-start; gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .wt-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300; line-height: 1;
+      color: #000;
+      opacity: .75;
+      flex-shrink: 0;
+      margin-top: -.5rem;
+      min-width: 80px;
+    }
+    .wt-title-block {}
+    .wt-eyebrow {
+      font-size: .62rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--burnt-sienna); margin-bottom: .6rem;
+    }
+    .wt-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 400; line-height: 1.15;
+      color: var(--linen-white);
+    }
+
+    /* Body text */
+    .wt-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+    .wt-body.single-col { grid-template-columns: 1fr; max-width: 700px; }
+    .wt-body p {
+      color: var(--stone-grey);
+      font-size: .97rem;
+      line-height: 1.8;
+    }
+    .wt-highlights {
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .wt-highlight-item {
+      display: flex; align-items: flex-start; gap: .7rem;
+      color: var(--sand-light); font-size: .93rem; line-height: 1.6;
+    }
+    .wt-highlight-item::before {
+      content: '—';
+      color: var(--warm-sand);
+      flex-shrink: 0;
+      margin-top: .05rem;
+    }
+
+    /* Photo strip */
+    .wt-photos {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(200,184,138,.2) transparent;
+    }
+    .wt-photos::-webkit-scrollbar { height: 3px; }
+    .wt-photos::-webkit-scrollbar-thumb { background: rgba(200,184,138,.2); border-radius: 2px; }
+    .wt-photos img {
+      height: 300px;
+      width: auto;
+      flex-shrink: 0;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(200,184,138,.08);
+      transition: transform .4s ease, border-color .3s;
+    }
+    .wt-photos img:hover {
+      transform: scale(1.02);
+      border-color: rgba(200,184,138,.25);
+    }
+
+    /* 2-photo grid for small galleries */
+    .wt-photos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1rem;
+    }
+    .wt-photos-grid img {
+      width: 100%; height: 340px;
+      object-fit: cover; display: block;
+      border: 1px solid rgba(200,184,138,.08);
+      transition: transform .4s ease, border-color .3s;
+    }
+    .wt-photos-grid img:hover {
+      transform: scale(1.02);
+      border-color: rgba(200,184,138,.25);
+    }
+
+    /* Divider stripe */
+    .wt-stripe {
+      width: 48px; height: 2px;
+      background: var(--warm-sand);
+      margin: 1.2rem 0 0;
+      opacity: .5;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-walnut-deep);
+      padding: 4rem 7rem 2.5rem;
+      border-top: 1px solid rgba(200,184,138,.1);
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-logo img { height: 60px; filter: brightness(0) invert(1); }
+    .footer-brand-desc { font-size: .8rem; color: var(--stone-grey); line-height: 1.7; margin-top: 1rem; max-width: 280px; }
+    .footer-social { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid rgba(200,184,138,.2); color: var(--stone-grey); text-decoration: none; font-size: .7rem; transition: background .2s, color .2s; }
+    .footer-social:hover { background: var(--warm-sand); color: var(--dark-walnut); }
+    .footer-heading { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--warm-sand); margin-bottom: 1.25rem; }
+    .footer-links { display: flex; flex-direction: column; gap: .6rem; }
+    .footer-links a { color: var(--stone-grey); text-decoration: none; font-size: .82rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--warm-sand); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid rgba(200,184,138,.08); font-size: .75rem; color: var(--stone-grey); }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .page-hero { padding: 0 2rem 5rem; }
+      .wt-section { padding: 5rem 2rem; }
+      .wt-body { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">Fatboys Living Estate</a>
+    <div class="nav-links">
+      <!-- Buying/Selling dropdown -->
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          <span data-i18n="nav.buy_sell">Buying/Selling</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.buying">Buying</div>
+            <div class="nav-dd-items">
+              <a href="buy-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.houses">Houses</span></a>
+              <a href="buy-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg><span data-i18n="nav.condo">Condo</span></a>
+              <a href="buy-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg><span data-i18n="nav.land">Land</span></a>
+            </div>
+          </div>
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.selling">Selling</div>
+            <div class="nav-dd-items">
+              <a href="sell-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.houses">Houses</span></a>
+              <a href="sell-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg><span data-i18n="nav.condo">Condo</span></a>
+              <a href="sell-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg><span data-i18n="nav.land">Land</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="why-thailand.html" class="active" data-i18n="nav.why_thailand">Why Thailand</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <!-- Services dropdown -->
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          <span data-i18n="nav.services">Services</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu nav-dd-single">
+          <div class="nav-dd-col" style="border-right:none">
+            <div class="nav-dd-heading" data-i18n="nav.what_we_offer">What We Offer</div>
+            <div class="nav-dd-items">
+              <a href="renting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.svc_renting">Renting</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="relocating.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-i18n="nav.svc_relocating">Relocating</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="pet-friendly.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-i18n="nav.svc_pet">Pet Friendly</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="investing.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span data-i18n="nav.svc_investing">Investing</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="construction.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20"/><path d="M17 20V8l-5-5-5 5v12"/><path d="M9 20v-5h6v5"/></svg><span data-i18n="nav.svc_construction">Construction &amp; Renovation</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="consulting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i18n="nav.svc_consulting">Consulting</span></span><span class="nav-dd-item-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lang-toggle" id="langToggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="th">TH</button>
+      </div>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-nav">Book Consultation</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-hero-eyebrow" data-i18n="hero.eyebrow">FatBoys Living Estate — Thailand</div>
+      <h1 data-i18n-html="hero.h1">Why <em>Thailand</em>?</h1>
+      <p data-i18n="hero.p">Ten reasons why thousands of people from around the world choose Thailand as their home — and why so many never want to leave.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- 01 · STREET FOOD -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">01</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s01.eyebrow">Food Culture</div>
+            <h2 class="wt-title" data-i18n="s01.title">Incredible Street Food, Everywhere</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s01.p1">One of the biggest surprises for foreigners arriving in Thailand is the sheer abundance and quality of food available at every turn. Street vendors, night markets, roadside stalls — they are woven into the daily rhythm of Thai life, and for good reason.</p>
+            <p style="margin-top:1rem;" data-i18n="s01.p2">Pad Thai tossed over a wok flame, grilled pork skewers, silky noodle soups, fresh papaya salads, mango sticky rice — dishes that would cost $15–25 in a Western restaurant are available here for just $1–3 per meal. The flavours are bold, the ingredients are fresh, and the variety is extraordinary.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s01.h1">Hundreds of dishes available within walking distance, morning to midnight</div>
+            <div class="wt-highlight-item" data-i18n="s01.h2">Meals cooked fresh to order — rarely anything sitting under a heat lamp</div>
+            <div class="wt-highlight-item" data-i18n="s01.h3">Night markets offer a social dining experience unlike anything in the West</div>
+            <div class="wt-highlight-item" data-i18n="s01.h4">International cuisines are also widely available in every major city</div>
+            <div class="wt-highlight-item" data-i18n="s01.h5">Food brings communities together — eating out is part of the culture, not a luxury</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/f1.jpeg" alt="Thai street food cooking" loading="lazy" />
+          <img src="Brand_assets/f2.jpeg" alt="Thai street food" loading="lazy" />
+          <img src="Brand_assets/f3.jpeg" alt="Thai street food" loading="lazy" />
+          <img src="Brand_assets/f4.jpeg" alt="Thai street food" loading="lazy" />
+          <img src="Brand_assets/f5.jpeg" alt="Thai street food" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · COST OF LIVING -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">02</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s02.eyebrow">Lifestyle & Finance</div>
+            <h2 class="wt-title" data-i18n="s02.title">A Lower Cost of Living — Without Sacrificing Quality</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s02.p1">Compared with Europe, North America, or Australia, the cost of living in Thailand can be dramatically lower — yet the quality of life remains exceptionally high. Many expats find they can live more comfortably here on a fraction of what they spent back home.</p>
+            <p style="margin-top:1rem;" data-i18n="s02.p2">Modern condominiums in desirable neighbourhoods, reliable internet, air-conditioned transport, and a full social life are all accessible at a fraction of the cost you might expect. For retirees, remote workers, and those seeking a lifestyle upgrade, Thailand represents one of the most compelling opportunities in Southeast Asia.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s02.h1">Comfortable, well-appointed condos available at competitive rental and purchase prices</div>
+            <div class="wt-highlight-item" data-i18n="s02.h2">Domestic transport — including motorbike taxis, tuk-tuks, and ride-share — is highly affordable</div>
+            <div class="wt-highlight-item" data-i18n="s02.h3">Utility costs are generally lower than in Western countries</div>
+            <div class="wt-highlight-item" data-i18n="s02.h4">Many expatriates save significantly more each month than they did at home</div>
+            <div class="wt-highlight-item" data-i18n="s02.h5">A comfortable lifestyle — with dining out, travel, and leisure — is achievable at modest income levels</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/l1.jpeg" alt="Comfortable living in Thailand" loading="lazy" />
+          <img src="Brand_assets/l2.jpeg" alt="Comfortable living in Thailand" loading="lazy" />
+          <img src="Brand_assets/l3.jpeg" alt="Working remotely in Thailand" loading="lazy" />
+          <img src="Brand_assets/l4.jpeg" alt="Digital nomad lifestyle Thailand" loading="lazy" />
+          <img src="Brand_assets/l5.jpeg" alt="Living in Thailand" loading="lazy" />
+          <img src="Brand_assets/l6.jpeg" alt="Living in Thailand" loading="lazy" />
+          <img src="Brand_assets/l7.jpeg" alt="Living in Thailand" loading="lazy" />
+          <img src="Brand_assets/l8.jpeg" alt="Living in Thailand" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · CLIMATE -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">03</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s03.eyebrow">Weather & Environment</div>
+            <h2 class="wt-title" data-i18n="s03.title">Warm Tropical Climate All Year Round</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s03.p1">For those who have spent years enduring cold, grey winters, Thailand's climate can feel genuinely transformative. Warm temperatures, lush green landscapes, and sunshine are the constants — not the exception. There are no months of darkness, no heating bills, and no digging your car out of snow.</p>
+            <p style="margin-top:1rem;" data-i18n="s03.p2">Thailand has three seasons: cool and dry (November–February), hot (March–May), and rainy (June–October). Even during the rainy season, storms tend to be short and dramatic rather than endless drizzle — and the landscape emerges greener and more vibrant than ever. For many people, the climate alone is a life-changing reason to stay.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s03.h1">Year-round warmth — average temperatures typically ranging from 25–35°C</div>
+            <div class="wt-highlight-item" data-i18n="s03.h2">Thousands of kilometres of coastline with warm, swimmable seas</div>
+            <div class="wt-highlight-item" data-i18n="s03.h3">Tropical storms pass quickly; sunshine typically returns the same day</div>
+            <div class="wt-highlight-item" data-i18n="s03.h4">Northern Thailand offers cooler, mountain-fresh air during the cool season</div>
+            <div class="wt-highlight-item" data-i18n="s03.h5">An outdoor lifestyle — cycling, swimming, hiking — becomes part of daily routine</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/w1.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w2.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w3.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w4.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w5.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w6.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w7.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w8.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w9.jpeg" alt="Thailand tropical weather" loading="lazy" />
+          <img src="Brand_assets/w10.jpeg" alt="Thailand tropical weather" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · FRESH FOOD -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">04</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s04.eyebrow">Health & Nutrition</div>
+            <h2 class="wt-title" data-i18n="s04.title">Fresh, Tropical Produce Grown All Year</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s04.p1">Thailand's tropical climate means that fresh fruits and vegetables are available in abundance throughout the entire year. Markets — from gleaming air-conditioned supermarkets to vibrant open-air wet markets — overflow with colour, fragrance, and freshness every single day.</p>
+            <p style="margin-top:1rem;" data-i18n="s04.p2">Mangoes, papayas, coconuts, rambutans, dragon fruit, durian, lychees, fresh herbs, and vegetables of every variety are grown locally and available at prices that would seem implausible in Europe or North America. Eating well in Thailand is not expensive — it is simply part of everyday life.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s04.h1">No seasonal produce gap — tropical fruits and vegetables grow year-round</div>
+            <div class="wt-highlight-item" data-i18n="s04.h2">Local markets operate daily, with produce that is often harvested that same morning</div>
+            <div class="wt-highlight-item" data-i18n="s04.h3">Fresh coconut water, tropical smoothies, and fruit bowls are ubiquitous and affordable</div>
+            <div class="wt-highlight-item" data-i18n="s04.h4">Thai cuisine naturally uses fresh herbs and minimal processed ingredients</div>
+            <div class="wt-highlight-item" data-i18n="s04.h5">Healthy eating does not require effort or expense — it is simply the default</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/h1.jpeg" alt="Fresh tropical produce Thailand" loading="lazy" />
+          <img src="Brand_assets/h2.jpeg" alt="Fresh tropical produce Thailand" loading="lazy" />
+          <img src="Brand_assets/h3.jpeg" alt="Fresh tropical produce Thailand" loading="lazy" />
+          <img src="Brand_assets/h4.jpeg" alt="Fresh fruit market Thailand" loading="lazy" />
+          <img src="Brand_assets/h5.jpeg" alt="Fresh tropical produce Thailand" loading="lazy" />
+          <img src="Brand_assets/h6.jpeg" alt="Fresh tropical produce Thailand" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · PEOPLE & CULTURE -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">05</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s05.eyebrow">People & Culture</div>
+            <h2 class="wt-title" data-i18n="s05.title">Friendly People &amp; A Welcoming Culture</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s05.p1">Thailand is known around the world as the "Land of Smiles" — and for those who settle here, that reputation proves to be very much deserved. Thai culture places a high value on warmth, hospitality, and the preservation of harmony in daily interactions. Foreigners arriving in Thailand frequently remark that the kindness they encounter feels genuine and unhurried.</p>
+            <p style="margin-top:1rem;" data-i18n="s05.p2">Whether navigating a bureaucratic process, asking for directions, or simply buying something from a market stall, the response is almost always patient and helpful. For many expats, this cultural openness makes the transition to life in Thailand far easier than they anticipated — and far more enjoyable.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s05.h1">A culture built around politeness, patience, and genuine warmth toward visitors</div>
+            <div class="wt-highlight-item" data-i18n="s05.h2">The traditional Thai greeting — the "wai" — reflects a deep respect for others</div>
+            <div class="wt-highlight-item" data-i18n="s05.h3">Thai people are generally curious about and welcoming of other cultures</div>
+            <div class="wt-highlight-item" data-i18n="s05.h4">Conflict is generally avoided — daily interactions tend to be calm and pleasant</div>
+            <div class="wt-highlight-item" data-i18n="s05.h5">Many long-term expats say the people are what made them stay permanently</div>
+          </div>
+        </div>
+        <div class="wt-photos-grid">
+          <img src="Brand_assets/p1.jpeg" alt="Friendly Thai people" loading="lazy" />
+          <img src="Brand_assets/p2.jpeg" alt="Warm Thai hospitality" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · HEALTHCARE -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">06</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s06.eyebrow">Health & Wellness</div>
+            <h2 class="wt-title" data-i18n="s06.title">Excellent Healthcare at Reasonable Prices</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s06.p1">Thailand has developed a reputation as a global destination for medical tourism, and with good reason. The country is home to dozens of internationally accredited hospitals — particularly in Bangkok, Chiang Mai, and Phuket — that provide world-class medical care at a fraction of the cost of equivalent treatment in the United States, the UK, or Australia.</p>
+            <p style="margin-top:1rem;" data-i18n="s06.p2">Bumrungrad International, Bangkok Hospital, Samitivej, and other facilities attract patients from across Asia, the Middle East, and the Western world. For expats living in Thailand, access to this level of healthcare — at affordable prices, with English-speaking staff — provides enormous peace of mind.</p>
+            <p style="margin-top:1rem;" data-i18n-html="s06.p3">What many newcomers don't realise is that Thailand's <strong style="color:var(--sand-light)">public hospitals</strong> are equally impressive — and often even better value. The doctors are highly trained, many having studied or practised abroad, and the standard of care is consistently high. For many treatments and conditions, a top public hospital delivers the same — or better — outcome at a significantly lower cost than its private counterpart.</p>
+            <p style="margin-top:1rem;" data-i18n-html="s06.p4">At FatBoys, we help you navigate this. Whether you need a specialist, a routine check-up, or ongoing care, <strong style="color:var(--sand-light)">we connect you with the right hospital for your budget and your exact need</strong> — so you always know you're in the right hands.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s06.h1">JCI-accredited international hospitals in major cities with English-speaking doctors and nurses</div>
+            <div class="wt-highlight-item" data-i18n="s06.h2">Thai public hospitals offer the same — and often higher — quality of care at lower prices</div>
+            <div class="wt-highlight-item" data-i18n="s06.h3">Medical procedures often cost 50–80% less than equivalent treatment in Western countries</div>
+            <div class="wt-highlight-item" data-i18n="s06.h4">Short waiting times — specialist appointments often available within days</div>
+            <div class="wt-highlight-item" data-i18n="s06.h5">Private health insurance in Thailand is affordable and comprehensive</div>
+            <div class="wt-highlight-item" data-i18n="s06.h6">FatBoys connects you with the right hospital for your budget and your specific medical need</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/hospital1.jpeg" alt="International hospital Thailand" loading="lazy" />
+          <img src="Brand_assets/hospital2.jpeg" alt="Healthcare Thailand" loading="lazy" />
+          <img src="Brand_assets/ho3.jpeg" alt="Modern hospital room Thailand" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · SAFETY -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">07</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s07.eyebrow">Safety & Stability</div>
+            <h2 class="wt-title" data-i18n="s07.title">A Safe and Peaceful Way of Life</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s07.p1">For many expatriates relocating from large cities in Europe, the US, or elsewhere, one of the most striking things about daily life in Thailand is how calm and safe it feels. Violent crime against foreigners is rare, and the pace of everyday life — from the market to the commute — tends to feel unhurried and unthreatening.</p>
+            <p style="margin-top:1rem;" data-i18n="s07.p2">Thai society places a high cultural premium on maintaining face and social harmony, which contributes to a generally peaceful atmosphere in public spaces. Families, couples, and solo travellers alike frequently remark that Thailand feels far safer in daily life than many of the cities they came from. Walking late at night, navigating public transport, and exploring new neighbourhoods rarely comes with the sense of anxiety that can characterise urban life elsewhere.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s07.h1">Low rates of violent crime against expatriates and tourists across the country</div>
+            <div class="wt-highlight-item" data-i18n="s07.h2">A cultural emphasis on social harmony reduces confrontation in daily life</div>
+            <div class="wt-highlight-item" data-i18n="s07.h3">Gated communities and modern residential buildings offer additional security and peace of mind</div>
+            <div class="wt-highlight-item" data-i18n="s07.h4">Thailand has a stable, established expat infrastructure — it is not a frontier destination</div>
+            <div class="wt-highlight-item" data-i18n="s07.h5">Many long-term residents describe feeling safer here than in their home countries</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/s1.jpeg" alt="Peaceful Thailand sunset temple" loading="lazy" />
+          <img src="Brand_assets/s2.jpeg" alt="Beautiful Thai temple at dusk" loading="lazy" />
+          <img src="Brand_assets/safe4.jpg" alt="Bangkok city skyline" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · EXPAT COMMUNITIES -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">08</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s08.eyebrow">Community & Connection</div>
+            <h2 class="wt-title" data-i18n="s08.title">Strong, Welcoming Expat Communities</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s08.p1">Bangkok, Chiang Mai, and Phuket are home to some of the largest and most active international communities in Southeast Asia. Whether you are a retiree, a digital nomad, a young professional, or relocating with a family, you will find an established community of people who have made the same journey — and who are generally very willing to help newcomers find their footing.</p>
+            <p style="margin-top:1rem;" data-i18n="s08.p2">Expat clubs, networking events, sports leagues, charity organisations, international schools, and online communities all thrive across Thailand's major cities. These networks make it significantly easier to build a social life, meet people with shared interests, and navigate practical challenges — from visa questions to finding a good mechanic or a trusted doctor.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s08.h1">Established expat communities across Bangkok, Chiang Mai, Phuket, Hua Hin, Koh Samui, and more</div>
+            <div class="wt-highlight-item" data-i18n="s08.h2">International schools offering British, American, IB, and other curricula for families with children</div>
+            <div class="wt-highlight-item" data-i18n="s08.h3">Active online communities sharing advice, events, and local recommendations</div>
+            <div class="wt-highlight-item" data-i18n="s08.h4">Clubs and groups for every interest — from golf and football to photography and cooking</div>
+            <div class="wt-highlight-item" data-i18n="s08.h5">A well-worn expat path means practical information and local knowledge is always available</div>
+          </div>
+        </div>
+        <div class="wt-photos-grid">
+          <img src="Brand_assets/expat.jpg" alt="Expat community meeting Thailand" loading="lazy" />
+          <img src="Brand_assets/expat1.jpg" alt="International community Thailand" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · NATURE -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">09</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s09.eyebrow">Nature & Adventure</div>
+            <h2 class="wt-title" data-i18n="s09.title">Beautiful Nature &amp; Endless Travel Opportunities</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s09.p1">Thailand's natural diversity is extraordinary. From the emerald islands of the south — Koh Samui, Koh Tao, the Phi Phi archipelago — to the misty mountains and teak forests of the north around Chiang Mai and Chiang Rai, the country offers landscapes that seem almost too beautiful to be real.</p>
+            <p style="margin-top:1rem;" data-i18n="s09.p2">Weekend travel within Thailand is easy, affordable, and rewarding. A short domestic flight or overnight train can take you from the city to a remote national park, a sacred mountain temple, or a deserted beach. For those who love exploring, living in Thailand is like having a passport to endless discovery — without ever needing to leave the country.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s09.h1">Dozens of national parks and wildlife sanctuaries protecting extraordinary ecosystems</div>
+            <div class="wt-highlight-item" data-i18n="s09.h2">World-class diving and snorkelling in the Gulf of Thailand and the Andaman Sea</div>
+            <div class="wt-highlight-item" data-i18n="s09.h3">Ancient temples, historical ruins, and UNESCO World Heritage sites within easy reach</div>
+            <div class="wt-highlight-item" data-i18n="s09.h4">Waterfalls, jungle treks, elephant sanctuaries, and river experiences in the north</div>
+            <div class="wt-highlight-item" data-i18n="s09.h5">Affordable domestic flights make weekend island or mountain trips genuinely accessible</div>
+          </div>
+        </div>
+        <div class="wt-photos">
+          <img src="Brand_assets/nature1.jpg" alt="Beautiful nature Thailand" loading="lazy" />
+          <img src="Brand_assets/nature2.jpg" alt="Lantern festival Thailand" loading="lazy" />
+          <img src="Brand_assets/nature3.jpg" alt="Golden temple Thailand" loading="lazy" />
+          <img src="Brand_assets/nature4.jpg" alt="Tropical Thailand scenery" loading="lazy" />
+          <img src="Brand_assets/nature5.jpg" alt="Thailand nature" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · SIMPLER LIFE -->
+    <section class="wt-section reveal">
+      <div class="wt-inner">
+        <div class="wt-header">
+          <div class="wt-number">10</div>
+          <div class="wt-title-block">
+            <div class="wt-eyebrow" data-i18n="s10.eyebrow">The Real Reason</div>
+            <h2 class="wt-title" data-i18n="s10.title">A Simpler, Happier Way of Life</h2>
+            <div class="wt-stripe"></div>
+          </div>
+        </div>
+        <div class="wt-body">
+          <div>
+            <p data-i18n="s10.p1">Perhaps the most honest answer to "why Thailand?" is the one that is hardest to quantify: life here simply feels better for many people. The combination of warmth — both climatic and human — affordable comfort, abundant food, natural beauty, and a culture that does not glorify stress creates something genuinely rare.</p>
+            <p style="margin-top:1rem;" data-i18n="s10.p2">Many people arrive in Thailand for a holiday and find themselves not wanting to leave. Many more arrive with a plan to stay for a year and end up building a life here. The pace is different. The priorities feel more aligned with what actually matters — connection, rest, food, experience, community. Sometimes happiness is not about having more. It is about living better.</p>
+          </div>
+          <div class="wt-highlights">
+            <div class="wt-highlight-item" data-i18n="s10.h1">A culture that values rest, enjoyment, and family — not just productivity</div>
+            <div class="wt-highlight-item" data-i18n="s10.h2">The stress of commuting, high rents, and financial pressure is significantly reduced</div>
+            <div class="wt-highlight-item" data-i18n="s10.h3">More time and energy available for what genuinely matters to you</div>
+            <div class="wt-highlight-item" data-i18n="s10.h4">Many expats report a measurable improvement in health, mood, and overall wellbeing</div>
+            <div class="wt-highlight-item" data-i18n="s10.h5">Thailand does not just offer a place to live — it offers a reason to live differently</div>
+          </div>
+        </div>
+        <div class="wt-photos-grid">
+          <img src="Brand_assets/rest1.jpg" alt="Relaxed lifestyle Thailand" loading="lazy" />
+          <img src="Brand_assets/rest2.jpeg" alt="Beautiful cafe Thailand" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding:6rem 7rem; background:var(--forest-green); text-align:center;">
+      <p style="font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,184,138,.6);margin-bottom:1rem;" data-i18n="cta.eyebrow">Ready to make the move?</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:var(--linen-white);margin-bottom:1.25rem;" data-i18n="cta.title">Let FatBoys Help You Find Your Home in Thailand</h2>
+      <p style="color:rgba(236,232,220,.65);font-size:.97rem;max-width:560px;margin:0 auto 2.5rem;" data-i18n="cta.desc">We know Thailand. We know the market. And we know what it takes to make a smooth, successful move. Reach out today — the conversation is free.</p>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" style="display:inline-block;padding:1rem 2.8rem;background:var(--warm-sand);color:var(--dark-walnut);font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;text-decoration:none;transition:background .25s;" data-i18n="cta.btn">Book a Free Consultation →</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-desc">Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.</p>
+        <div style="display:flex;gap:.75rem;margin-top:1.5rem">
+          <a href="https://www.facebook.com/share/1M5e6w6kzU/" target="_blank" class="footer-social">f</a><a href="https://wa.me/66829473350" target="_blank" class="footer-social"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.141 1.535 5.879L.057 23.625a.5.5 0 0 0 .618.618l5.746-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.166-1.448l-.371-.22-3.846.988.988-3.846-.22-.371A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Services</div>
+        <div class="footer-links">
+          <a href="renting.html">Renting</a>
+          <a href="relocating.html">Relocating</a>
+          <a href="pet-friendly.html">Pet Friendly</a>
+          <a href="investing.html">Investing</a>
+          <a href="construction.html">Construction</a>
+          <a href="consulting.html">Consulting</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Locations</div>
+        <div class="footer-links">
+          <a href="#">Phuket</a><a href="#">Bangkok</a><a href="#">Koh Samui</a><a href="#">Chiang Mai</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <a href="why-thailand.html">Why Thailand</a>
+          <a href="index.html#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FatBoys Real Estate Thailand. All rights reserved.</span>
+      <div style="display:flex;gap:2rem">
+        <a href="#" style="color:inherit;text-decoration:none">Privacy Policy</a>
+        <a href="#" style="color:inherit;text-decoration:none">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Custom cursor ──
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+    (function animRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); })();
+
+    // ── Scroll reveal ──
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => io.observe(el));
+
+    // ── Translations ──
+    const T = {
+      en: {
+        'hero.eyebrow':'FatBoys Living Estate — Thailand',
+        'hero.h1':'Why <em>Thailand</em>?',
+        'hero.p':'Ten reasons why thousands of people from around the world choose Thailand as their home — and why so many never want to leave.',
+        's01.eyebrow':'Food Culture','s01.title':'Incredible Street Food, Everywhere',
+        's01.p1':'One of the biggest surprises for foreigners arriving in Thailand is the sheer abundance and quality of food available at every turn. Street vendors, night markets, roadside stalls — they are woven into the daily rhythm of Thai life, and for good reason.',
+        's01.p2':'Pad Thai tossed over a wok flame, grilled pork skewers, silky noodle soups, fresh papaya salads, mango sticky rice — dishes that would cost $15–25 in a Western restaurant are available here for just $1–3 per meal. The flavours are bold, the ingredients are fresh, and the variety is extraordinary.',
+        's01.h1':'Hundreds of dishes available within walking distance, morning to midnight',
+        's01.h2':'Meals cooked fresh to order — rarely anything sitting under a heat lamp',
+        's01.h3':'Night markets offer a social dining experience unlike anything in the West',
+        's01.h4':'International cuisines are also widely available in every major city',
+        's01.h5':'Food brings communities together — eating out is part of the culture, not a luxury',
+        's02.eyebrow':'Lifestyle & Finance','s02.title':'A Lower Cost of Living — Without Sacrificing Quality',
+        's02.p1':'Compared with Europe, North America, or Australia, the cost of living in Thailand can be dramatically lower — yet the quality of life remains exceptionally high. Many expats find they can live more comfortably here on a fraction of what they spent back home.',
+        's02.p2':'Modern condominiums in desirable neighbourhoods, reliable internet, air-conditioned transport, and a full social life are all accessible at a fraction of the cost you might expect. For retirees, remote workers, and those seeking a lifestyle upgrade, Thailand represents one of the most compelling opportunities in Southeast Asia.',
+        's02.h1':'Comfortable, well-appointed condos available at competitive rental and purchase prices',
+        's02.h2':'Domestic transport — including motorbike taxis, tuk-tuks, and ride-share — is highly affordable',
+        's02.h3':'Utility costs are generally lower than in Western countries',
+        's02.h4':'Many expatriates save significantly more each month than they did at home',
+        's02.h5':'A comfortable lifestyle — with dining out, travel, and leisure — is achievable at modest income levels',
+        's03.eyebrow':'Weather & Environment','s03.title':'Warm Tropical Climate All Year Round',
+        's03.p1':'For those who have spent years enduring cold, grey winters, Thailand\'s climate can feel genuinely transformative. Warm temperatures, lush green landscapes, and sunshine are the constants — not the exception. There are no months of darkness, no heating bills, and no digging your car out of snow.',
+        's03.p2':'Thailand has three seasons: cool and dry (November–February), hot (March–May), and rainy (June–October). Even during the rainy season, storms tend to be short and dramatic rather than endless drizzle — and the landscape emerges greener and more vibrant than ever. For many people, the climate alone is a life-changing reason to stay.',
+        's03.h1':'Year-round warmth — average temperatures typically ranging from 25–35°C',
+        's03.h2':'Thousands of kilometres of coastline with warm, swimmable seas',
+        's03.h3':'Tropical storms pass quickly; sunshine typically returns the same day',
+        's03.h4':'Northern Thailand offers cooler, mountain-fresh air during the cool season',
+        's03.h5':'An outdoor lifestyle — cycling, swimming, hiking — becomes part of daily routine',
+        's04.eyebrow':'Health & Nutrition','s04.title':'Fresh, Tropical Produce Grown All Year',
+        's04.p1':'Thailand\'s tropical climate means that fresh fruits and vegetables are available in abundance throughout the entire year. Markets — from gleaming air-conditioned supermarkets to vibrant open-air wet markets — overflow with colour, fragrance, and freshness every single day.',
+        's04.p2':'Mangoes, papayas, coconuts, rambutans, dragon fruit, durian, lychees, fresh herbs, and vegetables of every variety are grown locally and available at prices that would seem implausible in Europe or North America. Eating well in Thailand is not expensive — it is simply part of everyday life.',
+        's04.h1':'No seasonal produce gap — tropical fruits and vegetables grow year-round',
+        's04.h2':'Local markets operate daily, with produce that is often harvested that same morning',
+        's04.h3':'Fresh coconut water, tropical smoothies, and fruit bowls are ubiquitous and affordable',
+        's04.h4':'Thai cuisine naturally uses fresh herbs and minimal processed ingredients',
+        's04.h5':'Healthy eating does not require effort or expense — it is simply the default',
+        's05.eyebrow':'People & Culture','s05.title':'Friendly People & A Welcoming Culture',
+        's05.p1':'Thailand is known around the world as the "Land of Smiles" — and for those who settle here, that reputation proves to be very much deserved. Thai culture places a high value on warmth, hospitality, and the preservation of harmony in daily interactions. Foreigners arriving in Thailand frequently remark that the kindness they encounter feels genuine and unhurried.',
+        's05.p2':'Whether navigating a bureaucratic process, asking for directions, or simply buying something from a market stall, the response is almost always patient and helpful. For many expats, this cultural openness makes the transition to life in Thailand far easier than they anticipated — and far more enjoyable.',
+        's05.h1':'A culture built around politeness, patience, and genuine warmth toward visitors',
+        's05.h2':'The traditional Thai greeting — the "wai" — reflects a deep respect for others',
+        's05.h3':'Thai people are generally curious about and welcoming of other cultures',
+        's05.h4':'Conflict is generally avoided — daily interactions tend to be calm and pleasant',
+        's05.h5':'Many long-term expats say the people are what made them stay permanently',
+        's06.eyebrow':'Health & Wellness','s06.title':'Excellent Healthcare at Reasonable Prices',
+        's06.p1':'Thailand has developed a reputation as a global destination for medical tourism, and with good reason. The country is home to dozens of internationally accredited hospitals — particularly in Bangkok, Chiang Mai, and Phuket — that provide world-class medical care at a fraction of the cost of equivalent treatment in the United States, the UK, or Australia.',
+        's06.p2':'Bumrungrad International, Bangkok Hospital, Samitivej, and other facilities attract patients from across Asia, the Middle East, and the Western world. For expats living in Thailand, access to this level of healthcare — at affordable prices, with English-speaking staff — provides enormous peace of mind.',
+        's06.p3':'What many newcomers don\'t realise is that Thailand\'s <strong style="color:var(--sand-light)">public hospitals</strong> are equally impressive — and often even better value. The doctors are highly trained, many having studied or practised abroad, and the standard of care is consistently high. For many treatments and conditions, a top public hospital delivers the same — or better — outcome at a significantly lower cost than its private counterpart.',
+        's06.p4':'At FatBoys, we help you navigate this. Whether you need a specialist, a routine check-up, or ongoing care, <strong style="color:var(--sand-light)">we connect you with the right hospital for your budget and your exact need</strong> — so you always know you\'re in the right hands.',
+        's06.h1':'JCI-accredited international hospitals in major cities with English-speaking doctors and nurses',
+        's06.h2':'Thai public hospitals offer the same — and often higher — quality of care at lower prices',
+        's06.h3':'Medical procedures often cost 50–80% less than equivalent treatment in Western countries',
+        's06.h4':'Short waiting times — specialist appointments often available within days',
+        's06.h5':'Private health insurance in Thailand is affordable and comprehensive',
+        's06.h6':'FatBoys connects you with the right hospital for your budget and your specific medical need',
+        's07.eyebrow':'Safety & Stability','s07.title':'A Safe and Peaceful Way of Life',
+        's07.p1':'For many expatriates relocating from large cities in Europe, the US, or elsewhere, one of the most striking things about daily life in Thailand is how calm and safe it feels. Violent crime against foreigners is rare, and the pace of everyday life — from the market to the commute — tends to feel unhurried and unthreatening.',
+        's07.p2':'Thai society places a high cultural premium on maintaining face and social harmony, which contributes to a generally peaceful atmosphere in public spaces. Families, couples, and solo travellers alike frequently remark that Thailand feels far safer in daily life than many of the cities they came from. Walking late at night, navigating public transport, and exploring new neighbourhoods rarely comes with the sense of anxiety that can characterise urban life elsewhere.',
+        's07.h1':'Low rates of violent crime against expatriates and tourists across the country',
+        's07.h2':'A cultural emphasis on social harmony reduces confrontation in daily life',
+        's07.h3':'Gated communities and modern residential buildings offer additional security and peace of mind',
+        's07.h4':'Thailand has a stable, established expat infrastructure — it is not a frontier destination',
+        's07.h5':'Many long-term residents describe feeling safer here than in their home countries',
+        's08.eyebrow':'Community & Connection','s08.title':'Strong, Welcoming Expat Communities',
+        's08.p1':'Bangkok, Chiang Mai, and Phuket are home to some of the largest and most active international communities in Southeast Asia. Whether you are a retiree, a digital nomad, a young professional, or relocating with a family, you will find an established community of people who have made the same journey — and who are generally very willing to help newcomers find their footing.',
+        's08.p2':'Expat clubs, networking events, sports leagues, charity organisations, international schools, and online communities all thrive across Thailand\'s major cities. These networks make it significantly easier to build a social life, meet people with shared interests, and navigate practical challenges — from visa questions to finding a good mechanic or a trusted doctor.',
+        's08.h1':'Established expat communities across Bangkok, Chiang Mai, Phuket, Hua Hin, Koh Samui, and more',
+        's08.h2':'International schools offering British, American, IB, and other curricula for families with children',
+        's08.h3':'Active online communities sharing advice, events, and local recommendations',
+        's08.h4':'Clubs and groups for every interest — from golf and football to photography and cooking',
+        's08.h5':'A well-worn expat path means practical information and local knowledge is always available',
+        's09.eyebrow':'Nature & Adventure','s09.title':'Beautiful Nature & Endless Travel Opportunities',
+        's09.p1':'Thailand\'s natural diversity is extraordinary. From the emerald islands of the south — Koh Samui, Koh Tao, the Phi Phi archipelago — to the misty mountains and teak forests of the north around Chiang Mai and Chiang Rai, the country offers landscapes that seem almost too beautiful to be real.',
+        's09.p2':'Weekend travel within Thailand is easy, affordable, and rewarding. A short domestic flight or overnight train can take you from the city to a remote national park, a sacred mountain temple, or a deserted beach. For those who love exploring, living in Thailand is like having a passport to endless discovery — without ever needing to leave the country.',
+        's09.h1':'Dozens of national parks and wildlife sanctuaries protecting extraordinary ecosystems',
+        's09.h2':'World-class diving and snorkelling in the Gulf of Thailand and the Andaman Sea',
+        's09.h3':'Ancient temples, historical ruins, and UNESCO World Heritage sites within easy reach',
+        's09.h4':'Waterfalls, jungle treks, elephant sanctuaries, and river experiences in the north',
+        's09.h5':'Affordable domestic flights make weekend island or mountain trips genuinely accessible',
+        's10.eyebrow':'The Real Reason','s10.title':'A Simpler, Happier Way of Life',
+        's10.p1':'Perhaps the most honest answer to "why Thailand?" is the one that is hardest to quantify: life here simply feels better for many people. The combination of warmth — both climatic and human — affordable comfort, abundant food, natural beauty, and a culture that does not glorify stress creates something genuinely rare.',
+        's10.p2':'Many people arrive in Thailand for a holiday and find themselves not wanting to leave. Many more arrive with a plan to stay for a year and end up building a life here. The pace is different. The priorities feel more aligned with what actually matters — connection, rest, food, experience, community. Sometimes happiness is not about having more. It is about living better.',
+        's10.h1':'A culture that values rest, enjoyment, and family — not just productivity',
+        's10.h2':'The stress of commuting, high rents, and financial pressure is significantly reduced',
+        's10.h3':'More time and energy available for what genuinely matters to you',
+        's10.h4':'Many expats report a measurable improvement in health, mood, and overall wellbeing',
+        's10.h5':'Thailand does not just offer a place to live — it offers a reason to live differently',
+        'cta.eyebrow':'Ready to make the move?',
+        'cta.title':'Let FatBoys Help You Find Your Home in Thailand',
+        'cta.desc':'We know Thailand. We know the market. And we know what it takes to make a smooth, successful move. Reach out today — the conversation is free.',
+        'cta.btn':'Book a Free Consultation →',
+      },
+      th: {
+        'hero.eyebrow':'แฟทบอยส์ ลิฟวิ่ง เอสเตท — ประเทศไทย',
+        'hero.h1':'ทำไมต้อง <em>ไทย</em>?',
+        'hero.p':'สิบเหตุผลที่ทำให้ผู้คนนับพันจากทั่วโลกเลือกประเทศไทยเป็นบ้าน — และทำไมหลายคนจึงไม่อยากจากไป',
+        's01.eyebrow':'วัฒนธรรมอาหาร','s01.title':'อาหารข้างทางสุดอร่อย ทุกที่ทุกเวลา',
+        's01.p1':'หนึ่งในสิ่งที่น่าแปลกใจที่สุดสำหรับชาวต่างชาติที่เดินทางมาไทยคือความอุดมสมบูรณ์และคุณภาพของอาหารที่มีให้เลือกในทุกมุม แผงขายอาหาร ตลาดกลางคืน ร้านริมทาง — ล้วนกลมกลืนอยู่ในวิถีชีวิตประจำวันของคนไทย',
+        's01.p2':'ผัดไทยหอมกลิ่นกะทะ หมูปิ้งรสเด็ด ก๋วยเตี๋ยวน้ำใส ส้มตำสด ข้าวเหนียวมะม่วง — อาหารที่ในร้านฝั่งตะวันตกอาจราคา 500–800 บาท ที่นี่มีให้กินในราคาแค่ 35–100 บาทต่อมื้อ รสชาติเข้มข้น วัตถุดิบสด และความหลากหลายอาหารนั้นน่าทึ่งอย่างยิ่ง',
+        's01.h1':'อาหารหลากหลายร้อยชนิดหาได้ภายในระยะเดินถึง ตั้งแต่เช้าจรดเที่ยงคืน',
+        's01.h2':'ปรุงสดทุกจาน — ไม่มีอาหารอุ่นทิ้งไว้ค้างวัน',
+        's01.h3':'ตลาดกลางคืนเป็นประสบการณ์ทางสังคมที่หาไม่ได้ในโลกตะวันตก',
+        's01.h4':'อาหารนานาชาติก็หาได้ง่ายในทุกเมืองใหญ่',
+        's01.h5':'อาหารเชื่อมผู้คน — การกินข้าวนอกบ้านเป็นส่วนหนึ่งของวัฒนธรรม ไม่ใช่ความฟุ่มเฟือย',
+        's02.eyebrow':'ไลฟ์สไตล์ & การเงิน','s02.title':'ค่าครองชีพต่ำกว่า — แต่คุณภาพชีวิตสูงกว่า',
+        's02.p1':'เมื่อเปรียบกับยุโรป อเมริกาเหนือ หรือออสเตรเลีย ค่าครองชีพในประเทศไทยต่ำกว่าอย่างเห็นได้ชัด — แต่คุณภาพชีวิตกลับสูงอย่างน่าประหลาดใจ ชาวต่างชาติหลายคนพบว่าพวกเขาใช้ชีวิตได้สุขสบายกว่าเดิม ด้วยงบประมาณที่น้อยกว่ามาก',
+        's02.p2':'คอนโดโมเดิร์นในย่านดีๆ อินเทอร์เน็ตความเร็วสูง ระบบขนส่งแอร์เย็น และชีวิตสังคมเต็มรูปแบบ — ล้วนเข้าถึงได้ในราคาที่คาดไม่ถึง ไม่ว่าจะเป็นผู้เกษียณ คนทำงานออนไลน์ หรือผู้ที่ต้องการยกระดับชีวิต ประเทศไทยคือโอกาสที่น่าสนใจที่สุดแห่งหนึ่งในเอเชียตะวันออกเฉียงใต้',
+        's02.h1':'คอนโดสวยพร้อมอยู่ในราคาเช่าและซื้อที่แข่งขันได้',
+        's02.h2':'ค่าเดินทางในประเทศ — มอเตอร์ไซค์รับจ้าง ตุ๊กตุ๊ก แกร็บ — ราคาย่อมเยา',
+        's02.h3':'ค่าสาธารณูปโภคโดยทั่วไปต่ำกว่าในประเทศตะวันตก',
+        's02.h4':'ชาวต่างชาติหลายคนเก็บออมได้มากกว่าตอนอยู่ที่บ้านเกิด',
+        's02.h5':'ชีวิตที่มีคุณภาพ — ทานอาหารนอกบ้าน เที่ยว พักผ่อน — ทำได้ด้วยรายได้ปกติ',
+        's03.eyebrow':'ดินฟ้าอากาศ & สิ่งแวดล้อม','s03.title':'อากาศร้อนชื้นแบบเขตร้อน ตลอดทั้งปี',
+        's03.p1':'สำหรับผู้ที่เคยทนทรมานกับฤดูหนาวที่หนาวเหน็บและท้องฟ้าหม่นมัว อากาศของประเทศไทยอาจเปลี่ยนชีวิตได้อย่างแท้จริง ความอบอุ่น ทิวทัศน์เขียวขจี และแสงแดด คือสิ่งที่มีให้เสมอ ไม่ใช่ข้อยกเว้น ไม่มีเดือนมืดมิด ไม่มีค่าความร้อน ไม่มีการขุดรถออกจากหิมะ',
+        's03.p2':'ประเทศไทยมีสามฤดู: เย็นและแห้ง (พ.ย.–ก.พ.) ร้อน (มี.ค.–พ.ค.) และฝน (มิ.ย.–ต.ค.) แม้แต่ในฤดูฝน พายุมักมาไวไปไว ไม่ใช่ฝนพรำตลอดวัน และเมื่อฝนหยุด ทิวทัศน์จะยิ่งสวยงามเขียวขจีกว่าเดิม สำหรับหลายคน อากาศเพียงอย่างเดียวก็เป็นเหตุผลเพียงพอที่จะอยู่ที่นี่',
+        's03.h1':'อบอุ่นตลอดปี — อุณหภูมิเฉลี่ยอยู่ที่ 25–35°C',
+        's03.h2':'แนวชายฝั่งยาวนับพันกิโลเมตร ทะเลอุ่นเหมาะสำหรับว่ายน้ำตลอดปี',
+        's03.h3':'พายุฝนผ่านไปเร็ว แดดมักออกในวันเดียวกัน',
+        's03.h4':'ภาคเหนือมีอากาศเย็นสดชื่นในฤดูหนาว เหมาะสำหรับผู้ที่รักความเย็น',
+        's03.h5':'ไลฟ์สไตล์กลางแจ้ง — ปั่นจักรยาน ว่ายน้ำ เดินป่า — กลายเป็นกิจวัตรประจำวัน',
+        's04.eyebrow':'สุขภาพ & โภชนาการ','s04.title':'ผลไม้และผักสดตลอดทั้งปี',
+        's04.p1':'สภาพอากาศเขตร้อนของไทยทำให้ผลไม้และผักสดมีให้เลือกอย่างอุดมสมบูรณ์ตลอดทั้งปี ตลาด — ตั้งแต่ซูเปอร์มาร์เก็ตแอร์เย็นไปจนถึงตลาดสดเปิดโล่ง — เต็มไปด้วยสีสัน กลิ่นหอม และความสดทุกวัน',
+        's04.p2':'มะม่วง มะละกอ มะพร้าว เงาะ แก้วมังกร ทุเรียน ลิ้นจี่ สมุนไพรสด และผักนานาชนิด ล้วนปลูกในประเทศและหาซื้อได้ในราคาที่แทบไม่น่าเชื่อเมื่อเทียบกับยุโรปหรืออเมริกา การกินดีในไทยไม่ใช่เรื่องแพง — แต่เป็นส่วนหนึ่งของชีวิตประจำวัน',
+        's04.h1':'ไม่มีช่วงขาดแคลน — ผลไม้และผักเขตร้อนมีให้ตลอดปี',
+        's04.h2':'ตลาดเปิดทุกวัน พร้อมสินค้าที่มักเก็บเกี่ยวมาในเช้าวันนั้น',
+        's04.h3':'น้ำมะพร้าวสด สมูทตี้ผลไม้ และชามผลไม้ หาได้ง่ายและราคาไม่แพง',
+        's04.h4':'อาหารไทยใช้สมุนไพรสดและส่วนผสมจากธรรมชาติเป็นหลัก',
+        's04.h5':'การกินเพื่อสุขภาพไม่ต้องใช้ความพยายามหรืองบมาก — เป็นเรื่องปกติในชีวิตประจำวัน',
+        's05.eyebrow':'ผู้คน & วัฒนธรรม','s05.title':'คนไทยใจดี วัฒนธรรมน่าประทับใจ',
+        's05.p1':'ประเทศไทยเป็นที่รู้จักทั่วโลกในนาม "เมืองยิ้ม" — และสำหรับผู้ที่มาตั้งรกรากที่นี่ ชื่อเสียงนั้นพิสูจน์แล้วว่าเป็นเรื่องจริง วัฒนธรรมไทยให้ความสำคัญกับความอบอุ่น การต้อนรับ และการรักษาความกลมเกลียวในชีวิตประจำวัน ชาวต่างชาติที่มาไทยมักบอกว่าความกรุณาที่ได้รับนั้นรู้สึกจริงใจและไม่เร่งรีบ',
+        's05.p2':'ไม่ว่าจะเป็นการติดต่อราชการ ถามทาง หรือแค่ซื้อของจากแผงตลาด — คำตอบที่ได้มักออกมาด้วยความอดทนและยินดีช่วยเหลือ สำหรับชาวต่างชาติหลายคน ความเปิดกว้างทางวัฒนธรรมนี้ทำให้การปรับตัวมาอยู่ไทยง่ายและสนุกกว่าที่คาดไว้มาก',
+        's05.h1':'วัฒนธรรมที่สร้างมาจากความสุภาพ ความอดทน และความอบอุ่นต่อผู้มาเยือน',
+        's05.h2':'การไหว้ — การทักทายแบบไทย — สะท้อนถึงความเคารพที่ลึกซึ้งต่อกัน',
+        's05.h3':'คนไทยสนใจและเปิดรับวัฒนธรรมต่างชาติ',
+        's05.h4':'หลีกเลี่ยงความขัดแย้ง — ปฏิสัมพันธ์ในชีวิตประจำวันมักสงบและน่าพึงพอใจ',
+        's05.h5':'ชาวต่างชาติที่อยู่มานานหลายคนบอกว่าคนไทยคือเหตุผลที่ทำให้พวกเขาอยู่ถาวร',
+        's06.eyebrow':'สุขภาพ & ความเป็นอยู่ที่ดี','s06.title':'การรักษาพยาบาลคุณภาพสูง ราคาสมเหตุสมผล',
+        's06.p1':'ประเทศไทยได้รับการยอมรับในฐานะจุดหมายปลายทางด้านการท่องเที่ยวเชิงการแพทย์ระดับโลก และมีเหตุผลที่ดีสนับสนุน ประเทศนี้มีโรงพยาบาลนานาชาติที่ได้รับการรับรองระดับสากลหลายสิบแห่ง — โดยเฉพาะในกรุงเทพฯ เชียงใหม่ และภูเก็ต — ที่ให้บริการดูแลสุขภาพระดับโลกในราคาที่ต่ำกว่าในสหรัฐฯ อังกฤษ หรือออสเตรเลียมาก',
+        's06.p2':'บำรุงราษฎร์ โรงพยาบาลกรุงเทพ สมิติเวช และโรงพยาบาลชั้นนำอื่นๆ ดึงดูดผู้ป่วยจากทั่วเอเชีย ตะวันออกกลาง และโลกตะวันตก สำหรับชาวต่างชาติที่อาศัยอยู่ในไทย การเข้าถึงการรักษาพยาบาลระดับนี้ — ในราคาที่สมเหตุสมผล พร้อมทีมแพทย์ที่พูดภาษาอังกฤษได้ — ให้ความอุ่นใจอย่างมาก',
+        's06.p3':'สิ่งที่หลายคนไม่รู้คือ <strong style="color:var(--sand-light)">โรงพยาบาลรัฐของไทย</strong>ก็มีมาตรฐานสูงไม่แพ้กัน — และมักคุ้มค่ากว่ามาก แพทย์ได้รับการฝึกอบรมอย่างเข้มข้น หลายคนจบจากต่างประเทศ และมาตรฐานการรักษาอยู่ในระดับสูงอย่างสม่ำเสมอ สำหรับหลายโรคและการรักษา โรงพยาบาลรัฐชั้นนำให้ผลลัพธ์ที่ดีไม่แพ้โรงพยาบาลเอกชน ในราคาที่ต่ำกว่าอย่างมีนัยสำคัญ',
+        's06.p4':'ที่แฟทบอยส์ เราช่วยให้คุณนำทางในระบบนี้ได้ ไม่ว่าจะต้องการแพทย์เฉพาะทาง ตรวจสุขภาพประจำปี หรือการดูแลต่อเนื่อง <strong style="color:var(--sand-light)">เราเชื่อมต่อคุณกับโรงพยาบาลที่เหมาะสมกับงบประมาณและความต้องการของคุณโดยเฉพาะ</strong> — เพื่อให้คุณมั่นใจว่าอยู่ในมือที่ไว้ใจได้เสมอ',
+        's06.h1':'โรงพยาบาลนานาชาติที่ได้รับการรับรอง JCI พร้อมแพทย์และพยาบาลที่พูดภาษาอังกฤษได้',
+        's06.h2':'โรงพยาบาลรัฐไทยมีคุณภาพการรักษาเทียบเท่า — หรือสูงกว่า — ในราคาที่ต่ำกว่า',
+        's06.h3':'ค่าหัตถการทางการแพทย์มักต่ำกว่าในประเทศตะวันตกถึง 50–80%',
+        's06.h4':'รอนัดพบแพทย์ระยะสั้น — มักได้นัดภายในไม่กี่วัน',
+        's06.h5':'ประกันสุขภาพเอกชนในไทยราคาจับต้องได้และครอบคลุมดี',
+        's06.h6':'แฟทบอยส์เชื่อมต่อคุณกับโรงพยาบาลที่เหมาะสมกับงบประมาณและความต้องการของคุณ',
+        's07.eyebrow':'ความปลอดภัย & เสถียรภาพ','s07.title':'ชีวิตที่สงบ ปลอดภัย และมีความสุข',
+        's07.p1':'สำหรับชาวต่างชาติหลายคนที่ย้ายมาจากเมืองใหญ่ในยุโรป สหรัฐฯ หรือที่อื่น สิ่งที่น่าประทับใจที่สุดอย่างหนึ่งของชีวิตประจำวันในไทยคือความสงบและปลอดภัยที่รู้สึกได้ อาชญากรรมรุนแรงต่อชาวต่างชาตินั้นหาได้ยาก และจังหวะชีวิตประจำวัน — ตั้งแต่ตลาดจนถึงการเดินทาง — มักรู้สึกไม่เร่งรีบและไม่น่ากลัว',
+        's07.p2':'สังคมไทยให้ความสำคัญทางวัฒนธรรมสูงในการรักษาหน้าและความกลมเกลียวทางสังคม ซึ่งส่งผลให้บรรยากาศในที่สาธารณะโดยทั่วไปสงบสุข ครอบครัว คู่รัก และนักเดินทางคนเดียวต่างพูดเป็นเสียงเดียวกันว่าไทยรู้สึกปลอดภัยกว่าเมืองที่พวกเขาจากมามาก',
+        's07.h1':'อัตราอาชญากรรมรุนแรงต่อชาวต่างชาติและนักท่องเที่ยวอยู่ในระดับต่ำทั่วประเทศ',
+        's07.h2':'การให้ความสำคัญทางวัฒนธรรมกับความกลมเกลียวทางสังคม ลดความขัดแย้งในชีวิตประจำวัน',
+        's07.h3':'หมู่บ้านจัดสรรและอาคารที่พักอาศัยสมัยใหม่มีระบบรักษาความปลอดภัยที่ดี',
+        's07.h4':'ไทยมีโครงสร้างพื้นฐานสำหรับชาวต่างชาติที่มั่นคงและได้รับการพิสูจน์แล้ว',
+        's07.h5':'ผู้พักอาศัยระยะยาวหลายคนบอกว่ารู้สึกปลอดภัยกว่าในประเทศบ้านเกิดของตัวเอง',
+        's08.eyebrow':'ชุมชน & การเชื่อมต่อ','s08.title':'ชุมชนชาวต่างชาติที่เข้มแข็งและน่าประทับใจ',
+        's08.p1':'กรุงเทพฯ เชียงใหม่ และภูเก็ต เป็นที่ตั้งของชุมชนนานาชาติที่ใหญ่ที่สุดและมีความเคลื่อนไหวมากที่สุดแห่งหนึ่งในเอเชียตะวันออกเฉียงใต้ ไม่ว่าคุณจะเป็นผู้เกษียณ ดิจิทัลโนแมด คนรุ่นใหม่ หรือย้ายมาพร้อมครอบครัว คุณจะพบชุมชนของผู้คนที่ผ่านเส้นทางเดียวกัน — และพร้อมช่วยเหลือผู้มาใหม่',
+        's08.p2':'ชมรมชาวต่างชาติ กิจกรรมเน็ตเวิร์กกิ้ง ลีกกีฬา องค์กรการกุศล โรงเรียนนานาชาติ และชุมชนออนไลน์ — ล้วนคึกคักทั่วเมืองใหญ่ของไทย เครือข่ายเหล่านี้ทำให้การสร้างชีวิตทางสังคม พบปะผู้คน และรับมือกับความท้าทายในชีวิตประจำวันเป็นเรื่องง่ายขึ้นมาก',
+        's08.h1':'ชุมชนชาวต่างชาติที่มีมานานในกรุงเทพฯ เชียงใหม่ ภูเก็ต หัวหิน เกาะสมุย และอื่นๆ',
+        's08.h2':'โรงเรียนนานาชาติที่ให้การศึกษาหลักสูตรอังกฤษ อเมริกัน IB และอื่นๆ สำหรับครอบครัว',
+        's08.h3':'ชุมชนออนไลน์ที่คึกคักแชร์คำแนะนำ กิจกรรม และสถานที่น่าสนใจในพื้นที่',
+        's08.h4':'ชมรมและกลุ่มสำหรับทุกความสนใจ — ตั้งแต่กอล์ฟและฟุตบอลไปจนถึงการถ่ายภาพและทำอาหาร',
+        's08.h5':'เส้นทางชาวต่างชาติที่มีมายาวนาน ทำให้ข้อมูลและความรู้ท้องถิ่นหาได้เสมอ',
+        's09.eyebrow':'ธรรมชาติ & การผจญภัย','s09.title':'ธรรมชาติงดงาม โอกาสท่องเที่ยวไม่รู้จบ',
+        's09.p1':'ความหลากหลายทางธรรมชาติของไทยนั้นน่าทึ่งอย่างยิ่ง ตั้งแต่เกาะมรกตในภาคใต้ — เกาะสมุย เกาะเต่า หมู่เกาะพีพี — ไปจนถึงภูเขาหมอกและป่าสักในภาคเหนือรอบเชียงใหม่และเชียงราย ประเทศนี้มีทิวทัศน์ที่ดูเหนือจริงอยู่บ่อยครั้ง',
+        's09.p2':'การเดินทางท่องเที่ยวในประเทศไทยช่วงวันหยุดสุดสัปดาห์เป็นเรื่องง่าย ราคาไม่แพง และคุ้มค่า เที่ยวบินสั้นๆ หรือรถไฟข้ามคืน พาคุณจากเมืองสู่อุทยานแห่งชาติห่างไกล วัดศักดิ์สิทธิ์บนภูเขา หรือหาดทรายที่เงียบสงบได้',
+        's09.h1':'อุทยานแห่งชาติและเขตรักษาพันธุ์สัตว์ป่าหลายสิบแห่งที่ปกป้องระบบนิเวศที่น่าทึ่ง',
+        's09.h2':'ดำน้ำและสน็อกเกิ้ลระดับโลกในอ่าวไทยและทะเลอันดามัน',
+        's09.h3':'วัดโบราณ ซากประวัติศาสตร์ และแหล่งมรดกโลก UNESCO อยู่ไม่ไกล',
+        's09.h4':'น้ำตก เส้นทางป่า เขตรักษาช้าง และกิจกรรมล่องแก่งในภาคเหนือ',
+        's09.h5':'เที่ยวบินภายในประเทศราคาประหยัดทำให้การไปเกาะหรือภูเขาช่วงสุดสัปดาห์เป็นเรื่องง่าย',
+        's10.eyebrow':'เหตุผลที่แท้จริง','s10.title':'ชีวิตที่เรียบง่ายและมีความสุขกว่า',
+        's10.p1':'บางทีคำตอบที่ตรงไปตรงมาที่สุดสำหรับ "ทำไมต้องไทย?" คือสิ่งที่ยากจะอธิบายเป็นตัวเลข: ชีวิตที่นี่รู้สึกดีกว่าสำหรับคนจำนวนมาก การผสมผสานของความอบอุ่น — ทั้งสภาพอากาศและผู้คน — ความสะดวกสบายในราคาที่จับต้องได้ อาหารอุดมสมบูรณ์ ธรรมชาติสวยงาม และวัฒนธรรมที่ไม่ยกย่องความเครียด สร้างบางอย่างที่หาได้ยากจริงๆ',
+        's10.p2':'คนมากมายเดินทางมาไทยเพื่อพักร้อน แล้วพบว่าตัวเองไม่อยากกลับ หลายคนมาด้วยแผนอยู่หนึ่งปีแล้วสร้างชีวิตที่นี่ จังหวะชีวิตต่างออกไป ลำดับความสำคัญรู้สึกสอดคล้องกับสิ่งที่สำคัญจริงๆ — การเชื่อมต่อ การพัก อาหาร ประสบการณ์ ชุมชน บางครั้งความสุขไม่ได้อยู่ที่การมีมากขึ้น แต่อยู่ที่การใช้ชีวิตอย่างดีขึ้น',
+        's10.h1':'วัฒนธรรมที่ให้คุณค่ากับการพักผ่อน ความสุข และครอบครัว — ไม่ใช่แค่ความสำเร็จ',
+        's10.h2':'ความเครียดจากการเดินทาง ค่าเช่าสูง และแรงกดดันทางการเงินลดลงอย่างมีนัยสำคัญ',
+        's10.h3':'มีเวลาและพลังงานมากขึ้นสำหรับสิ่งที่สำคัญกับคุณจริงๆ',
+        's10.h4':'ชาวต่างชาติหลายคนรายงานว่าสุขภาพ อารมณ์ และความเป็นอยู่ที่ดีโดยรวมดีขึ้นอย่างเห็นได้ชัด',
+        's10.h5':'ไทยไม่ได้แค่มอบสถานที่พักอาศัย — แต่มอบเหตุผลให้ใช้ชีวิตในแบบที่แตกต่างออกไป',
+        'cta.eyebrow':'พร้อมเริ่มต้นแล้วหรือยัง?',
+        'cta.title':'ให้แฟทบอยส์ช่วยคุณหาบ้านในประเทศไทย',
+        'cta.desc':'เรารู้จักประเทศไทย เรารู้จักตลาด และเรารู้ว่าต้องทำอะไรบ้างเพื่อให้การย้ายมาอยู่ไทยของคุณราบรื่นและประสบความสำเร็จ ติดต่อเราวันนี้ — การพูดคุยครั้งแรกฟรี',
+        'cta.btn':'นัดปรึกษาฟรี →',
+      }
+    };
+
+    function setLanguage(lang) {
+      localStorage.setItem('fb_lang', lang);
+      const t = T[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (t[key] !== undefined) el.innerHTML = t[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    // Init from stored preference
+    setLanguage(localStorage.getItem('fb_lang') || 'en');
+  </script>
+</body>
+</html>

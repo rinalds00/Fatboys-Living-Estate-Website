@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Buying Land — FatBoys Real Estate Thailand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    
+  :root{
+    --warm-sand:#C8B88A;
+    --forest-green:#233d00;
+    --burnt-sienna:#C06A4A;
+    --dark-walnut:#1E2618;
+    --linen-white:#ECE8DC;
+    --stone-grey:#908C84;
+    --dark-walnut-deep:#14180E;
+    --forest-light:#2f5200;
+    --sand-light:#DDD0B0;
+    --rocky-stone:#B8B4AE;
+    --stone-dark:#6A6660;
+  }
+  *{box-sizing:border-box}html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',sans-serif;background:var(--dark-walnut);color:var(--linen-white);overflow-x:hidden;cursor:none;margin:0}
+  .cursor{width:8px;height:8px;background:var(--burnt-sienna);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+  .cursor-ring{width:32px;height:32px;border:1px solid rgba(200,184,138,.5);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s cubic-bezier(.25,.46,.45,.94)}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:9990;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,184,138,.1)}
+  .nav-logo{display:flex;align-items:center;text-decoration:none;font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;letter-spacing:.04em;color:var(--linen-white);white-space:nowrap}
+  .footer-logo img{height:60px;width:auto;display:block;filter:brightness(0) invert(1)}
+  .nav-links{display:flex;gap:2.5rem;align-items:center}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,232,220,.7);text-decoration:none;font-weight:400;transition:color .2s;position:relative}
+  .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--burnt-sienna);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+  .nav-links a:hover{color:var(--warm-sand)}.nav-links a:hover::after{transform:scaleX(1)}
+  .nav-dropdown{position:relative}
+  .nav-dropdown-toggle{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(236,232,220,.7);background:none;border:none;font-family:'DM Sans',sans-serif;font-weight:400;cursor:none;display:flex;align-items:center;gap:.4rem;padding:0;transition:color .2s;position:relative}
+  .nav-dropdown-toggle::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--burnt-sienna);transform:scaleX(0);transition:transform .25s;transform-origin:left}
+  .nav-dropdown-toggle svg{transition:transform .25s}
+  .nav-dropdown:hover .nav-dropdown-toggle{color:var(--warm-sand)}
+  .nav-dropdown:hover .nav-dropdown-toggle::after{transform:scaleX(1)}
+  .nav-dropdown:hover .nav-dropdown-toggle svg{transform:rotate(180deg)}
+  .nav-dropdown-menu{position:absolute;top:calc(100% + 0.6rem);left:50%;transform:translateX(-50%) translateY(6px);min-width:480px;background:rgba(10,14,8,.97);backdrop-filter:blur(20px);border:1px solid rgba(200,184,138,.12);padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.2s,transform 0.2s;z-index:200;display:grid;grid-template-columns:1fr 1fr;gap:0}
+  .nav-dropdown-menu::before{content:'';position:absolute;top:-0.8rem;left:0;right:0;height:0.8rem}
+  .nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);transition:opacity 0.22s 0s,transform 0.22s 0s}
+  .nav-dd-single{min-width:260px;grid-template-columns:1fr}
+  .nav-dd-col{padding:.5rem 1rem}.nav-dd-col:first-child{border-right:1px solid rgba(200,184,138,.1)}
+  .nav-dd-heading{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--burnt-sienna);font-weight:600;margin-bottom:.85rem;display:flex;align-items:center;gap:.5rem}
+  .nav-dd-heading::before{content:'';width:16px;height:1px;background:var(--burnt-sienna)}
+  .nav-dd-items{display:flex;flex-direction:column;gap:.1rem}
+  .nav-dd-item{display:flex;align-items:center;justify-content:space-between;padding:.6rem .75rem;color:rgba(200,184,138,.65);text-decoration:none;font-size:.82rem;font-weight:300;letter-spacing:.04em;transition:color .18s,background .18s,padding-left .18s;border-radius:2px;cursor:none;border-left:2px solid transparent}
+  .nav-dd-item-left{display:flex;align-items:center;gap:.75rem}
+  .nav-dd-item-arrow{font-size:.75rem;opacity:0;transform:translateX(-4px);transition:opacity .18s,transform .18s;color:var(--burnt-sienna)}
+  .nav-dd-item:hover{color:var(--warm-sand);background:rgba(200,184,138,.06);border-left-color:var(--burnt-sienna);padding-left:1rem}
+  .nav-dd-item:hover .nav-dd-item-arrow{opacity:1;transform:translateX(0)}
+  .nav-dd-item svg{color:var(--forest-green);flex-shrink:0}
+  .btn-nav{padding:.55rem 1.4rem;background:var(--forest-green);border:1px solid var(--forest-green);color:var(--warm-sand);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;cursor:none;font-family:'DM Sans',sans-serif;transition:background .25s,border-color .25s,color .25s}
+  .btn-nav:hover{background:var(--warm-sand);color:var(--dark-walnut-deep);border-color:var(--warm-sand)}
+  .btn-forest{padding:.9rem 2.2rem;background:var(--forest-green);color:var(--linen-white);font-family:'DM Sans',sans-serif;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border:none;cursor:none;transition:background .25s;display:inline-block;text-decoration:none}
+  .btn-forest:hover{background:var(--forest-light)}
+  footer{background:var(--dark-walnut-deep);padding:4rem 7rem 2.5rem;border-top:1px solid rgba(200,184,138,.1)}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:3.5rem}
+  .footer-brand-desc{font-size:.85rem;line-height:1.75;color:rgba(144,140,132,.8);font-weight:300;margin-top:1.25rem;max-width:280px}
+  .footer-heading{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--warm-sand);font-weight:600;margin-bottom:1.25rem}
+  .footer-links{display:flex;flex-direction:column;gap:.65rem}
+  .footer-links a{font-size:.83rem;color:rgba(144,140,132,.75);text-decoration:none;font-weight:300;transition:color .2s}
+  .footer-links a:hover{color:var(--warm-sand)}
+  .footer-social{width:34px;height:34px;border:1px solid rgba(200,184,138,.15);display:flex;align-items:center;justify-content:center;color:var(--stone-grey);font-size:.78rem;text-decoration:none;transition:border-color .2s,color .2s;cursor:none}
+  .footer-social:hover{border-color:var(--warm-sand);color:var(--warm-sand)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(200,184,138,.08);font-size:.7rem;color:rgba(144,140,132,.5)}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  .reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}
+  .lang-toggle{display:flex;align-items:center;gap:.15rem;background:rgba(200,184,138,.08);border:1px solid rgba(200,184,138,.18);border-radius:20px;padding:.2rem .5rem}
+  .lang-btn{background:none;border:none;color:var(--stone-grey);font-family:'DM Sans',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.12em;cursor:none;padding:.18rem .45rem;border-radius:12px;transition:background .22s,color .22s}
+  .lang-btn.active{background:var(--warm-sand);color:var(--dark-walnut-deep)}
+  .lang-btn:hover:not(.active){color:var(--warm-sand)}
+  .lang-sep{color:rgba(200,184,138,.22);font-size:.6rem}
+
+    .page-hero{min-height:58vh;padding-top:7rem;padding-bottom:5rem;display:flex;align-items:center;background:linear-gradient(155deg,#0d1a08 0%,#162210 50%,#0a120a 100%);position:relative;overflow:hidden}
+    .page-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(35,61,0,.18) 0%,transparent 60%)}
+    .page-hero-content{position:relative;z-index:2;padding:0 7rem;max-width:760px}
+    .page-eyebrow{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:#233d00;font-weight:500}
+    .page-eyebrow::before{content:'';width:28px;height:1px;background:#233d00}
+    .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;line-height:.95;color:var(--linen-white);letter-spacing:-.02em;margin-bottom:.8rem}
+    .page-tagline{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:rgba(200,184,138,.75);margin-top:1rem;margin-bottom:2rem}
+    .intro-section{background:var(--linen-white);padding:6rem 7rem;color:var(--dark-walnut)}
+    .intro-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start}
+    .intro-label{font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:#233d00;font-weight:600;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+    .intro-label::before{content:'';width:20px;height:1px;background:#233d00}
+    .intro-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:600;line-height:1.05;color:var(--dark-walnut);letter-spacing:-.02em;margin-bottom:1.5rem}
+    .intro-heading em{font-style:italic;color:var(--forest-green)}
+    .intro-text{font-size:.9rem;line-height:1.85;color:var(--stone-grey);font-weight:300}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--dark-walnut);line-height:1}
+    .stat-label{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-grey);margin-top:.25rem}
+    .benefits-section{background:var(--dark-walnut);padding:6rem 7rem}
+    .benefits-heading-row{margin-bottom:0}
+    .benefits-eyebrow{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:#233d00;font-weight:600;margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+    .benefits-eyebrow::before{content:'';width:20px;height:1px;background:#233d00}
+    .benefits-h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:600;color:var(--warm-sand);line-height:1.05;letter-spacing:-.02em}
+    .benefits-h2 em{font-style:italic;color:var(--forest-green)}
+    .benefits-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;margin-top:3.5rem;border-top:1px solid rgba(200,184,138,.1)}
+    .benefit-card{padding:2.5rem;border-right:1px solid rgba(200,184,138,.1);border-bottom:1px solid rgba(200,184,138,.1);transition:background .3s}
+    .benefit-card:nth-child(even){border-right:none}
+    .benefit-card:hover{background:rgba(200,184,138,.04)}
+    .benefit-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(200,184,138,.1);line-height:1;display:block;margin-bottom:-1rem}
+    .benefit-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--warm-sand);margin-bottom:.75rem}
+    .benefit-desc{font-size:.84rem;line-height:1.75;color:var(--stone-grey);font-weight:300}
+    .benefit-bar{width:28px;height:2px;background:#233d00;margin-top:1.5rem;transition:width .4s}
+    .benefit-card:hover .benefit-bar{width:48px}
+    .services-strip{background:var(--dark-walnut-deep);padding:2rem 7rem;border-top:1px solid rgba(200,184,138,.08)}
+    .services-strip-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--stone-grey);margin-bottom:1rem}
+    .services-strip-links{display:flex;flex-wrap:wrap;gap:.5rem}
+    .svc-pill{padding:.45rem 1.1rem;border:1px solid rgba(200,184,138,.15);color:rgba(200,184,138,.55);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;cursor:none}
+    .svc-pill:hover,.svc-pill.active{border-color:var(--warm-sand);color:var(--warm-sand)}
+    .cta-strip{background:linear-gradient(155deg,#0d1a08 0%,#162210 50%,#0a120a 100%);padding:5rem 7rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;border-top:1px solid rgba(200,184,138,.1)}
+    .cta-strip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;color:var(--linen-white);max-width:500px;line-height:1.2}
+    .cta-strip-title strong{font-weight:600;color:var(--warm-sand)}
+  
+  </style>
+</head>
+<body>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="grain"></div>
+  
+  <nav id="mainNav">
+    <a href="index.html" class="nav-logo">Fatboys Living Estate</a>
+    <div class="nav-links">
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle"><span data-i18n="nav.buy_sell">Buying/Selling</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.buying">Buying</div>
+            <div class="nav-dd-items">
+              <a href="buy-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.houses">Houses</span></a>
+              <a href="buy-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg><span data-i18n="nav.condo">Condo</span></a>
+              <a href="buy-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg><span data-i18n="nav.land">Land</span></a>
+            </div>
+          </div>
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.selling">Selling</div>
+            <div class="nav-dd-items">
+              <a href="sell-house.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.houses">Houses</span></a>
+              <a href="sell-condo.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg><span data-i18n="nav.condo">Condo</span></a>
+              <a href="sell-land.html" class="nav-dd-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg><span data-i18n="nav.land">Land</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="why-thailand.html" data-i18n="nav.why_thailand">Why Thailand</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle"><span data-i18n="nav.services">Services</span> <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <div class="nav-dropdown-menu nav-dd-single">
+          <div class="nav-dd-col" style="border-right:none">
+            <div class="nav-dd-heading" data-i18n="nav.what_we_offer">What We Offer</div>
+            <div class="nav-dd-items">
+              <a href="renting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.svc_renting">Renting</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="relocating.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-i18n="nav.svc_relocating">Relocating</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="pet-friendly.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-i18n="nav.svc_pet">Pet Friendly</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="investing.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span data-i18n="nav.svc_investing">Investing</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="construction.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20"/><path d="M17 20V8l-5-5-5 5v12"/><path d="M9 20v-5h6v5"/></svg><span data-i18n="nav.svc_construction">Construction &amp; Renovation</span></span><span class="nav-dd-item-arrow">→</span></a>
+              <a href="consulting.html" class="nav-dd-item"><span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i18n="nav.svc_consulting">Consulting</span></span><span class="nav-dd-item-arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lang-toggle" id="langToggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="th">TH</button>
+      </div>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-nav" data-i18n="nav.book_consultation">Book Consultation</a>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-content">
+      <div class="page-eyebrow" data-i18n="pg.eyebrow">Land Ownership in Thailand</div>
+      <h1 class="page-title" data-i18n="pg.title">Buying Land</h1>
+      <p class="page-tagline" data-i18n="pg.tagline">"Your land. Your legacy."</p>
+      <a href="https://lin.ee/H5iMNKQ" class="btn-forest" data-i18n="pg.cta">Reach Out to Our Team</a>
+    </div>
+  </section>
+
+  <section class="intro-section">
+    <div class="intro-layout reveal">
+      <div>
+        <div class="intro-label" data-i18n="pg.overview">Overview</div>
+        <h2 class="intro-heading" data-i18n="pg.how_we_help">How We<br><em>Help You</em></h2>
+      </div>
+      <div>
+        <p class="intro-text" data-i18n="pg.intro">Acquiring land in Thailand is one of the most rewarding long-term decisions you can make. We help you identify the right plots in your preferred area and navigate the entire legal process — from due diligence and title deed verification to final registration. Through a properly structured 30-year agreement, you can hold land rights fully in your name, with no nominee required. We have plots ready to inquire about right now.</p>
+        <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(30,38,24,.1);display:flex;gap:3rem">
+          <div><div class="stat-num">12<span style="color:#233d00;font-size:1.2rem">+</span></div><div class="stat-label" data-i18n="pg.stat1_label">Years Experience</div></div>
+          <div><div class="stat-num">1,200<span style="color:#233d00;font-size:1.2rem">+</span></div><div class="stat-label" data-i18n="pg.stat2_label">Happy Clients</div></div>
+          <div><div class="stat-num">12</div><div class="stat-label" data-i18n="pg.stat3_label">Cities Covered</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="benefits-section">
+    <div class="reveal benefits-heading-row">
+      <div class="benefits-eyebrow" data-i18n="pg.whats_included">What's Included</div>
+      <h2 class="benefits-h2" data-i18n="pg.everything_you_need">Everything You<br><em>Need</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <span class="benefit-num">01</span>
+        <div class="benefit-title" data-i18n="pg.b1_title">Land Search</div>
+        <div class="benefit-desc" data-i18n="pg.b1_desc">We identify plots that match your intended use, preferred location, and budget — including options ready to view immediately upon inquiry.</div>
+        <div class="benefit-bar"></div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-1">
+        <span class="benefit-num">02</span>
+        <div class="benefit-title" data-i18n="pg.b2_title">Due Diligence & Title Verification</div>
+        <div class="benefit-desc" data-i18n="pg.b2_desc">We verify the title deed, check for encumbrances, confirm boundaries, and ensure the land is fully clean and legally transferable before you commit.</div>
+        <div class="benefit-bar"></div>
+      </div>
+      <div class="benefit-card reveal">
+        <span class="benefit-num">03</span>
+        <div class="benefit-title" data-i18n="pg.b3_title">30-Year Land Rights</div>
+        <div class="benefit-desc" data-i18n="pg.b3_desc">We structure your agreement so you hold legally registered land rights for 30 years, 100% in your name, with no nominee, no risk, and full legal protection.</div>
+        <div class="benefit-bar"></div>
+      </div>
+      <div class="benefit-card reveal reveal-delay-1">
+        <span class="benefit-num">04</span>
+        <div class="benefit-title" data-i18n="pg.b4_title">Legal Transfer & Registration</div>
+        <div class="benefit-desc" data-i18n="pg.b4_desc">All Land Department procedures, documentation, and official registration are handled by our team from start to finish.</div>
+        <div class="benefit-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="services-strip">
+    <div class="services-strip-label" data-i18n="pg.other_services">Explore Other Services</div>
+    <div class="services-strip-links"><a href="renting.html" class="svc-pill" data-i18n-pill-en="Renting" data-i18n-pill-th="เช่า">Renting</a><a href="relocating.html" class="svc-pill" data-i18n-pill-en="Relocating" data-i18n-pill-th="ย้ายถิ่นฐาน">Relocating</a><a href="pet-friendly.html" class="svc-pill" data-i18n-pill-en="Pet Friendly" data-i18n-pill-th="สัตว์เลี้ยง">Pet Friendly</a><a href="investing.html" class="svc-pill" data-i18n-pill-en="Investing" data-i18n-pill-th="ลงทุน">Investing</a><a href="construction.html" class="svc-pill" data-i18n-pill-en="Construction" data-i18n-pill-th="ก่อสร้าง">Construction</a><a href="consulting.html" class="svc-pill" data-i18n-pill-en="Consulting" data-i18n-pill-th="ที่ปรึกษา">Consulting</a></div>
+  </div>
+
+  <div class="cta-strip">
+    <div class="cta-strip-title" data-i18n="pg.cta_ready">Ready to get started? <strong>Let's talk.</strong></div>
+    <a href="https://lin.ee/H5iMNKQ" class="btn-forest" style="white-space:nowrap;flex-shrink:0" data-i18n="pg.cta_btn">Reach Out to Our Team →</a>
+  </div>
+
+  
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-desc" data-i18n="footer.brand_desc">Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.</p>
+        <div style="display:flex;gap:.75rem;margin-top:1.5rem">
+          <a href="https://www.facebook.com/share/1M5e6w6kzU/" target="_blank" class="footer-social">f</a><a href="https://wa.me/66829473350" target="_blank" class="footer-social"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.141 1.535 5.879L.057 23.625a.5.5 0 0 0 .618.618l5.746-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.166-1.448l-.371-.22-3.846.988.988-3.846-.22-.371A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_services">Services</div>
+        <div class="footer-links">
+          <a href="renting.html" data-i18n="nav.svc_renting">Renting</a>
+          <a href="relocating.html" data-i18n="nav.svc_relocating">Relocating</a>
+          <a href="pet-friendly.html" data-i18n="nav.svc_pet">Pet Friendly</a>
+          <a href="investing.html" data-i18n="nav.svc_investing">Investing</a>
+          <a href="construction.html" data-i18n="nav.svc_construction">Construction</a>
+          <a href="consulting.html" data-i18n="nav.svc_consulting">Consulting</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_locations">Locations</div>
+        <div class="footer-links">
+          <a href="#">Phuket</a><a href="#">Bangkok</a><a href="#">Koh Samui</a><a href="#">Chiang Mai</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_company">Company</div>
+        <div class="footer-links">
+          <a href="about.html" data-i18n="footer.about_us">About Us</a>
+          <a href="index.html#contact" data-i18n="footer.contact_us">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 FatBoys Real Estate Thailand. All rights reserved.</span>
+      <div style="display:flex;gap:2rem">
+        <a href="#" style="color:inherit;text-decoration:none" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" style="color:inherit;text-decoration:none" data-i18n="footer.terms">Terms</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+  // ── Cursor ──
+  var cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+  (function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){cursor.style.width='12px';cursor.style.height='12px';ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(192,106,74,0.6)';});
+    el.addEventListener('mouseleave',function(){cursor.style.width='8px';cursor.style.height='8px';ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(200,184,138,0.5)';});
+  });
+  // ── Scroll reveal ──
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+  // ── Language switcher ──
+  var T = {
+    en: Object.assign({"nav.buy_sell":"Buying/Selling","nav.buying":"Buying","nav.selling":"Selling","nav.houses":"Houses","nav.condo":"Condo","nav.land":"Land","nav.locations":"Locations","nav.why_thailand":"Why Thailand","nav.about":"About","nav.services":"Services","nav.what_we_offer":"What We Offer","nav.svc_renting":"Renting","nav.svc_relocating":"Relocating","nav.svc_pet":"Pet Friendly","nav.svc_investing":"Investing","nav.svc_construction":"Construction & Renovation","nav.svc_consulting":"Consulting","nav.book_consultation":"Book Consultation","pg.overview":"Overview","pg.how_we_help":"How We<br><em>Help You</em>","pg.whats_included":"What's Included","pg.everything_you_need":"Everything You<br><em>Need</em>","pg.stat1_label":"Years Experience","pg.stat2_label":"Happy Clients","pg.stat3_label":"Cities Covered","pg.other_services":"Explore Other Services","pg.cta_ready":"Ready to get started? <strong>Let's talk.</strong>","footer.brand_desc":"Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.","footer.h_services":"Services","footer.h_locations":"Locations","footer.h_company":"Company","footer.about_us":"About Us","footer.contact_us":"Contact","footer.copyright":"© 2026 FatBoys Real Estate Thailand. All rights reserved.","footer.privacy":"Privacy Policy","footer.terms":"Terms"}, {"pg.eyebrow":"Land Ownership in Thailand","pg.title":"Buying Land","pg.tagline":"\"Your land. Your legacy.\"","pg.cta":"Reach Out to Our Team","pg.cta_btn":"Reach Out to Our Team →","pg.intro":"Acquiring land in Thailand is one of the most rewarding long-term decisions you can make. We help you identify the right plots in your preferred area and navigate the entire legal process — from due diligence and title deed verification to final registration. Through a properly structured 30-year agreement, you can hold land rights fully in your name, with no nominee required. We have plots ready to inquire about right now.","pg.b1_title":"Land Search","pg.b1_desc":"We identify plots that match your intended use, preferred location, and budget — including options ready to view immediately upon inquiry.","pg.b2_title":"Due Diligence & Title Verification","pg.b2_desc":"We verify the title deed, check for encumbrances, confirm boundaries, and ensure the land is fully clean and legally transferable before you commit.","pg.b3_title":"30-Year Land Rights","pg.b3_desc":"We structure your agreement so you hold legally registered land rights for 30 years, 100% in your name, with no nominee, no risk, and full legal protection.","pg.b4_title":"Legal Transfer & Registration","pg.b4_desc":"All Land Department procedures, documentation, and official registration are handled by our team from start to finish."}),
+    th: Object.assign({"nav.buy_sell":"ซื้อ/ขาย","nav.buying":"ซื้อ","nav.selling":"ขาย","nav.houses":"บ้าน","nav.condo":"คอนโด","nav.land":"ที่ดิน","nav.locations":"สถานที่","nav.why_thailand":"ทำไมต้องไทย","nav.about":"เกี่ยวกับเรา","nav.services":"บริการ","nav.what_we_offer":"สิ่งที่เราให้บริการ","nav.svc_renting":"เช่า","nav.svc_relocating":"ย้ายถิ่นฐาน","nav.svc_pet":"เป็นมิตรกับสัตว์เลี้ยง","nav.svc_investing":"ลงทุน","nav.svc_construction":"ก่อสร้าง & ปรับปรุง","nav.svc_consulting":"ที่ปรึกษา","nav.book_consultation":"นัดปรึกษาฟรี","pg.overview":"ภาพรวม","pg.how_we_help":"เราช่วย<br><em>คุณอย่างไร</em>","pg.whats_included":"สิ่งที่รวมอยู่ด้วย","pg.everything_you_need":"ทุกสิ่งที่<br><em>คุณต้องการ</em>","pg.stat1_label":"ปีประสบการณ์","pg.stat2_label":"ลูกค้าพึงพอใจ","pg.stat3_label":"เมืองที่ให้บริการ","pg.other_services":"บริการอื่นๆ ของเรา","pg.cta_ready":"พร้อมเริ่มต้นแล้วหรือยัง? <strong>มาคุยกัน</strong>","footer.brand_desc":"ชุมชนอสังหาริมทรัพย์ที่น่าเชื่อถือที่สุดในไทย เชื่อมต่อผู้คนกับอสังหาฯ ที่ยอดเยี่ยมมาตั้งแต่ปี 2016","footer.h_services":"บริการ","footer.h_locations":"สถานที่","footer.h_company":"บริษัท","footer.about_us":"เกี่ยวกับเรา","footer.contact_us":"ติดต่อเรา","footer.copyright":"© 2026 แฟทบอยส์ เรียล เอสเตท ประเทศไทย สงวนลิขสิทธิ์","footer.privacy":"นโยบายความเป็นส่วนตัว","footer.terms":"ข้อกำหนด"}, {"pg.eyebrow":"การถือครองที่ดินในไทย","pg.title":"ซื้อที่ดิน","pg.tagline":"\"ที่ดินของคุณ มรดกของคุณ\"","pg.cta":"ติดต่อทีมงาน","pg.cta_btn":"ติดต่อทีมงาน →","pg.intro":"การซื้อที่ดินในไทยเป็นหนึ่งในการตัดสินใจระยะยาวที่คุ้มค่าที่สุด แฟทบอยส์ ลิฟวิ่ง เอสเตทพร้อมช่วยคุณค้นหาแปลงที่เหมาะสมในพื้นที่ที่ต้องการ และดูแลกระบวนการทางกฎหมายทั้งหมดแทนคุณ ตั้งแต่การตรวจสอบโฉนดจนถึงการจดทะเบียนโอนกรรมสิทธิ์ เรามีแปลงพร้อมให้สอบถามได้ทันที","pg.b1_title":"ค้นหาที่ดิน","pg.b1_desc":"เราระบุแปลงที่ตรงกับวัตถุประสงค์ พื้นที่ที่ต้องการ และงบประมาณของคุณ รวมถึงตัวเลือกที่พร้อมชมได้ทันทีเมื่อสอบถาม","pg.b2_title":"ตรวจสอบสถานะและโฉนด","pg.b2_desc":"เราตรวจสอบโฉนด ตรวจหาภาระผูกพัน ยืนยันขอบเขต และให้มั่นใจว่าที่ดินสะอาดและสามารถโอนได้ตามกฎหมายก่อนที่คุณจะตัดสินใจ","pg.b3_title":"เป็นเจ้าของที่ดินตลอดไป","pg.b3_desc":"คนไทยสามารถเป็นเจ้าของที่ดินได้อย่างสมบูรณ์ แฟทบอยส์ดูแลรายละเอียดทั้งหมดให้คุณ เพื่อให้การซื้อที่ดินของคุณปลอดภัยและถูกต้องตามกฎหมายทุกขั้นตอน","pg.b4_title":"การโอนและจดทะเบียน","pg.b4_desc":"ขั้นตอนสำนักงานที่ดิน เอกสาร และการจดทะเบียนอย่างเป็นทางการทั้งหมดดูแลโดยทีมของเราตั้งแต่ต้นจนจบ"})
+  };
+  function setLanguage(lang) {
+    localStorage.setItem('fb_lang', lang);
+    var t = T[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+    // Service pills
+    document.querySelectorAll('[data-i18n-pill-en]').forEach(function(el) {
+      el.textContent = lang === 'th' ? el.getAttribute('data-i18n-pill-th') : el.getAttribute('data-i18n-pill-en');
+    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
+    document.documentElement.lang = lang === 'th' ? 'th' : 'en';
+  }
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { setLanguage(btn.getAttribute('data-lang')); });
+  });
+  setLanguage(localStorage.getItem('fb_lang') || 'en');
+  </script>
+</body>
+</html>

@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FatBoys Real Estate — Thailand</title>
+
+  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --warm-sand: #C8B88A;          /* golden sandy brown */
+      --forest-green: #233d00;       /* deep olive green */
+      --burnt-sienna: #C06A4A;       /* terracotta accent */
+      --dark-walnut: #1E2618;        /* deep green-brown base */
+      --linen-white: #ECE8DC;        /* warm off-white */
+      --stone-grey: #908C84;         /* rocky neutral gray */
+      --dark-walnut-deep: #14180E;   /* darkest base */
+      --forest-light: #2f5200;       /* lighter olive green */
+      --sand-light: #DDD0B0;         /* light sandy warm */
+      --rocky-stone: #B8B4AE;        /* light stone gray */
+      --stone-dark: #6A6660;         /* darker stone */
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark-walnut);
+      color: var(--linen-white);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--burnt-sienna);
+      border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(200,184,138,0.5);
+      border-radius: 50%;
+      position: fixed; pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    a:hover ~ .cursor, button:hover ~ .cursor { width: 14px; height: 14px; }
+
+    /* Grain overlay */
+    .grain {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9990;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+    }
+
+    /* Typography */
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+
+    /* Navigation */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.97);
+      backdrop-filter: blur(16px);
+      padding: 1rem 3rem;
+      border-bottom: 1px solid rgba(200,184,138,0.1);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center;
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--linen-white);
+      white-space: nowrap;
+    }
+    .footer-logo img {
+      height: 60px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a {
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(236,232,220,0.7); text-decoration: none; font-weight: 400;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      background: var(--burnt-sienna); transform: scaleX(0); transition: transform 0.25s;
+      transform-origin: left;
+    }
+    .nav-links a:hover { color: var(--warm-sand); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* Dropdown nav */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(236,232,220,0.7); background: none; border: none;
+      font-family: 'DM Sans', sans-serif; font-weight: 400; cursor: none;
+      display: flex; align-items: center; gap: 0.4rem; padding: 0;
+      transition: color 0.2s; position: relative;
+    }
+    .nav-dropdown-toggle::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1px;
+      background: var(--burnt-sienna); transform: scaleX(0); transition: transform 0.25s;
+      transform-origin: left;
+    }
+    .nav-dropdown-toggle svg { transition: transform 0.25s; }
+    .nav-dropdown:hover .nav-dropdown-toggle { color: var(--warm-sand); }
+    .nav-dropdown:hover .nav-dropdown-toggle::after { transform: scaleX(1); }
+    .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+
+    .nav-dropdown-menu {
+      position: absolute; top: calc(100% + 0.6rem); left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      min-width: 480px;
+      background: rgba(10,14,8,0.97);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(200,184,138,0.12);
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 200;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    /* Invisible bridge fills the gap between toggle and menu so mouse movement doesn't close it */
+    .nav-dropdown-menu::before {
+      content: ''; position: absolute;
+      top: -0.8rem; left: 0; right: 0; height: 0.8rem;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1; pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+      transition: opacity 0.22s 0s, transform 0.22s 0s;
+    }
+    .nav-dd-col { padding: 0.5rem 1rem; }
+    .nav-dd-col:first-child { border-right: 1px solid rgba(200,184,138,0.1); }
+    .nav-dd-heading {
+      font-size: 0.6rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--burnt-sienna); font-weight: 600; margin-bottom: 0.85rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-dd-heading::before { content: ''; width: 16px; height: 1px; background: var(--burnt-sienna); }
+    .nav-dd-items { display: flex; flex-direction: column; gap: 0.1rem; }
+    .nav-dd-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 0.75rem;
+      color: rgba(200,184,138,0.65); text-decoration: none;
+      font-size: 0.82rem; font-weight: 300; letter-spacing: 0.04em;
+      transition: color 0.18s, background 0.18s, padding-left 0.18s;
+      border-radius: 2px; cursor: none; border-left: 2px solid transparent;
+    }
+    .nav-dd-item-left { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-dd-item-arrow {
+      font-size: 0.75rem; opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.18s, transform 0.18s;
+      color: var(--burnt-sienna);
+    }
+    .nav-dd-item:hover {
+      color: var(--warm-sand); background: rgba(200,184,138,0.06);
+      border-left-color: var(--burnt-sienna); padding-left: 1rem;
+    }
+    .nav-dd-item:hover .nav-dd-item-arrow { opacity: 1; transform: translateX(0); }
+    .nav-dd-item svg { color: var(--forest-green); flex-shrink: 0; }
+    .nav-dd-single { min-width: 260px; grid-template-columns: 1fr; }
+
+    .btn-nav {
+      padding: 0.55rem 1.4rem;
+      background: var(--forest-green);
+      border: 1px solid var(--forest-green);
+      color: var(--warm-sand);
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: none; font-family: 'DM Sans', sans-serif;
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .btn-nav:hover {
+      background: var(--warm-sand); color: var(--dark-walnut);
+      border-color: var(--warm-sand);
+    }
+
+    /* Hero */
+    /* ══════════ SCROLL EXPANSION HERO ══════════ */
+    #seh-wrapper { position: relative; overflow-x: hidden; }
+
+    #seh-bg {
+      position: absolute; inset: 0; height: 100vh;
+      z-index: 0; pointer-events: none;
+      /* Replace value below with: background-image: url('your-surat-thani-park.jpg'); */
+      background: linear-gradient(160deg, #0a1e06 0%, #102606 30%, #183010 55%, #0d2008 80%, #081606 100%);
+      background-size: cover; background-position: center;
+    }
+
+    #seh-section {
+      position: relative; height: 100vh; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2; overflow: hidden;
+    }
+
+    #seh-media-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    #seh-media {
+      position: relative; width: 300px; height: 400px;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: 0 0 60px rgba(0,0,0,0.5);
+    }
+
+    #seh-media-fallback {
+      position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(160deg, #081408 0%, #0e1e0a 40%, #0a1806 70%, #060e04 100%);
+    }
+
+    #seh-video {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    #seh-media-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background: rgba(0,0,0,0.45);
+      pointer-events: none;
+    }
+
+    #seh-titles {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      gap: 0.2rem; pointer-events: none;
+    }
+
+    #seh-date {
+      font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--burnt-sienna); font-weight: 500;
+      margin-bottom: 0.8rem; will-change: transform;
+    }
+
+    .seh-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 300; line-height: 1; letter-spacing: -0.01em;
+      color: var(--linen-white); will-change: transform;
+    }
+    .seh-title em { font-style: italic; color: var(--warm-sand); }
+
+    #seh-scroll-hint {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(200,184,138,0.55); margin-top: 1rem; will-change: transform;
+    }
+
+    /* Post-expansion content */
+    #seh-post {
+      background: var(--dark-walnut); position: relative; z-index: 2;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+    #seh-post.seh-visible { opacity: 1; pointer-events: auto; }
+
+    #seh-post-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 6rem 7rem;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2.5rem;
+    }
+
+    .seh-post-eyebrow {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .seh-post-eyebrow-line { width: 40px; height: 1px; background: var(--burnt-sienna); }
+    .seh-post-eyebrow-text {
+      font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--burnt-sienna); font-weight: 500;
+    }
+
+    .seh-post-stats { display: flex; gap: 3.5rem; }
+    .seh-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; line-height: 1; color: var(--warm-sand);
+    }
+    .seh-stat-num span { font-size: 1.4rem; color: var(--burnt-sienna); }
+    .seh-stat-label {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--stone-grey); margin-top: 0.3rem;
+    }
+
+    .seh-subtitle {
+      font-size: 1rem; line-height: 1.75; color: rgba(236,232,220,0.65);
+      max-width: 480px; font-weight: 300;
+    }
+
+    .seh-ctas { display: flex; gap: 1rem; align-items: center; }
+
+    .btn-primary {
+      padding: 0.9rem 2.2rem;
+      background: var(--warm-sand);
+      color: var(--dark-walnut);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 600; border: none; cursor: none;
+      transition: background 0.25s, transform 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--sand-light); transform: translateX(-101%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-outline {
+      padding: 0.9rem 2.2rem;
+      background: transparent;
+      color: var(--linen-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 500; border: 1px solid rgba(236,232,220,0.3); cursor: none;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--warm-sand); color: var(--warm-sand); }
+
+    .btn-sienna {
+      padding: 0.9rem 2.2rem;
+      background: var(--burnt-sienna);
+      color: var(--linen-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 600; border: none; cursor: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-sienna:hover { background: #d4795e; }
+    .btn-sienna:active { transform: scale(0.98); }
+
+    .btn-forest {
+      padding: 0.9rem 2.2rem;
+      background: var(--forest-green);
+      color: var(--linen-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      font-weight: 600; border: none; cursor: none;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-forest:hover { background: var(--forest-light); }
+    .btn-forest:active { transform: scale(0.98); }
+
+
+    /* Section base */
+    section { position: relative; }
+
+    /* Marquee strip */
+    .marquee-strip {
+      background: var(--forest-green);
+      padding: 1rem 0; overflow: hidden;
+      border-top: 1px solid rgba(200,184,138,0.1);
+      border-bottom: 1px solid rgba(200,184,138,0.1);
+    }
+    .marquee-inner {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 2rem;
+      padding: 0 2rem;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(236,232,220,0.8); font-weight: 400;
+    }
+    .marquee-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--burnt-sienna); flex-shrink: 0;
+    }
+
+    /* Properties section */
+    .properties-section {
+      background: var(--linen-white);
+      color: var(--dark-walnut);
+      padding: 7rem 7rem 8rem;
+    }
+
+    .section-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+    .section-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--burnt-sienna); font-weight: 500; margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-eyebrow::before {
+      content: ''; width: 24px; height: 1px; background: var(--burnt-sienna);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 3.8rem);
+      font-weight: 600; line-height: 1.05;
+      color: var(--dark-walnut); letter-spacing: -0.02em;
+    }
+    .section-title em { font-style: italic; color: var(--forest-green); }
+
+    /* Property Cards */
+    .properties-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.5px;
+    }
+    .prop-card {
+      position: relative; overflow: hidden;
+      cursor: none;
+    }
+    .prop-card:first-child {
+      grid-row: span 2;
+    }
+    .prop-card img {
+      width: 100%; height: 100%;
+      display: block; min-height: 260px;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      object-fit: cover;
+    }
+    .prop-card:first-child img { min-height: 560px; }
+    .prop-card:hover img { transform: scale(1.04); }
+
+    /* ── Placeholder image backgrounds (replace with real photos) ── */
+    .prop-card:nth-child(1) img {
+      background: linear-gradient(150deg, #162410 0%, #244818 40%, #1a3210 100%);
+    }
+    .prop-card:nth-child(2) img {
+      background: linear-gradient(140deg, #2a2c24 0%, #1e281a 50%, #16200e 100%);
+    }
+    .prop-card:nth-child(3) img {
+      background: linear-gradient(155deg, #222820 0%, #1a2416 50%, #2a3020 100%);
+    }
+    .about-img-main {
+      background: linear-gradient(155deg, #1e2a16 0%, #263218 50%, #2a3820 100%) !important;
+    }
+    .about-img-accent {
+      background: linear-gradient(145deg, #182410 0%, #233d00 100%) !important;
+    }
+    .listing-card:nth-child(1) .listing-img-wrap img {
+      background: linear-gradient(150deg, #2e2c26 0%, #3a3828 50%, #2e3020 100%);
+    }
+    .listing-card:nth-child(2) .listing-img-wrap img {
+      background: linear-gradient(140deg, #1a2e0e 0%, #264016 50%, #182610 100%);
+    }
+    .listing-card:nth-child(3) .listing-img-wrap img {
+      background: linear-gradient(155deg, #2c2c24 0%, #3a3a2c 50%, #28281e 100%);
+    }
+    .listing-img-wrap img {
+      background: linear-gradient(150deg, #1e2a14 0%, #2a3820 100%);
+    }
+    .testimonial-avatar {
+      background: linear-gradient(135deg, #2a2c22 0%, #1e2c14 100%) !important;
+    }
+    .location-card:nth-child(1) img {
+      background: linear-gradient(160deg, #162410 0%, #244818 40%, #1a3010 100%);
+    }
+    .location-card:nth-child(2) img {
+      background: linear-gradient(150deg, #2e2e28 0%, #3a3830 50%, #2a2820 100%);
+    }
+    .location-card:nth-child(3) img {
+      background: linear-gradient(155deg, #162410 0%, #1e3210 50%, #233d00 100%);
+    }
+    .location-card:nth-child(4) img {
+      background: linear-gradient(145deg, #2a2c26 0%, #36342e 50%, #2a2820 100%);
+    }
+    .location-card img {
+      background: linear-gradient(150deg, #1e2a14 0%, #1a2e10 100%);
+    }
+    .prop-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,24,14,0.88) 0%, rgba(20,24,14,0.1) 55%, transparent 100%);
+      transition: opacity 0.4s;
+    }
+    .prop-card-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.75rem 1.75rem 1.5rem;
+      transform: translateY(0);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .prop-card-tag {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      background: var(--burnt-sienna);
+      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--linen-white); font-weight: 500; margin-bottom: 0.6rem;
+    }
+    .prop-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; line-height: 1.1;
+      color: var(--linen-white); margin-bottom: 0.3rem;
+    }
+    .prop-card:first-child .prop-card-name { font-size: 2rem; }
+    .prop-card-location {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      color: rgba(200,184,138,0.75); display: flex; align-items: center; gap: 0.4rem;
+    }
+    .prop-card-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; color: var(--warm-sand);
+      margin-top: 0.75rem;
+    }
+    .prop-card-details {
+      display: flex; gap: 1.5rem; margin-top: 0.5rem;
+      font-size: 0.68rem; letter-spacing: 0.08em; color: rgba(200,184,138,0.6);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s 0.05s, transform 0.35s 0.05s;
+    }
+    .prop-card:hover .prop-card-details { opacity: 1; transform: translateY(0); }
+    .prop-card-details span { display: flex; align-items: center; gap: 0.3rem; }
+
+    /* Values section */
+    .values-section {
+      background: var(--dark-walnut);
+      padding: 8rem 7rem;
+    }
+    .values-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 4.5rem; border-top: 1px solid rgba(184,180,174,0.2);
+    }
+    .value-card {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid rgba(184,180,174,0.2);
+      border-bottom: 1px solid rgba(184,180,174,0.2);
+      transition: background 0.35s;
+    }
+    .value-card:last-child { border-right: none; }
+    .value-card:hover { background: rgba(184,180,174,0.06); }
+    .value-icon {
+      width: 48px; height: 48px; margin-bottom: 2rem;
+      color: var(--forest-green);
+    }
+    .value-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 300; line-height: 1;
+      color: rgba(200,184,138,0.12); margin-bottom: -1.5rem;
+      display: block;
+    }
+    .value-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600;
+      color: var(--warm-sand); margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .value-desc {
+      font-size: 0.85rem; line-height: 1.75;
+      color: var(--stone-grey); font-weight: 300;
+    }
+    .value-line {
+      width: 32px; height: 2px; background: var(--burnt-sienna);
+      margin-top: 1.75rem;
+      transition: width 0.4s;
+    }
+    .value-card:hover .value-line { width: 56px; }
+
+    /* About section */
+    .about-section {
+      background: var(--dark-walnut-deep);
+      padding: 8rem 7rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: center;
+    }
+    .about-image-stack { position: relative; }
+    .about-img-main {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      display: block;
+      filter: saturate(0.85);
+    }
+    .about-img-accent {
+      position: absolute; bottom: -2.5rem; right: -2.5rem;
+      width: 55%; aspect-ratio: 1/1; object-fit: cover;
+      border: 5px solid var(--dark-walnut-deep);
+      filter: saturate(0.85);
+    }
+    .about-badge {
+      position: absolute; top: -1.5rem; left: -1.5rem;
+      width: 120px; height: 120px;
+      background: var(--forest-green);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .about-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 600; line-height: 1;
+      color: var(--warm-sand);
+    }
+    .about-badge-text {
+      font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(236,232,220,0.7); text-align: center; line-height: 1.4;
+    }
+
+    .about-content { padding-right: 1rem; }
+    .about-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; font-style: italic;
+      color: var(--burnt-sienna); margin-bottom: 2.5rem; line-height: 1.6;
+    }
+    .about-body {
+      font-size: 0.9rem; line-height: 1.85; color: rgba(200,184,138,0.7);
+      font-weight: 300; margin-bottom: 2rem;
+    }
+    .about-signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-style: italic; font-weight: 300;
+      color: var(--warm-sand); margin-top: 2.5rem; margin-bottom: 0.3rem;
+    }
+    .about-sig-title {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--stone-grey);
+    }
+
+    /* Properties list / Listings */
+    .listings-section {
+      background: #E8E2D8;
+      padding: 7rem 7rem 8rem;
+      color: var(--dark-walnut);
+    }
+    .listings-filter {
+      display: flex; gap: 0.5rem; margin-top: 3rem; margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.55rem 1.5rem;
+      background: transparent; color: var(--stone-grey);
+      border: 1px solid rgba(30,38,24,0.2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: none; transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--dark-walnut); color: var(--warm-sand);
+      border-color: var(--dark-walnut);
+    }
+    .listings-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    }
+    .listing-card {
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(30,38,24,0.08), 0 8px 32px rgba(184,180,174,0.12);
+      overflow: hidden; cursor: none;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.3s;
+    }
+    .listing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 32px rgba(30,38,24,0.14), 0 24px 64px rgba(184,180,174,0.18);
+    }
+    .listing-img-wrap { position: relative; overflow: hidden; }
+    .listing-img-wrap img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .listing-card:hover .listing-img-wrap img { transform: scale(1.06); }
+    .listing-badge {
+      position: absolute; top: 1rem; left: 1rem;
+      padding: 0.3rem 0.7rem;
+      background: var(--forest-green);
+      font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--linen-white); font-weight: 500;
+    }
+    .listing-price-tag {
+      position: absolute; bottom: 1rem; right: 1rem;
+      padding: 0.4rem 0.9rem;
+      background: rgba(20,24,14,0.9);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; color: var(--warm-sand);
+    }
+    .listing-body { padding: 1.5rem; }
+    .listing-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; line-height: 1.2;
+      color: var(--dark-walnut); margin-bottom: 0.4rem;
+    }
+    .listing-loc {
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      color: var(--stone-grey); display: flex; align-items: center; gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .listing-sep { height: 1px; background: rgba(30,38,24,0.1); margin: 1rem 0; }
+    .listing-specs {
+      display: flex; gap: 1.5rem;
+      font-size: 0.72rem; color: var(--stone-grey);
+      letter-spacing: 0.04em;
+    }
+    .listing-spec { display: flex; align-items: center; gap: 0.35rem; }
+
+    /* Testimonials */
+    .testimonials-section {
+      background: #EEEAE0;
+      padding: 7rem;
+      overflow: hidden;
+    }
+    .testimonials-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem;
+    }
+    .testimonial-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(30,38,24,0.08);
+      background: #fff;
+      transition: background 0.3s, border-color 0.3s;
+      position: relative;
+    }
+    .testimonial-card:hover {
+      background: #f9f7f2;
+      border-color: rgba(30,38,24,0.18);
+    }
+    .testimonial-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 300;
+      color: var(--burnt-sienna); line-height: 0.5;
+      margin-bottom: 1.5rem; display: block;
+    }
+    .testimonial-text {
+      font-size: 0.9rem; line-height: 1.8; font-style: italic; font-weight: 300;
+      color: var(--stone-dark); margin-bottom: 1.5rem;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      object-fit: cover; border: 2px solid rgba(200,184,138,0.3);
+    }
+    .testimonial-name {
+      font-size: 0.82rem; font-weight: 600; color: var(--dark-walnut);
+    }
+    .testimonial-role {
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--stone-grey); margin-top: 0.15rem;
+    }
+    .testimonial-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
+    .testimonial-stars span { color: var(--burnt-sienna); font-size: 0.75rem; }
+
+    /* Locations section */
+    .locations-section {
+      background: var(--dark-walnut);
+      padding: 7rem;
+    }
+    .locations-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px;
+      margin-top: 4rem;
+    }
+    .location-card {
+      position: relative; overflow: hidden; cursor: none;
+    }
+    .location-card img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s;
+      filter: saturate(0.75) brightness(0.8);
+    }
+    .location-card:hover img { transform: scale(1.08); filter: saturate(0.9) brightness(0.9); }
+    .location-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(20,24,14,0.85) 0%, transparent 55%);
+    }
+    .location-content {
+      position: absolute; bottom: 1.75rem; left: 1.75rem; right: 1.75rem; z-index: 1;
+    }
+    .location-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--linen-white); margin-bottom: 0.25rem;
+    }
+    .location-count {
+      font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(200,184,138,0.65);
+    }
+    .location-arrow {
+      position: absolute; top: 1.5rem; right: 1.5rem; z-index: 1;
+      width: 36px; height: 36px; border: 1px solid rgba(200,184,138,0.3);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--warm-sand); font-size: 0.85rem;
+      opacity: 0; transform: translateY(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .location-card:hover .location-arrow { opacity: 1; transform: translateY(0); }
+
+    /* CTA section */
+    .cta-section {
+      background: var(--dark-walnut-deep);
+      padding: 8rem 7rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+      border-top: 1px solid rgba(200,184,138,0.08);
+    }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.1;
+      color: var(--linen-white); letter-spacing: -0.01em;
+    }
+    .cta-title strong { font-weight: 600; color: var(--warm-sand); }
+    .cta-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label {
+      font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--stone-grey); font-weight: 500;
+    }
+    .form-input {
+      padding: 0.8rem 1rem;
+      background: rgba(200,184,138,0.06);
+      border: 1px solid rgba(200,184,138,0.15);
+      color: var(--linen-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 300;
+      outline: none; cursor: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input::placeholder { color: rgba(200,184,138,0.3); }
+    .form-input:focus {
+      border-color: rgba(200,184,138,0.45);
+      background: rgba(200,184,138,0.09);
+    }
+    select.form-input { appearance: none; }
+
+    /* Footer */
+    footer {
+      background: var(--dark-walnut-deep);
+      padding: 4rem 7rem 2.5rem;
+      border-top: 1px solid rgba(200,184,138,0.1);
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+      margin-bottom: 3.5rem;
+    }
+    .footer-brand-desc {
+      font-size: 0.85rem; line-height: 1.75; color: rgba(144,140,132,0.8);
+      font-weight: 300; margin-top: 1.25rem; max-width: 280px;
+    }
+    .footer-heading {
+      font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--warm-sand); font-weight: 600; margin-bottom: 1.25rem;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-links a {
+      font-size: 0.83rem; color: rgba(144,140,132,0.75); text-decoration: none;
+      font-weight: 300; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--warm-sand); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 2rem; border-top: 1px solid rgba(200,184,138,0.08);
+      font-size: 0.7rem; color: rgba(144,140,132,0.5);
+    }
+    .footer-socials { display: flex; gap: 1.2rem; }
+    .footer-social {
+      width: 34px; height: 34px; border: 1px solid rgba(200,184,138,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--stone-grey); font-size: 0.78rem; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-social:hover { border-color: var(--warm-sand); color: var(--warm-sand); }
+
+    /* Services section */
+    .services-section {
+      background: #EEEAE0;
+      padding: 7rem 7rem 8rem;
+      color: var(--dark-walnut);
+    }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      margin-top: 4rem;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(30,38,24,0.08);
+      padding: 2.25rem 2rem;
+      cursor: none; position: relative; overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--forest-green);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .service-card:hover {
+      border-color: rgba(35,61,0,0.25);
+      box-shadow: 0 8px 40px rgba(20,24,14,0.09);
+      transform: translateY(-4px);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      width: 44px; height: 44px;
+      background: rgba(35,61,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+      color: var(--forest-green);
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon { background: rgba(35,61,0,0.16); }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--dark-walnut); margin-bottom: 0.65rem;
+      letter-spacing: 0.01em;
+    }
+    .service-desc {
+      font-size: 0.83rem; line-height: 1.72;
+      color: var(--stone-grey); font-weight: 300;
+    }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.25rem;
+      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--forest-green); font-weight: 600; text-decoration: none;
+      cursor: none; transition: gap 0.2s;
+    }
+    .service-link:hover { gap: 0.7rem; }
+
+    /* Animations */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes scrollLine {
+      0% { transform: translateY(-100%); }
+      50% { transform: translateY(0); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* Location dot svg */
+    .loc-dot { display: inline-flex; align-items: center; }
+
+    /* SVG icons */
+    .icon { display: inline-block; flex-shrink: 0; }
+
+    /* ══════════ LANGUAGE TOGGLE ══════════ */
+    .lang-toggle { display:flex; align-items:center; gap:0.15rem; background:rgba(200,184,138,0.08); border:1px solid rgba(200,184,138,0.18); border-radius:20px; padding:0.2rem 0.5rem; }
+    .lang-btn { background:none; border:none; color:var(--stone-grey); font-family:'DM Sans',sans-serif; font-size:0.68rem; font-weight:700; letter-spacing:0.12em; cursor:none; padding:0.18rem 0.45rem; border-radius:12px; transition:background 0.22s, color 0.22s; }
+    .lang-btn.active { background:var(--warm-sand); color:var(--dark-walnut-deep); }
+    .lang-btn:hover:not(.active) { color:var(--warm-sand); }
+    .lang-sep { color:rgba(200,184,138,0.22); font-size:0.6rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
+  <!-- ══════════════════ NAVIGATION ══════════════════ -->
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">Fatboys Living Estate</a>
+    <div class="nav-links">
+      <!-- Buying dropdown -->
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          <span data-i18n="nav.buy_sell">Buying/Selling</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.buying">Buying</div>
+            <div class="nav-dd-items">
+              <a href="buy-house.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                <span data-i18n="nav.houses">Houses</span>
+              </a>
+              <a href="buy-condo.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                <span data-i18n="nav.condo">Condo</span>
+              </a>
+              <a href="buy-land.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg>
+                <span data-i18n="nav.land">Land</span>
+              </a>
+            </div>
+          </div>
+          <div class="nav-dd-col">
+            <div class="nav-dd-heading" data-i18n="nav.selling">Selling</div>
+            <div class="nav-dd-items">
+              <a href="sell-house.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                <span data-i18n="nav.houses">Houses</span>
+              </a>
+              <a href="sell-condo.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="18" rx="1"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                <span data-i18n="nav.condo">Condo</span>
+              </a>
+              <a href="sell-land.html" class="nav-dd-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 22h20"/><path d="M6 18V8l6-5 6 5v10"/><path d="M9 22v-4h6v4"/></svg>
+                <span data-i18n="nav.land">Land</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="why-thailand.html" data-i18n="nav.why_thailand">Why Thailand</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <!-- Services dropdown -->
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          <span data-i18n="nav.services">Services</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu nav-dd-single">
+          <div class="nav-dd-col" style="border-right:none">
+            <div class="nav-dd-heading" data-i18n="nav.what_we_offer">What We Offer</div>
+            <div class="nav-dd-items">
+              <a href="renting.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><span data-i18n="nav.svc_renting">Renting</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+              <a href="relocating.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span data-i18n="nav.svc_relocating">Relocating</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+              <a href="pet-friendly.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span data-i18n="nav.svc_pet">Pet Friendly</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+              <a href="investing.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span data-i18n="nav.svc_investing">Investing</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+              <a href="construction.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20"/><path d="M17 20V8l-5-5-5 5v12"/><path d="M9 20v-5h6v5"/></svg><span data-i18n="nav.svc_construction">Construction &amp; Renovation</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+              <a href="consulting.html" class="nav-dd-item">
+                <span class="nav-dd-item-left"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i18n="nav.svc_consulting">Consulting</span></span>
+                <span class="nav-dd-item-arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lang-toggle" id="langToggle">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="th">TH</button>
+      </div>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-nav" data-i18n="nav.book_consultation">Book Consultation</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════ SCROLL EXPANSION HERO ══════════════════ -->
+  <div id="seh-wrapper">
+
+    <div id="seh-bg" style="background-image:url('Brand_assets/pexels-cottonbro-5608227.jpg')"></div>
+
+    <section id="seh-section">
+      <div id="seh-media-wrap">
+        <div id="seh-media">
+          <div id="seh-media-fallback"></div>
+          <video id="seh-video" autoplay muted loop playsinline preload="auto">
+            <source src="Brand_assets/11321656-hd_1920_1080_25fps.mp4" type="video/mp4">
+          </video>
+          <div id="seh-media-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Title split — two halves slide apart as scroll expands the media -->
+      <div id="seh-titles">
+        <div id="seh-date" data-i18n="hero.date">Premium Properties · Thailand</div>
+        <h1 id="seh-title-left" class="seh-title" data-i18n="hero.title_left">Where Home</h1>
+        <h1 id="seh-title-right" class="seh-title"><em data-i18n="hero.title_right">Meets Thailand</em></h1>
+        <p id="seh-scroll-hint" data-i18n="hero.scroll_hint">Scroll to expand</p>
+      </div>
+    </section>
+
+
+  </div>
+
+  <!-- ══════════════════ MARQUEE ══════════════════ -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <!-- duplicated for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Phuket Villas</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Bangkok Penthouses</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Koh Samui Beachfront</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Chiang Mai Estates</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pattaya Condos</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Hua Hin Retreats</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Krabi Hideaways</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Trusted Since 2016</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Phuket Villas</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Bangkok Penthouses</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Koh Samui Beachfront</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Chiang Mai Estates</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Pattaya Condos</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Hua Hin Retreats</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Krabi Hideaways</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Trusted Since 2016</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════ VALUES ══════════════════ -->
+  <section class="values-section" id="community">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-eyebrow" style="color:var(--burnt-sienna)" data-i18n="values.eyebrow">Why FatBoys</div>
+        <h2 class="section-title" style="color:var(--warm-sand)">Built on<br><em style="color:var(--forest-green)" data-i18n="values.title_em">Values</em></h2>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="value-num">01</span>
+        <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M24 4l4 8h8l-6 6 2 9-8-4-8 4 2-9-6-6h8z"/>
+          <circle cx="24" cy="36" r="8" stroke-dasharray="4 2"/>
+        </svg>
+        <div class="value-title" data-i18n="values.v1_title">Trust</div>
+        <div class="value-desc" data-i18n="values.v1_desc">Reliable & transparent in every transaction. We guide you with honesty from first viewing to final handover.</div>
+        <div class="value-line"></div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-1">
+        <span class="value-num">02</span>
+        <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="18" cy="16" r="6"/>
+          <circle cx="30" cy="16" r="6"/>
+          <path d="M6 40c0-8 5-14 12-14h12c7 0 12 6 12 14"/>
+        </svg>
+        <div class="value-title" data-i18n="values.v2_title">Community</div>
+        <div class="value-desc" data-i18n="values.v2_desc">Rooted in local neighbourhoods. We connect expats and locals, building genuine ties that last well beyond the sale.</div>
+        <div class="value-line"></div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-2">
+        <span class="value-num">03</span>
+        <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M24 4l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z"/>
+        </svg>
+        <div class="value-title" data-i18n="values.v3_title">Quality</div>
+        <div class="value-desc" data-i18n="values.v3_desc">Premium properties, exceptional service. Every listing is carefully vetted to meet the highest standards of living.</div>
+        <div class="value-line"></div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-3">
+        <span class="value-num">04</span>
+        <svg class="value-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M24 8C18 8 10 14 10 22c0 12 14 18 14 18s14-6 14-18c0-8-8-14-14-14z"/>
+          <path d="M19 22l3 3 7-7" stroke-linecap="round"/>
+        </svg>
+        <div class="value-title" data-i18n="values.v4_title">Warmth</div>
+        <div class="value-desc" data-i18n="values.v4_desc">Welcoming, personal approach. Thailand is our home, and we make it yours — from the moment you walk through the door.</div>
+        <div class="value-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ ABOUT ══════════════════ -->
+  <!-- ══════════════════ SERVICES ══════════════════ -->
+  <section class="services-section" id="services">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-eyebrow" data-i18n="services.eyebrow">How We Help</div>
+        <h2 class="section-title">Our<br><em data-i18n="services.title_em">Services</em></h2>
+      </div>
+      <p style="color:var(--stone-grey); font-size:0.9rem; max-width:340px; line-height:1.75; font-weight:300" data-i18n="services.subtitle">
+        From your first move to your next investment — we're with you at every step of life in Thailand.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s1_title">Renting</div>
+        <div class="service-desc" data-i18n="services.s1_desc">Short and long-term rentals across Thailand's best neighbourhoods. We match you to the right home, at the right price, with zero stress.</div>
+        <a href="#" class="service-link"><span data-i18n="services.s1_link">Browse Rentals</span> <span>→</span></a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s2_title">Relocating</div>
+        <div class="service-desc" data-i18n="services.s2_desc">Moving to Thailand? Our relocation specialists handle everything — housing, visas guidance, schools, and settling into your new community.</div>
+        <a href="#" class="service-link"><span data-i18n="services.s2_link">Start Your Move</span> <span>→</span></a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s3_title">Pet Friendly</div>
+        <div class="service-desc" data-i18n="services.s3_desc">Finding pet-friendly homes in Thailand shouldn't be a challenge. We've built a dedicated network of landlords and properties that welcome your furry family.</div>
+        <a href="#" class="service-link"><span data-i18n="services.s3_link">Find Pet Homes</span> <span>→</span></a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s4_title">Investing</div>
+        <div class="service-desc" data-i18n="services.s4_desc">Thailand's property market offers exceptional yields. We guide investors through legal structures, due diligence, rental ROI analysis, and portfolio growth.</div>
+        <a href="#" class="service-link"><span data-i18n="services.s4_link">Investment Guide</span> <span>→</span></a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20h20"/><path d="M17 20V8l-5-5-5 5v12"/><path d="M9 20v-5h6v5"/><path d="M9 9h6"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s5_title">Construction &amp; Renovation</div>
+        <div class="service-desc" data-i18n="services.s5_desc">Build your dream home or transform an existing property. We connect you with trusted architects, builders, and project managers who deliver on time and on budget.</div>
+        <a href="#" class="service-link"><span data-i18n="services.s5_link">Build With Us</span> <span>→</span></a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="service-title" data-i18n="services.s6_title">Consulting</div>
+        <div class="service-desc" data-i18n="services.s6_desc">One-on-one expert advice on the Thai property market, ownership laws for foreigners, leasehold vs freehold, and long-term strategic planning for expats.</div>
+        <a href="#contact" class="service-link"><span data-i18n="services.s6_link">Book a Session</span> <span>→</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════ LISTINGS ══════════════════ -->
+  <section class="listings-section">
+    <div style="max-width:720px; margin:0 auto; text-align:center;" class="reveal">
+      <div class="section-eyebrow" data-i18n="listings.eyebrow">Find Your Home</div>
+      <h2 class="section-title" style="margin-bottom:2rem;">
+        Find Your<br><em data-i18n="listings.title_em">Ideal Home</em>
+      </h2>
+      <p style="font-size:1.1rem; line-height:1.9; color:var(--stone-dark); margin-bottom:1.5rem;" data-i18n="listings.intro">
+        Whether you are looking for a family home, a private villa, a modern condo, or a piece of land to build your dream — we will find it for you. Our team knows the Thai property market inside out, from Phuket beaches to Bangkok towers to quiet Chiang Mai hillsides.
+      </p>
+      <p style="font-size:1rem; line-height:1.8; color:var(--stone-grey); margin-bottom:3rem;" data-i18n="listings.intro2">
+        Tell us what you need and we handle everything — search, viewings, negotiation, and paperwork. No stress, no guesswork. Just the right property for your life.
+      </p>
+      <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-forest" data-i18n="listings.cta">Book a Free Consultation</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════ TESTIMONIALS ══════════════════ -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-header reveal">
+      <div>
+        <div class="section-eyebrow" style="color:var(--burnt-sienna)" data-i18n="test.eyebrow">Community Stories</div>
+        <h2 class="section-title" style="color:var(--dark-walnut)">What Our<br><em style="color:var(--forest-green)" data-i18n="test.title_em">Clients Say</em></h2>
+      </div>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text" data-i18n="test.t1_text">The FatBoys team made finding our home in Thailand so easy. They listened to exactly what we were looking for and didn't stop until we found the perfect house. Couldn't have done it without them.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" alt="James" />
+          <div>
+            <div class="testimonial-name">James</div>
+            <div class="testimonial-role" data-i18n="test.t1_role">Home Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text" data-i18n="test.t2_text">I had no idea how to navigate the Thai visa process alongside buying property. The FatBoys team handled everything — they connected me with the right people and I had my visa sorted without any stress.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" alt="Sophie" />
+          <div>
+            <div class="testimonial-name">Sophie</div>
+            <div class="testimonial-role" data-i18n="test.t2_role">Visa &amp; Property</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text" data-i18n="test.t3_text">FatBoys opened my eyes to investment opportunities in Thailand I never would have found alone. Their team guided me through the whole process and I now have a property generating strong returns.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" alt="Michael" />
+          <div>
+            <div class="testimonial-name">Michael</div>
+            <div class="testimonial-role" data-i18n="test.t3_role">Property Investment</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-stars">
+          <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        </div>
+        <span class="testimonial-quote">"</span>
+        <p class="testimonial-text" data-i18n="test.t4_text">Relocating with the whole family felt overwhelming, but the FatBoys team took care of everything. Schools, housing, settling in — they treated us like their own family and made Thailand feel like home from day one.</p>
+        <div class="testimonial-author">
+          <img class="testimonial-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/%3E" alt="Emma" />
+          <div>
+            <div class="testimonial-name">Emma</div>
+            <div class="testimonial-role" data-i18n="test.t4_role">Family Relocation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ CTA / CONTACT ══════════════════ -->
+  <section class="cta-section" id="contact">
+    <div class="reveal">
+      <div class="section-eyebrow" style="color:var(--burnt-sienna)" data-i18n="cta.eyebrow">Start Your Journey</div>
+      <h2 class="cta-title" style="margin-top:1rem; margin-bottom:1.5rem" data-i18n="cta.title">
+        Ready to Find<br>Your <strong>Perfect Home</strong><br>in Thailand?
+      </h2>
+      <p style="color:var(--stone-grey); font-size:0.88rem; line-height:1.75; font-weight:300; max-width:380px" data-i18n="cta.desc">
+        Book a free consultation with one of our expert advisors. We'll listen to your needs and match you with the right properties across Thailand.
+      </p>
+      <div style="display:flex; gap:2rem; margin-top:2.5rem; padding-top:2rem; border-top:1px solid rgba(200,184,138,0.1)">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--burnt-sienna)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <div style="font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--stone-grey)" data-i18n="cta.call_label">Call Us</div>
+            <div style="font-size:0.9rem; color:var(--warm-sand); margin-top:0.15rem">+66 82 947 3350</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--burnt-sienna)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <div style="font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--stone-grey)" data-i18n="cta.email_label">Email</div>
+            <div style="font-size:0.9rem; color:var(--warm-sand); margin-top:0.15rem">hello@fatboysrealestate.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <form class="cta-form" onsubmit="return false">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="cta.form_first_name">First Name</label>
+            <input type="text" class="form-input" placeholder="John" data-i18n-placeholder="cta.ph_first_name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="cta.form_last_name">Last Name</label>
+            <input type="text" class="form-input" placeholder="Smith" data-i18n-placeholder="cta.ph_last_name" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="cta.form_email">Email Address</label>
+          <input type="email" class="form-input" placeholder="john@example.com" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="cta.form_location">Location Interest</label>
+            <input type="text" class="form-input" data-i18n-placeholder="cta.select_location" placeholder="e.g. Phuket, Bangkok, Chiang Mai…" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="cta.form_type">Property Type</label>
+            <input type="text" class="form-input" data-i18n-placeholder="cta.select_type" placeholder="e.g. Condo, Villa, Land, House…" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="cta.form_budget">Budget Range (THB)</label>
+          <input type="text" class="form-input" data-i18n-placeholder="cta.select_budget" placeholder="e.g. ฿3M, ฿5M–฿10M, flexible…" />
+        </div>
+        <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-forest" style="margin-top:0.5rem; width:100%; font-size:0.78rem; display:block; text-align:center; text-decoration:none;" data-i18n="cta.submit">
+          Book Free Consultation →
+        </a>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand-desc" data-i18n="footer.brand_desc">
+          Thailand's most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.
+        </p>
+        <div style="display:flex; gap:0.75rem; margin-top:1.5rem">
+          <a href="https://www.facebook.com/share/1M5e6w6kzU/" target="_blank" class="footer-social">f</a>
+          <a href="https://wa.me/66829473350" target="_blank" class="footer-social">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.141 1.535 5.879L.057 23.625a.5.5 0 0 0 .618.618l5.746-1.478A11.952 11.952 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.166-1.448l-.371-.22-3.846.988.988-3.846-.22-.371A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_properties">Properties</div>
+        <div class="footer-links">
+          <a href="#" data-i18n="footer.for_sale">For Sale</a>
+          <a href="#" data-i18n="footer.for_rent">For Rent</a>
+          <a href="#" data-i18n="footer.new_dev">New Developments</a>
+          <a href="#" data-i18n="footer.investment">Investment Properties</a>
+          <a href="#" data-i18n="footer.commercial">Commercial</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_locations">Locations</div>
+        <div class="footer-links">
+          <a href="#">Phuket</a>
+          <a href="#">Bangkok</a>
+          <a href="#">Koh Samui</a>
+          <a href="#">Chiang Mai</a>
+          <a href="#">Pattaya</a>
+          <a href="#">Hua Hin</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-heading" data-i18n="footer.h_company">Company</div>
+        <div class="footer-links">
+          <a href="#" data-i18n="footer.about_us">About Us</a>
+          <a href="#" data-i18n="footer.our_team">Our Team</a>
+          <a href="#" data-i18n="footer.community">Community</a>
+          <a href="#" data-i18n="footer.blog">Blog &amp; News</a>
+          <a href="#" data-i18n="footer.contact_us">Contact Us</a>
+          <a href="#" data-i18n="footer.careers">Careers</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span data-i18n="footer.copyright">© 2026 FatBoys Real Estate Thailand. All rights reserved.</span>
+      <div style="display:flex; gap:2rem;">
+        <a href="#" style="color:inherit; text-decoration:none; transition:color 0.2s; cursor:none" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" style="color:inherit; text-decoration:none; transition:color 0.2s; cursor:none" data-i18n="footer.terms">Terms of Service</a>
+        <a href="#" style="color:inherit; text-decoration:none; transition:color 0.2s; cursor:none" data-i18n="footer.cookies">Cookie Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .prop-card, .listing-card, .location-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        ring.style.width = '52px';
+        ring.style.height = '52px';
+        ring.style.borderColor = 'rgba(192,106,74,0.6)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '8px';
+        cursor.style.height = '8px';
+        ring.style.width = '32px';
+        ring.style.height = '32px';
+        ring.style.borderColor = 'rgba(200,184,138,0.5)';
+      });
+    });
+
+    // Navbar scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // ══════════ SCROLL EXPANSION HERO ══════════
+    (function () {
+      const isMobile = window.innerWidth < 768;
+      let scrollProgress = 0;
+      let mediaFullyExpanded = false;
+      let touchStartY = 0;
+
+      const sehBg      = document.getElementById('seh-bg');
+      const sehMedia   = document.getElementById('seh-media');
+      const sehOverlay = document.getElementById('seh-media-overlay');
+      const titleLeft  = document.getElementById('seh-title-left');
+      const titleRight = document.getElementById('seh-title-right');
+      const dateEl     = document.getElementById('seh-date');
+      const hintEl     = document.getElementById('seh-scroll-hint');
+      const sehPost    = document.getElementById('seh-post');
+
+      if (!sehMedia) return;
+
+      function applyProgress(p) {
+        const mw = 300 + p * (isMobile ? 650 : 1250);
+        const mh = 400 + p * (isMobile ? 200 : 400);
+        const tx = p * (isMobile ? 180 : 150);
+        const rr = 16 * (1 - p);
+
+        sehMedia.style.width        = Math.min(mw, window.innerWidth  * 0.95) + 'px';
+        sehMedia.style.height       = Math.min(mh, window.innerHeight * 0.85) + 'px';
+        sehMedia.style.borderRadius = rr + 'px';
+
+        if (sehBg)      sehBg.style.opacity      = (1 - p).toString();
+        if (sehOverlay) sehOverlay.style.opacity  = Math.max(0, 0.7 - p * 0.5).toString();
+
+        if (titleLeft)  titleLeft.style.transform  = `translateX(-${tx}vw)`;
+        if (titleRight) titleRight.style.transform = `translateX(${tx}vw)`;
+        if (dateEl)     dateEl.style.transform     = `translateX(-${tx}vw)`;
+        if (hintEl)     hintEl.style.transform     = `translateX(${tx}vw)`;
+      }
+
+      function onExpanded() {
+        if (sehPost) sehPost.classList.add('seh-visible');
+      }
+      function onCollapsed() {
+        if (sehPost) sehPost.classList.remove('seh-visible');
+      }
+
+      window.addEventListener('wheel', function (e) {
+        if (mediaFullyExpanded) {
+          if (e.deltaY < 0 && window.scrollY <= 5) {
+            mediaFullyExpanded = false;
+            onCollapsed();
+            e.preventDefault();
+          }
+        } else {
+          e.preventDefault();
+          scrollProgress = Math.min(Math.max(scrollProgress + e.deltaY * 0.0009, 0), 1);
+          applyProgress(scrollProgress);
+          if (scrollProgress >= 1) { mediaFullyExpanded = true; onExpanded(); }
+        }
+      }, { passive: false });
+
+      window.addEventListener('scroll', function () {
+        if (!mediaFullyExpanded) window.scrollTo(0, 0);
+      });
+
+      window.addEventListener('touchstart', function (e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: false });
+
+      window.addEventListener('touchmove', function (e) {
+        if (!touchStartY) return;
+        const deltaY = touchStartY - e.touches[0].clientY;
+        if (mediaFullyExpanded && deltaY < -20 && window.scrollY <= 5) {
+          mediaFullyExpanded = false;
+          onCollapsed();
+          e.preventDefault();
+        } else if (!mediaFullyExpanded) {
+          e.preventDefault();
+          const factor = deltaY < 0 ? 0.008 : 0.005;
+          scrollProgress = Math.min(Math.max(scrollProgress + deltaY * factor, 0), 1);
+          applyProgress(scrollProgress);
+          if (scrollProgress >= 1) { mediaFullyExpanded = true; onExpanded(); }
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: false });
+
+      window.addEventListener('touchend', function () { touchStartY = 0; });
+
+      applyProgress(0);
+    })();
+
+    // ══════════ BILINGUAL EN / TH LANGUAGE SWITCHER ══════════
+    (function () {
+      const translations = {
+        en: {
+          'nav.buy_sell': 'Buying/Selling',
+          'nav.buying': 'Buying',
+          'nav.selling': 'Selling',
+          'nav.houses': 'Houses',
+          'nav.condo': 'Condo',
+          'nav.land': 'Land',
+          'nav.locations': 'Locations',
+          'nav.why_thailand': 'Why Thailand',
+          'nav.about': 'About',
+          'nav.services': 'Services',
+          'nav.what_we_offer': 'What We Offer',
+          'nav.svc_renting': 'Renting',
+          'nav.svc_relocating': 'Relocating',
+          'nav.svc_pet': 'Pet Friendly',
+          'nav.svc_investing': 'Investing',
+          'nav.svc_construction': 'Construction & Renovation',
+          'nav.svc_consulting': 'Consulting',
+          'nav.book_consultation': 'Book Consultation',
+          'hero.date': 'Premium Properties · Thailand',
+          'hero.title_left': 'Where Home',
+          'hero.title_right': 'Meets Thailand',
+          'hero.scroll_hint': 'Scroll to expand',
+          'hero.eyebrow': 'FatBoys Real Estate · Thailand',
+          'hero.stat1_label': 'Properties Listed',
+          'hero.stat2_label': 'Cities Covered',
+          'hero.stat3_label': 'Years Serving Thailand',
+          'hero.description': 'Discover exceptional properties across Thailand\'s most sought-after communities. From Phuket villas to Bangkok penthouses — your perfect home awaits.',
+          'hero.cta_explore': 'Explore Properties',
+          'hero.cta_story': 'Our Story',
+          'values.eyebrow': 'Why FatBoys',
+          'values.title_em': 'Values',
+          'values.v1_title': 'Trust',
+          'values.v1_desc': 'Reliable & transparent in every transaction. We guide you with honesty from first viewing to final handover.',
+          'values.v2_title': 'Community',
+          'values.v2_desc': 'Rooted in local neighbourhoods. We connect expats and locals, building genuine ties that last well beyond the sale.',
+          'values.v3_title': 'Quality',
+          'values.v3_desc': 'Premium properties, exceptional service. Every listing is carefully vetted to meet the highest standards of living.',
+          'values.v4_title': 'Warmth',
+          'values.v4_desc': 'Welcoming, personal approach. Thailand is our home, and we make it yours — from the moment you walk through the door.',
+          'about.eyebrow': 'Our Story',
+          'about.title_em': 'Real Estate',
+          'about.badge_text': 'Years in<br>Thailand',
+          'about.lead': '"We didn\'t just open an agency. We built a community."',
+          'about.body1': 'FatBoys Real Estate was born from a passion for Thailand and a deep belief that finding the right property should feel personal, not transactional. Founded by expats who fell in love with this country, we understand what makes a house truly feel like home here.',
+          'about.body2': 'From the bustling streets of Bangkok to the serene shores of Phuket, we\'ve spent years building relationships with the best developers, landlords, and communities across Thailand — so that when you\'re ready to find your place, we already know exactly where it is.',
+          'about.stat1_label': 'Happy Clients',
+          'about.stat2_label': 'Property Transacted',
+          'about.stat3_label': 'Cities Covered',
+          'about.signature': 'The FatBoys Team',
+          'about.sig_title': 'FatBoys Real Estate · Thailand',
+          'about.meet_team': 'Meet Our Team',
+          'services.eyebrow': 'How We Help',
+          'services.title_em': 'Services',
+          'services.subtitle': 'From your first move to your next investment — we\'re with you at every step of life in Thailand.',
+          'services.s1_title': 'Renting',
+          'services.s1_desc': 'Short and long-term rentals across Thailand\'s best neighbourhoods. We match you to the right home, at the right price, with zero stress.',
+          'services.s1_link': 'Browse Rentals',
+          'services.s2_title': 'Relocating',
+          'services.s2_desc': 'Moving to Thailand? Our relocation specialists handle everything — housing, visas guidance, schools, and settling into your new community.',
+          'services.s2_link': 'Start Your Move',
+          'services.s3_title': 'Pet Friendly',
+          'services.s3_desc': 'Finding pet-friendly homes in Thailand shouldn\'t be a challenge. We\'ve built a dedicated network of landlords and properties that welcome your furry family.',
+          'services.s3_link': 'Find Pet Homes',
+          'services.s4_title': 'Investing',
+          'services.s4_desc': 'Thailand\'s property market offers exceptional yields. We guide investors through legal structures, due diligence, rental ROI analysis, and portfolio growth.',
+          'services.s4_link': 'Investment Guide',
+          'services.s5_title': 'Construction & Renovation',
+          'services.s5_desc': 'Build your dream home or transform an existing property. We connect you with trusted architects, builders, and project managers who deliver on time and on budget.',
+          'services.s5_link': 'Build With Us',
+          'services.s6_title': 'Consulting',
+          'services.s6_desc': 'One-on-one expert advice on the Thai property market, ownership laws for foreigners, leasehold vs freehold, and long-term strategic planning for expats.',
+          'services.s6_link': 'Book a Session',
+          'listings.eyebrow': 'Find Your Home',
+          'listings.title_em': 'Ideal Home',
+          'listings.intro': 'Whether you are looking for a family home, a private villa, a modern condo, or a piece of land to build your dream — we will find it for you. Our team knows the Thai property market inside out, from Phuket beaches to Bangkok towers to quiet Chiang Mai hillsides.',
+          'listings.intro2': 'Tell us what you need and we handle everything — search, viewings, negotiation, and paperwork. No stress, no guesswork. Just the right property for your life.',
+          'listings.cta': 'Book a Free Consultation',
+          'test.eyebrow': 'Community Stories',
+          'test.title_em': 'Clients Say',
+          'test.t1_text': 'The FatBoys team made finding our home in Thailand so easy. They listened to exactly what we were looking for and didn\'t stop until we found the perfect house. Couldn\'t have done it without them.',
+          'test.t1_role': 'Home Purchase',
+          'test.t2_text': 'I had no idea how to navigate the Thai visa process alongside buying property. The FatBoys team handled everything — they connected me with the right people and I had my visa sorted without any stress.',
+          'test.t2_role': 'Visa & Property',
+          'test.t3_text': 'FatBoys opened my eyes to investment opportunities in Thailand I never would have found alone. Their team guided me through the whole process and I now have a property generating strong returns.',
+          'test.t3_role': 'Property Investment',
+          'test.t4_text': 'Relocating with the whole family felt overwhelming, but the FatBoys team took care of everything. Schools, housing, settling in — they treated us like their own family and made Thailand feel like home from day one.',
+          'test.t4_role': 'Family Relocation',
+          'loc.eyebrow': 'Explore Thailand',
+          'loc.title_em': 'Locations',
+          'loc.subtitle': 'From tropical islands to mountain cities — we operate across Thailand\'s most desirable markets.',
+          'loc.count_phuket': '142 Properties Available',
+          'loc.count_bangkok': '98 Properties Available',
+          'loc.count_samui': '54 Properties Available',
+          'loc.count_chiangmai': '46 Properties Available',
+          'cta.eyebrow': 'Start Your Journey',
+          'cta.title': 'Ready to Find<br>Your <strong>Perfect Home</strong><br>in Thailand?',
+          'cta.desc': 'Book a free consultation with one of our expert advisors. We\'ll listen to your needs and match you with the right properties across Thailand.',
+          'cta.call_label': 'Call Us',
+          'cta.email_label': 'Email',
+          'cta.form_first_name': 'First Name',
+          'cta.form_last_name': 'Last Name',
+          'cta.form_email': 'Email Address',
+          'cta.form_location': 'Location Interest',
+          'cta.select_location': 'e.g. Phuket, Bangkok, Chiang Mai…',
+          'cta.form_type': 'Property Type',
+          'cta.select_type': 'e.g. Condo, Villa, Land, House…',
+          'cta.form_budget': 'Budget Range (THB)',
+          'cta.select_budget': 'e.g. ฿3M, ฿5M–฿10M, flexible…',
+          'cta.submit': 'Book Free Consultation →',
+          'cta.ph_first_name': 'John',
+          'cta.ph_last_name': 'Smith',
+          'footer.brand_desc': 'Thailand\'s most trusted real estate community. Connecting people with exceptional properties and building lives across the Kingdom since 2016.',
+          'footer.h_properties': 'Properties',
+          'footer.for_sale': 'For Sale',
+          'footer.for_rent': 'For Rent',
+          'footer.new_dev': 'New Developments',
+          'footer.investment': 'Investment Properties',
+          'footer.commercial': 'Commercial',
+          'footer.h_locations': 'Locations',
+          'footer.h_company': 'Company',
+          'footer.about_us': 'About Us',
+          'footer.our_team': 'Our Team',
+          'footer.community': 'Community',
+          'footer.blog': 'Blog & News',
+          'footer.contact_us': 'Contact Us',
+          'footer.careers': 'Careers',
+          'footer.copyright': '© 2026 FatBoys Real Estate Thailand. All rights reserved.',
+          'footer.privacy': 'Privacy Policy',
+          'footer.terms': 'Terms of Service',
+          'footer.cookies': 'Cookie Policy',
+        },
+        th: {
+          'nav.buy_sell': 'ซื้อ/ขาย',
+          'nav.buying': 'ซื้อ',
+          'nav.selling': 'ขาย',
+          'nav.houses': 'บ้าน',
+          'nav.condo': 'คอนโด',
+          'nav.land': 'ที่ดิน',
+          'nav.locations': 'สถานที่',
+          'nav.why_thailand': 'ทำไมต้องไทย',
+          'nav.about': 'เกี่ยวกับเรา',
+          'nav.services': 'บริการ',
+          'nav.what_we_offer': 'สิ่งที่เราให้บริการ',
+          'nav.svc_renting': 'เช่า',
+          'nav.svc_relocating': 'ย้ายถิ่นฐาน',
+          'nav.svc_pet': 'เป็นมิตรกับสัตว์เลี้ยง',
+          'nav.svc_investing': 'ลงทุน',
+          'nav.svc_construction': 'ก่อสร้าง & ปรับปรุง',
+          'nav.svc_consulting': 'ที่ปรึกษา',
+          'nav.book_consultation': 'นัดปรึกษาฟรี',
+          'hero.date': 'อสังหาริมทรัพย์ระดับพรีเมียม · ประเทศไทย',
+          'hero.title_left': 'บ้านที่ใช่',
+          'hero.title_right': 'เริ่มต้นที่ไทย',
+          'hero.scroll_hint': 'เลื่อนลงเพื่อขยาย',
+          'hero.eyebrow': 'แฟทบอยส์ เรียล เอสเตท · ประเทศไทย',
+          'hero.stat1_label': 'รายการอสังหาฯ',
+          'hero.stat2_label': 'เมืองที่ให้บริการ',
+          'hero.stat3_label': 'ปีในประเทศไทย',
+          'hero.description': 'ค้นพบอสังหาริมทรัพย์พิเศษในทำเลที่ดีที่สุดทั่วไทย ตั้งแต่วิลล่าภูเก็ตถึงเพนต์เฮาส์กรุงเทพฯ — บ้านในฝันของคุณรอคุณอยู่',
+          'hero.cta_explore': 'ดูอสังหาฯ ทั้งหมด',
+          'hero.cta_story': 'เรื่องราวของเรา',
+          'values.eyebrow': 'ทำไมต้องแฟทบอยส์',
+          'values.title_em': 'คุณค่า',
+          'values.v1_title': 'ความไว้วางใจ',
+          'values.v1_desc': 'โปร่งใสและน่าเชื่อถือในทุกขั้นตอน เราดูแลคุณด้วยความซื่อสัตย์ตั้งแต่การดูครั้งแรกจนถึงการโอนกรรมสิทธิ์',
+          'values.v2_title': 'ชุมชน',
+          'values.v2_desc': 'ฝังรากในย่านท้องถิ่น เราเชื่อมต่อชาวต่างชาติและคนไทย สร้างความสัมพันธ์ที่แท้จริงยั่งยืนเกินกว่าการซื้อขาย',
+          'values.v3_title': 'คุณภาพ',
+          'values.v3_desc': 'อสังหาริมทรัพย์ระดับพรีเมียม การบริการที่ยอดเยี่ยม ทุกรายการผ่านการคัดกรองอย่างละเอียดเพื่อให้ตรงกับมาตรฐานสูงสุด',
+          'values.v4_title': 'ความอบอุ่น',
+          'values.v4_desc': 'แนวทางที่เป็นกันเองและใส่ใจ ประเทศไทยคือบ้านของเรา และเราทำให้มันกลายเป็นบ้านของคุณ ตั้งแต่ก้าวแรกที่คุณเข้ามา',
+          'about.eyebrow': 'เรื่องราวของเรา',
+          'about.title_em': 'อสังหาริมทรัพย์',
+          'about.badge_text': 'ปีในประเทศไทย',
+          'about.lead': '"เราไม่ได้แค่เปิดบริษัท เราสร้างชุมชน"',
+          'about.body1': 'แฟทบอยส์ เรียล เอสเตท เกิดจากความหลงใหลในประเทศไทยและความเชื่อมั่นว่าการหาอสังหาริมทรัพย์ที่เหมาะสมควรเป็นเรื่องส่วนตัว ไม่ใช่แค่การทำธุรกรรม ก่อตั้งโดยชาวต่างชาติที่หลงรักประเทศนี้ เราเข้าใจว่าอะไรทำให้บ้านรู้สึกเหมือนบ้านที่นี่จริงๆ',
+          'about.body2': 'จากถนนคึกคักในกรุงเทพฯ สู่ชายฝั่งอันเงียบสงบของภูเก็ต เราใช้เวลาหลายปีในการสร้างความสัมพันธ์กับผู้พัฒนา เจ้าของที่ดิน และชุมชนที่ดีที่สุดทั่วไทย — เมื่อคุณพร้อมหาบ้าน เราก็รู้อยู่แล้วว่ามันอยู่ที่ไหน',
+          'about.stat1_label': 'ลูกค้าพึงพอใจ',
+          'about.stat2_label': 'มูลค่าอสังหาฯ ที่ทำธุรกรรม',
+          'about.stat3_label': 'เมืองที่ให้บริการ',
+          'about.signature': 'ทีมแฟทบอยส์',
+          'about.sig_title': 'แฟทบอยส์ เรียล เอสเตท · ประเทศไทย',
+          'about.meet_team': 'พบกับทีมงานของเรา',
+          'services.eyebrow': 'เราช่วยอะไรได้บ้าง',
+          'services.title_em': 'บริการ',
+          'services.subtitle': 'ตั้งแต่การย้ายครั้งแรกถึงการลงทุนครั้งต่อไป — เราอยู่เคียงข้างทุกก้าวในชีวิตที่ประเทศไทย',
+          'services.s1_title': 'เช่า',
+          'services.s1_desc': 'เช่าระยะสั้นและยาวในย่านที่ดีที่สุดทั่วไทย เราจับคู่คุณกับบ้านที่ใช่ ในราคาที่ดี ไม่มีความยุ่งยาก',
+          'services.s1_link': 'ดูรายการเช่า',
+          'services.s2_title': 'ย้ายถิ่นฐาน',
+          'services.s2_desc': 'ย้ายมาไทยใช่ไหม? ผู้เชี่ยวชาญด้านการย้ายถิ่นฐานของเราดูแลทุกอย่าง — ที่พัก วีซ่า โรงเรียน และการตั้งถิ่นฐาน',
+          'services.s2_link': 'เริ่มย้ายบ้าน',
+          'services.s3_title': 'เป็นมิตรกับสัตว์เลี้ยง',
+          'services.s3_desc': 'การหาบ้านสำหรับสัตว์เลี้ยงในไทยไม่ควรยาก เราสร้างเครือข่ายเจ้าของที่ดินที่ยินดีต้อนรับสมาชิกขนปุยของคุณ',
+          'services.s3_link': 'หาบ้านสัตว์เลี้ยง',
+          'services.s4_title': 'ลงทุน',
+          'services.s4_desc': 'ตลาดอสังหาริมทรัพย์ไทยให้ผลตอบแทนที่ยอดเยี่ยม เราแนะนำนักลงทุนผ่านโครงสร้างกฎหมาย การตรวจสอบสิทธิ์ และการวิเคราะห์ ROI',
+          'services.s4_link': 'คู่มือการลงทุน',
+          'services.s5_title': 'ก่อสร้าง & ปรับปรุง',
+          'services.s5_desc': 'สร้างบ้านในฝันหรือปรับปรุงอสังหาที่มีอยู่ เราเชื่อมคุณกับสถาปนิก ผู้รับเหมา และผู้จัดการโครงการที่เชื่อถือได้',
+          'services.s5_link': 'สร้างกับเรา',
+          'services.s6_title': 'ที่ปรึกษา',
+          'services.s6_desc': 'คำแนะนำจากผู้เชี่ยวชาญแบบตัวต่อตัวเรื่องตลาดอสังหาฯ ไทย กฎหมายการถือครองสำหรับชาวต่างชาติ สัญญาเช่าและโฉนด และการวางแผนระยะยาว',
+          'services.s6_link': 'นัดปรึกษา',
+          'listings.eyebrow': 'ค้นหาบ้านของคุณ',
+          'listings.title_em': 'บ้านในฝันของคุณ',
+          'listings.intro': 'ไม่ว่าคุณกำลังมองหาบ้านครอบครัว วิลล่าส่วนตัว คอนโดทันสมัย หรือที่ดินสำหรับสร้างฝัน — เราจะหาให้คุณ ทีมงานของเรารู้จักตลาดอสังหาริมทรัพย์ไทยอย่างถ่องแท้ ตั้งแต่ชายหาดภูเก็ต ตึกสูงกรุงเทพฯ ไปจนถึงเชิงเขาเชียงใหม่',
+          'listings.intro2': 'บอกเราว่าคุณต้องการอะไร แล้วเราจัดการทุกอย่าง — ค้นหา นัดชม เจรจา และเอกสาร ไม่ยุ่งยาก ไม่เดาสุ่ม แค่อสังหาฯ ที่ใช่สำหรับชีวิตคุณ',
+          'listings.cta': 'จองคำปรึกษาฟรี',
+          'listings.badge_investment': 'ลงทุน',
+          'listings.view_all': 'ดูรายการทั้งหมด 340+ รายการ',
+          'test.eyebrow': 'เรื่องราวจากชุมชน',
+          'test.title_em': 'ลูกค้าพูดถึงเรา',
+          'test.t1_text': 'ทีมแฟทบอยส์ทำให้การหาบ้านในไทยง่ายมาก พวกเขาฟังสิ่งที่เราต้องการและไม่หยุดจนกว่าจะพบบ้านที่ใช่ ไม่มีทางทำได้โดยไม่มีพวกเขา',
+          'test.t1_role': 'ซื้อบ้าน',
+          'test.t2_text': 'ฉันไม่รู้เลยว่าต้องทำอย่างไรกับกระบวนการวีซ่าไทยควบคู่กับการซื้ออสังหาฯ ทีมแฟทบอยส์จัดการทุกอย่าง เชื่อมต่อฉันกับคนที่ใช่ และได้วีซ่าโดยไม่มีความเครียดใดๆ',
+          'test.t2_role': 'วีซ่าและอสังหาฯ',
+          'test.t3_text': 'แฟทบอยส์เปิดตาฉันต่อโอกาสการลงทุนในไทยที่ฉันไม่มีทางพบเจอคนเดียว ทีมงานให้คำแนะนำตลอดกระบวนการ และตอนนี้ฉันมีอสังหาฯ ที่สร้างผลตอบแทนดีมาก',
+          'test.t3_role': 'ลงทุนอสังหาฯ',
+          'test.t4_text': 'การย้ายมาทั้งครอบครัวรู้สึกน่ากังวลมาก แต่ทีมแฟทบอยส์ดูแลทุกอย่าง ทั้งโรงเรียน ที่พัก และการตั้งตัว พวกเขาดูแลเราเหมือนครอบครัว และทำให้ไทยรู้สึกเหมือนบ้านตั้งแต่วันแรก',
+          'test.t4_role': 'ย้ายครอบครัว',
+          'loc.eyebrow': 'สำรวจประเทศไทย',
+          'loc.title_em': 'สาขา',
+          'loc.subtitle': 'ตั้งแต่เกาะเขตร้อนถึงเมืองบนภูเขา — เราดำเนินงานในตลาดที่น่าต้องการที่สุดของไทย',
+          'loc.count_phuket': '142 รายการ',
+          'loc.count_bangkok': '98 รายการ',
+          'loc.count_samui': '54 รายการ',
+          'loc.count_chiangmai': '46 รายการ',
+          'cta.eyebrow': 'เริ่มต้นการเดินทางของคุณ',
+          'cta.title': 'พร้อมค้นหา<br>บ้านที่ <strong>สมบูรณ์แบบ</strong><br>ในประเทศไทยแล้วหรือยัง?',
+          'cta.desc': 'นัดปรึกษาฟรีกับที่ปรึกษาผู้เชี่ยวชาญของเรา เราจะรับฟังความต้องการและจับคู่คุณกับอสังหาริมทรัพย์ที่เหมาะสมทั่วไทย',
+          'cta.call_label': 'โทรหาเรา',
+          'cta.email_label': 'อีเมล',
+          'cta.form_first_name': 'ชื่อ',
+          'cta.form_last_name': 'นามสกุล',
+          'cta.form_email': 'อีเมล',
+          'cta.form_location': 'สถานที่ที่สนใจ',
+          'cta.select_location': 'เช่น ภูเก็ต กรุงเทพฯ เชียงใหม่…',
+          'cta.form_type': 'ประเภทอสังหาฯ',
+          'cta.select_type': 'เช่น คอนโด วิลล่า ที่ดิน บ้าน…',
+          'cta.form_budget': 'งบประมาณ (บาท)',
+          'cta.select_budget': 'เช่น 3 ล้าน, 5–10 ล้าน, ยืดหยุ่นได้…',
+          'cta.submit': 'นัดปรึกษาฟรี →',
+          'cta.ph_first_name': 'ชื่อ',
+          'cta.ph_last_name': 'นามสกุล',
+          'footer.brand_desc': 'ชุมชนอสังหาริมทรัพย์ที่น่าเชื่อถือที่สุดในไทย เชื่อมต่อผู้คนกับอสังหาฯ ที่ยอดเยี่ยมและสร้างชีวิตทั่วราชอาณาจักรมาตั้งแต่ปี 2016',
+          'footer.h_properties': 'อสังหาริมทรัพย์',
+          'footer.for_sale': 'ขาย',
+          'footer.for_rent': 'เช่า',
+          'footer.new_dev': 'โครงการใหม่',
+          'footer.investment': 'อสังหาฯ เพื่อการลงทุน',
+          'footer.commercial': 'เชิงพาณิชย์',
+          'footer.h_locations': 'สถานที่',
+          'footer.h_company': 'บริษัท',
+          'footer.about_us': 'เกี่ยวกับเรา',
+          'footer.our_team': 'ทีมงาน',
+          'footer.community': 'ชุมชน',
+          'footer.blog': 'บล็อก & ข่าวสาร',
+          'footer.contact_us': 'ติดต่อเรา',
+          'footer.careers': 'ร่วมงานกับเรา',
+          'footer.copyright': '© 2026 แฟทบอยส์ เรียล เอสเตท ประเทศไทย สงวนลิขสิทธิ์',
+          'footer.privacy': 'นโยบายความเป็นส่วนตัว',
+          'footer.terms': 'ข้อกำหนดการใช้งาน',
+          'footer.cookies': 'นโยบายคุกกี้',
+        }
+      };
+
+      let currentLang = localStorage.getItem('fb_lang') || 'en';
+
+      function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('fb_lang', lang);
+        const t = translations[lang];
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (t[key] !== undefined) el.innerHTML = t[key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n-placeholder');
+          if (t[key] !== undefined) el.placeholder = t[key];
+        });
+        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        document.documentElement.lang = lang === 'th' ? 'th' : 'en';
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () { setLanguage(btn.getAttribute('data-lang')); });
+      });
+
+      setLanguage(currentLang);
+    })();
+  </script>
+</body>
+</html>
