@@ -285,12 +285,52 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    @media (max-width: 900px) {
-      nav { padding: 1rem 1.5rem; }
-      .page-hero { padding: 0 2rem 5rem; }
-      .wt-section { padding: 5rem 2rem; }
-      .wt-body { grid-template-columns: 1fr; gap: 1.5rem; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    /* ── Hamburger ── */
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 201; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--linen-white); transition: all .3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav-overlay { display: none; position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,.5); backdrop-filter: blur(4px); }
+    .mobile-nav-overlay.open { display: block; }
+    .mobile-nav-drawer { display: none; position: fixed; top: 0; right: -100%; width: min(320px,85vw); height: 100dvh; background: #0d1209; z-index: 200; flex-direction: column; padding: 5rem 2rem 2rem; transition: right .35s cubic-bezier(.4,0,.2,1); overflow-y: auto; }
+    .mobile-nav-drawer.open { right: 0; }
+    .mobile-nav-drawer a, .mobile-nav-drawer button { display: block; color: var(--linen-white); text-decoration: none; font-size: 1rem; letter-spacing: .06em; text-transform: uppercase; padding: .85rem 0; border-bottom: 1px solid rgba(200,184,138,.1); background: none; border-left: none; border-right: none; border-top: none; font-family: 'DM Sans', sans-serif; font-weight: 400; text-align: left; cursor: pointer; width: 100%; }
+    .mobile-nav-drawer .mobile-book-btn { margin-top: 1.5rem; background: var(--forest-green); color: var(--warm-sand); text-align: center; border: none; padding: .9rem 1rem; font-size: .78rem; letter-spacing: .14em; display: block; text-decoration: none; }
+    .mobile-nav-drawer .mobile-lang { display: flex; gap: .75rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(200,184,138,.1); }
+    .mobile-nav-drawer .mobile-lang button { border-bottom: none; padding: .4rem .75rem; font-size: .75rem; border: 1px solid rgba(200,184,138,.3); width: auto; text-transform: uppercase; letter-spacing: .1em; }
+    .mobile-nav-drawer .mobile-lang button.active { background: var(--forest-green); border-color: var(--forest-green); color: var(--warm-sand); }
+    .mobile-section-label { font-size: .6rem; letter-spacing: .18em; color: var(--stone-grey); text-transform: uppercase; padding: 1rem 0 .25rem; border-bottom: none !important; }
+
+    @media (max-width: 768px) {
+      html { overflow-x: hidden; }
+      body { overflow-x: hidden; cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+      nav { padding: .85rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-logo { font-size: 1rem; }
+      .page-hero { padding: 6rem 1.25rem 3rem; min-height: 50vh; }
+      .page-hero h1 { font-size: clamp(2rem, 9vw, 3.5rem); }
+      .page-hero p { font-size: .92rem; }
+      .wt-section { padding: 3rem 1.25rem; }
+      .wt-header { gap: 1rem; }
+      .wt-number { font-size: 3rem; min-width: 50px; }
+      .wt-title { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+      .wt-body { grid-template-columns: 1fr; gap: 1.25rem; }
+      .wt-photos img { height: 200px; }
+      .wt-photos-grid { grid-template-columns: 1fr; }
+      .wt-photos-grid img { height: 220px; }
+      footer { padding: 3rem 1.25rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; }
+      .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
+      .btn-nav { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .wt-header { flex-direction: column; gap: .5rem; }
+      .wt-number { font-size: 2.5rem; }
+      .nav-logo { font-size: .88rem; }
     }
   </style>
 </head>
@@ -299,6 +339,34 @@
   <div class="grain"></div>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <div class="mobile-section-label">Buying</div>
+    <a href="buy-house.html">Houses</a>
+    <a href="buy-condo.html">Condo</a>
+    <a href="buy-land.html">Land</a>
+    <div class="mobile-section-label">Selling</div>
+    <a href="sell-house.html">Houses</a>
+    <a href="sell-condo.html">Condo</a>
+    <a href="sell-land.html">Land</a>
+    <div class="mobile-section-label">Services</div>
+    <a href="renting.html">Renting</a>
+    <a href="relocating.html">Relocating</a>
+    <a href="pet-friendly.html">Pet Friendly</a>
+    <a href="investing.html">Investing</a>
+    <a href="construction.html">Construction &amp; Renovation</a>
+    <a href="consulting.html">Consulting</a>
+    <div class="mobile-section-label">Info</div>
+    <a href="why-thailand.html">Why Thailand</a>
+    <a href="about.html">About</a>
+    <a href="https://lin.ee/H5iMNKQ" target="_blank" class="mobile-book-btn">Book Consultation</a>
+    <div class="mobile-lang">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="th">TH</button>
+    </div>
+  </div>
 
   <!-- NAV -->
   <nav id="mainNav">
@@ -358,6 +426,9 @@
       </div>
       <a href="https://lin.ee/H5iMNKQ" target="_blank" class="btn-nav">Book Consultation</a>
     </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -966,6 +1037,34 @@
         'cta.btn':'นัดปรึกษาฟรี →',
       }
     };
+
+    // Hamburger menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    function openMenu() {
+      mobileDrawer.style.display = 'flex';
+      mobileOverlay.classList.add('open');
+      setTimeout(() => mobileDrawer.classList.add('open'), 10);
+      hamburgerBtn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileDrawer.classList.remove('open');
+      mobileOverlay.classList.remove('open');
+      hamburgerBtn.classList.remove('open');
+      document.body.style.overflow = '';
+      setTimeout(() => { mobileDrawer.style.display = ''; }, 380);
+    }
+    hamburgerBtn.addEventListener('click', () => hamburgerBtn.classList.contains('open') ? closeMenu() : openMenu());
+    mobileOverlay.addEventListener('click', closeMenu);
+    mobileDrawer.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.dataset.lang);
+        mobileDrawer.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
 
     function setLanguage(lang) {
       localStorage.setItem('fb_lang', lang);
